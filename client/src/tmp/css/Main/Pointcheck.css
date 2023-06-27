@@ -1,0 +1,31 @@
+.pointBox{
+    box-sizing: border-box;
+    position: absolute;
+    width: 915px;
+    height: 412px;
+    top: 412px;
+
+    background: #FFFFFF;
+    /* gray/dark */
+
+    border: 1px solid #7E7E7E;
+    border-radius: 10px;
+}
+
+.point_title{
+    position: absolute;
+    width: 150px;
+    height: 27px;
+    left: 54px;
+    top: 25px;
+
+    /* 20px/SemiBold */
+
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 27px;
+
+    color: #000000;
+}

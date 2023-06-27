@@ -1,0 +1,277 @@
+.notice_box{
+
+    position: relative;
+    Width: 605px;
+    Height: 233px;
+    top: 45px;
+    margin-bottom: 854px;
+    margin-left: 409px;
+    margin-right: 787px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    background: #FFFFFF;
+    border: 1px solid #7E7E7E;
+    border-radius: 10px;
+}
+
+.title_box{
+
+    position: inherit;
+    background: #FFFFFF;
+    z-index: 1px;
+    height: 45px;
+    width: 605px;
+    top: -1px;
+    left: -1px;
+    border: 1px solid #7E7E7E;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.notice_icon{
+
+    position: absolute;
+    background: #FFFFFF;
+    z-index: 1px;
+    height: 18px;
+    width: 18px;
+    top: 13px;
+    left: 30px;
+}
+
+.notice{
+    position: absolute;
+    left:62px;
+    top:10px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.move{
+    position: absolute;
+    width: 8px; /* 사이즈 */
+    height: 8px; /* 사이즈 */
+    left: 572px;
+    top: 15px;
+    border-top: 1.5px solid #000; /* 선 두께 */
+    border-right: 1.5px solid #000; /* 선 두께 */
+    transform: rotate(45deg); /* 각도 */
+}
+
+.attendence_box{
+
+    position: absolute;
+    Width: 605px;
+    Height: 233px;
+    top: 574px;
+    margin-left: 409px;
+    margin-right: 787px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    background: #FFFFFF;
+    border: 1px solid #7E7E7E;
+    border-radius: 10px;
+}
+
+.attendence_icon{
+
+    position: absolute;
+    background: #FFFFFF;
+    z-index: 1px;
+    height: 18px;
+    width: 18px;
+    top: 13px;
+    left: 30px;
+}
+
+.attendence{
+    position: absolute;
+    left:62px;
+    top:10px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.submit_box{
+
+    position: absolute;
+    Width: 605px;
+    Height: 233px;
+    top: 838px;
+    margin-left: 409px;
+    margin-right: 787px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    background: #FFFFFF;
+    border: 1px solid #7E7E7E;
+    border-radius: 10px;
+}
+
+.submit_icon{
+
+    position: absolute;
+    background: #FFFFFF;
+    z-index: 1px;
+    height: 18px;
+    width: 18px;
+    top: 13px;
+    left: 30px;
+}
+
+.submit{
+    position: absolute;
+    left:62px;
+    top:10px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.mypage_box{
+    position: absolute;
+    Width: 322px;
+    Height: 403px;
+    top: 320px;
+    left: calc(50% - 322px/2 + 331.5px);
+    background: #FFFFFF;
+    border: 1px solid #7E7E7E;
+    border-radius: 10px;
+}
+/*마이페이지 이동*/
+.mypage_click{
+    position: absolute;
+    left: 220px;
+    top: 25px;
+    font-weight: 400;
+    font-size: 14px;
+    color: #7E7E7E;
+}
+
+.mypage_move{
+    position: absolute;
+    height: 10.625px;
+    width: 5.625px;
+    left: 292.19px;
+    top: 28.69px;   
+}
+
+.profile{
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    left: 60px;
+    top: 63px;  
+}
+
+.name_icon{
+    position: absolute;
+    left: 37px;
+    top: 292px;
+}
+
+.name{
+    position: absolute;
+    left: 60px;
+    top: 291px;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.point_icon{
+    position: absolute;
+    left: 37px;
+    top: 324px;
+}
+
+.point{
+    position: absolute;
+    left: 60px;
+    top: 323px;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.position_icon{
+    position: absolute;
+    left: 37px;
+    top: 357.71px;
+}
+
+.belong{
+    position: absolute;
+    left: 60px;
+    top: 355px;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.schedule_box{
+    position: absolute;
+    width: 323px;
+    height: 95px;
+    left: calc(50% - 323px/2 + 332px);
+    top: 749px;
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    border-radius: 10px;
+}
+
+.title_box1{
+    position: absolute;
+    width: 323px;
+    height: 45px;
+    left: -1px;
+    top: -1px;
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.schedule_icon{
+    position: absolute;
+    height: 16px;
+    width: 12px;
+    left: 25px;
+    top: 16px;
+}
+
+.schedule{
+    position: absolute;
+    left: 47px;
+    top: 13px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.todo_box{
+    position: absolute;
+    width: 323px;
+    height: 95px;
+    left: calc(50% - 323px/2 + 332px);
+    top: 861px;
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    border-radius: 10px;
+}
+
+.todo_icon{
+    position: absolute;
+    height: 16px;
+    width: 12px;
+    left: 25px;
+    top: 16px;
+}
+
+.todo{
+    position: absolute;
+    left: 47px;
+    top: 13px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.calendar{
+    position: absolute;
+    width: 323px;
+    height: 267px;
+    left: calc(50% - 323px/2 + 332px);
+    top: 974px;
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    border-radius: 8px;
+}

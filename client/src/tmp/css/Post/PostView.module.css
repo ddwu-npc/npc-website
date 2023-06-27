@@ -1,0 +1,237 @@
+.postView {
+  width: 100%;
+
+  border: 1px solid #7e7e7e;
+  border-radius: 10px;
+
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: 30px;
+}
+.postView > div {
+  margin-left: 30px;
+}
+.postView .title {
+  width: 800px;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 27px;
+
+  margin-top: 25px;
+  margin-bottom: 20px;
+}
+.postView .option iconify-icon {
+  color: #7e7e7e;
+  margin-top: 30px;
+  font-size: 24px;
+}
+.postView .option .option_list {
+  display: none;
+  position: absolute;
+  width: 72px;
+  height: 85px;
+  transform: translate(-40%, 0);
+
+  background: white;
+  border: 1px solid #d9d9d9;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  z-index: 10;
+}
+.postView .option .option_list div {
+  width: 100%;
+  height: 28.34px;
+
+  font-size: 14px;
+  line-height: 28.333px;
+  text-align: center;
+}
+.postView .option .option_list div:hover {
+  background: #d9d9d9;
+}
+
+.postView .writer {
+  display: flex;
+  width: 650px;
+}
+.postView .writer .profile {
+  width: 55px;
+  height: 55px;
+  background: #d9d9d9;
+}
+.postView .writer .info {
+  font-size: 16px;
+  margin: 5px;
+  margin-left: 7px;
+}
+.postView .writer .info .date {
+  color: #7e7e7e;
+}
+.postView .scope,
+.postView .view {
+  font-size: 16px;
+  color: #7e7e7e;
+
+  height: 16px;
+  margin-left: 39px;
+  margin-top: 25px;
+}
+.postView .content {
+  width: 800px;
+  height: 300px;
+  margin-top: 50px;
+
+  font-size: 16px;
+  line-height: 21.79px;
+}
+.postAttachment {
+  font-size: 16px;
+}
+.postAttachmentTitle {
+  font-size: 16px;
+  font-weight: 600;
+}
+.postAttachmentTitle iconify-icon {
+  margin-right: 5px;
+}
+.postAttachmentView {
+  font-size: 14px;
+}
+.postAttachmentView iconify-icon {
+  font-size: 16px;
+  transform: translate(5px, 2.5px);
+}
+
+.commentView .commentTitle {
+  font-size: 20px;
+
+  margin-top: 35px;
+  margin-left: 10px;
+}
+.commentView .commentTitle iconify-icon {
+  font-size: 20px;
+  margin-right: 5px;
+  transform: translate(0, 2.5px);
+}
+.commentView hr {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.commentView .commentInput {
+  border: 1px solid #b1b1b1;
+  border-radius: 10px;
+
+  padding: 20px;
+
+  display: flex;
+  flex-wrap: wrap;
+}
+.commentView .commentInput .writer {
+  width: 875px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+}
+.commentView .commentInput .content {
+  width: 848px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+}
+
+.attachmant {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+
+  color: #000000;
+  width: 820px;
+  margin-top: 10px;
+}
+.attachmant label iconify-icon {
+  font-size: 18px;
+  margin-right: 3px;
+  transform: translate(0, 2.5px);
+  margin-left: 5px;
+}
+.fileView {
+  font-size: 14px;
+  margin-top: 5px;
+  color: #7e7e7e;
+}
+input[name="attachmant"] {
+  display: none;
+}
+
+.commentView .commentInput .submit {
+  width: 50px;
+  height: 30px;
+
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: #b1b1b1;
+  margin-top: 15px;
+
+  background: none;
+  border: none;
+}
+
+.commentView .comment {
+  width: 100%;
+
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+.commentView .comment > div {
+  width: 850px;
+  margin-left: 10px;
+
+  display: flex;
+  flex-wrap: wrap;
+}
+.commentView .comment .profile {
+  width: 55px;
+  height: 55px;
+  background: #d9d9d9;
+  margin: 0;
+}
+.commentView .comment .name {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 19px;
+  margin-right: 10px;
+}
+.commentView .comment .date {
+  width: 700px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  color: #7e7e7e;
+}
+.commentView .comment .content {
+  width: 800px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+.commentView .comment .CommentAttachment {
+  font-size: 14px;
+  color: #7e7e7e;
+}
+.commentView .comment .CommentAttachment b {
+  color: black;
+  margin-right: 10px;
+}
+.commentView .comment hr {
+  width: 100%;
+  margin-left: -20px;
+  margin-top: 20px;
+}

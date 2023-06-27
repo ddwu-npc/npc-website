@@ -1,0 +1,131 @@
+.atten_titleBox{
+    position: relative;
+    width: 915px;
+    height: 50px;
+    top: 75px;
+    margin-bottom: 1000px;
+    background: #BF4A4A;
+    border-radius: 10px;
+}
+.AttendanceBox{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 915px;
+    height: 852px;
+    top: 414px;
+
+    background: #FFFFFF;
+    /* gray/dark */
+
+    border: 1px solid #7E7E7E;
+    border-radius: 10px;
+}
+
+.attendance_title{
+    position: absolute;
+    width: 100px;
+    height: 27px;
+    left: 52px;
+    top: 28px;
+
+    /* 20px/SemiBold */
+
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 27px;
+
+    /* gray/dark */
+
+    color: #7E7E7E;
+}
+
+.team_menu{
+    position: absolute;
+    height: 16.25px;
+    width: 3.75px;
+    left: 885.13px;
+    top: 23.88px;
+    border-radius: 0px;
+}
+
+.attenNum_check_text{
+    position: absolute;
+    left: 355px;
+    top: 155px;
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    color: #BC8686;
+}
+
+.attenNum{
+    box-sizing: border-box;
+    position: absolute;
+    Width: 200px;
+    Height: 80px;
+    left: 370px;
+    top: 191px;
+    background: #FFFFFF;
+    border: 1px solid #4C5058;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    font-size: 20px;
+    color: #B1B1B1;
+    text-align: center;
+}
+
+.atten_check{
+    position: absolute;
+    height: 50px;
+    width: 145px;
+    left: 400px;
+    top: 290px;
+    /* black/blue */
+    background: #161E2E;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    color:#FFFFFF;
+    font-size: 20px;
+}
+
+.point_text{
+    
+    position: absolute;
+    width: 300px;
+    height: 19px;
+    left: 565px;
+    top: 414px;
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    color: #000000;
+}
+
+.point_move{
+    position: absolute;
+    width: 8px; /* 사이즈 */
+    height: 8px; /* 사이즈 */
+    left: 747.19px;
+    top: 420.69px;
+    border-top: 1.5px solid #B1B1B1; /* 선 두께 */
+    border-right: 1.5px solid #B1B1B1;; /* 선 두께 */
+    transform: rotate(45deg); /* 각도 */
+}
+
+.atten_check{
+    position: absolute;
+    width: 606px;
+    height: 70px;
+    left: 154px;
+    top: 451px;
+
+    border-width: 1px 0px;
+    border-style: solid;
+    border-color: #E4E4E4;
+}

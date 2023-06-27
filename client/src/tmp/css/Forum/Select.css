@@ -1,0 +1,30 @@
+
+.Select{
+	z-index: 3;
+	position: absolute;
+
+	transform: translate(-7px, 0);
+
+	background: white;
+
+	display: none;
+}
+
+.Select div {
+	width: 76px; height: 30px;
+	font-size: 14px;
+
+	border-left: solid 1px black;
+	border-right: solid 1px black;
+}
+
+.Select div:first-child {
+	border-top: solid 1px black;
+}
+.Select div:last-child {
+	border-bottom: solid 1px black;
+}
+
+.Select div:hover {
+	background: #ECECEC;
+}

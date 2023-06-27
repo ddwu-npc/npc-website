@@ -1,0 +1,72 @@
+.header {
+	display: flex;
+	flex-direction: column;
+
+	align-items: center;
+
+	width: 100%;
+}
+
+.banner {
+	display: flex;
+	width: 95%;
+	padding-top: 25px;
+	justify-content: space-between;
+}
+
+.banner div:nth-child(1) {
+	font-size: 16px;
+	line-height: 22px;
+	text-align: left;
+
+	color: #7E7E7E;
+}
+.banner div:nth-child(2) {
+	transform: translate(0, -5px);
+}
+
+.banner .greet {
+	display: inline;
+
+	font-family: 'Noto Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 22px;
+
+	color: black;
+}
+.banner .greet img {
+	transform: translate(0, 5px);
+	padding-right: 10px;
+	padding-left: 5px;
+}
+.banner .logout {
+	display: inline;
+
+	font-family: 'Noto Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 22px;
+}
+.banner .logout:hover {
+	font-weight: 600;
+}
+
+.logo {
+	width: 190px;
+	height: 104.16px;
+	padding-bottom: 30px;
+}
+
+@media screen and (min-width: 450px) and (max-width: 550px) { /* 모바일 */
+	.banner .greet { display: none;}
+	.banner .logout { padding-right: 5vw;}
+}
+@media screen and (min-width: 550px) and (max-width: 650px) { /* 태블릿  */
+	html { font-size: 0.8px; }
+}
+@media screen and (min-width: 650px) { /* PC */
+	html { font-size: 1px;}
+}

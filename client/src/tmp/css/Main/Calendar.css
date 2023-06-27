@@ -1,0 +1,51 @@
+.fc.fc-media-screen.fc-direction-ltr.fc-theme-standard {
+  padding: 30px;
+}
+.fc-header-toolbar.fc-toolbar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px !important;
+}
+.fc-header-toolbar.fc-toolbar > div:first-child {
+  font-weight: 700;
+  font-size: 18px;
+
+  color: #262729;
+}
+.fc-header-toolbar.fc-toolbar > div:last-child {
+  position: absolute;
+  width: 90%;
+}
+
+.fc-button-group {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.fc-button {
+  width: 30px !important;
+  height: 30px !important;
+  border-radius: 50% !important;
+
+  flex: none !important;
+  border: 2px solid #bc8686 !important;
+  background: none !important;
+
+  --fc-button-border-color: #bc8686;
+  --fc-button-hover-border-color: #bc8686;
+  --fc-button-active-border-color: #bc8686;
+}
+.fc-button > span {
+  color: #bc8686;
+  font-size: 26px !important;
+}
+.fc-today-button {
+  display: none !important;
+}
+
+.fc-dayGridMonth-view {
+  font-size: 14px;
+}
+.fc-col-header-cell.fc-day.fc-day-sun {
+  color: #bf4a4a;
+}

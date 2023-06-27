@@ -1,0 +1,96 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap");
+
+.bg {
+  width: 100vw;
+  height: 100vh;
+  background: gray;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+}
+
+.container {
+  width: 650px;
+  height: 710px;
+
+  background: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  font-size: 20px;
+  padding: 25px;
+}
+
+.npc {
+  font-family: "Oswald", sans-serif;
+  font-size: 30px;
+  margin-bottom: -50px;
+}
+.title {
+  font-weight: 400;
+  font-size: 40px;
+  color: #060606;
+}
+
+.container form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+.container form input:not(input[type="button"]) {
+  width: 495px;
+  height: 50px;
+
+  font-weight: 400;
+  font-size: 20px;
+
+  border: none;
+  border-bottom: 1.5px solid #d3d3d3;
+
+  margin: 0px 5px;
+  padding: 5px;
+}
+.container form input::placeholder {
+  color: #c4c4c4;
+}
+
+input[name="email"] {
+  margin-bottom: 20px !important;
+}
+
+.agree {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.container form input[type="button"] {
+  width: 300px;
+  height: 56px;
+  background: #000000;
+  border-radius: 10px;
+
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 56px;
+  text-align: center;
+
+  color: #ffffff;
+
+  margin-top: 10px;
+}
+
+.result {
+  position: absolute;
+  transform: translate(0, -160px);
+  color: blue;
+}

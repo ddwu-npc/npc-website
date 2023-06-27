@@ -1,0 +1,188 @@
+.postEdit {
+  font-size: 18rem;
+
+  width: 100%;
+}
+
+.postEdit .top {
+  width: 100%;
+  height: 50px;
+
+  background: #bf4a4a;
+  border-radius: 10px;
+
+  margin-top: 50px;
+  margin-bottom: 10px;
+
+  color: white;
+
+  display: flex;
+  align-items: center;
+}
+.postEdit .top iconify-icon {
+  /* font-size: 25px; */
+  margin-left: 20px;
+  margin-right: 10px;
+  color: white;
+}
+.postEdit .top .text {
+  height: 35px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.postEdit form {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.title {
+  width: -webkit-fill-available;
+  border: 1px solid #7e7e7e;
+  border-radius: 10px;
+
+  padding: 30px;
+}
+.title input[name="title"] {
+  width: 860px;
+  height: 30px;
+  border: none;
+  border-bottom: 1px solid #7e7e7e;
+  padding: 5px;
+
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+}
+.title input[name="title"]::placeholder {
+  color: #b1b1b1;
+}
+.postEdit form > .title .info {
+  display: flex;
+  flex-wrap: wrap;
+
+  width: 400px;
+  text-align: left;
+}
+.important {
+  margin: 20px;
+  margin-bottom: 0;
+}
+input[name="important"] {
+  margin-left: 10px;
+}
+.scope {
+  display: flex;
+  margin: 20px;
+  margin-left: 50px;
+  margin-bottom: 0;
+}
+.postEdit .view_scope {
+  width: 75px;
+  height: 30px;
+  border: solid 1px #7e7e7e;
+
+  text-align: center;
+  font-size: 14px;
+  line-height: 30px;
+
+  margin: 5px;
+  margin-left: 15px;
+  transform: translate(0, -7.5px);
+}
+
+.attachmant {
+  width: 820px;
+  margin: 20px;
+  margin-top: 0;
+}
+.attachmant label iconify-icon {
+  font-size: 20px;
+  margin-right: 3px;
+  transform: translate(0, 2.5px);
+  margin-left: 5px;
+}
+.fileView {
+  font-size: 16px;
+  margin-top: 5px;
+}
+input[name="attachmant"] {
+  display: none;
+}
+
+.postEdit form > .title .info .attachmant div {
+  font-size: 16px;
+  line-height: 26px;
+  color: #7e7e7e;
+}
+.postEdit form > .title .info .attachmant .title {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 19px;
+  color: black;
+  margin-bottom: 5px;
+}
+.postEdit form > .title .info .attachmant .title iconify-icon {
+  font-size: 20px;
+  margin-right: 5px;
+  transform: translate(0, 5px);
+}
+
+textarea {
+  width: -webkit-fill-available;
+  height: 50px;
+  border: 1px solid #7e7e7e;
+  border-radius: 10px;
+  padding: 30px;
+  padding-bottom: 450px;
+
+  margin-top: 10px;
+
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+
+  resize: none;
+}
+
+.postEdit form .submit {
+  width: 100%;
+  text-align: center;
+}
+
+.submitButton {
+  width: 130px;
+  height: 43px;
+
+  background: #bf4a4a;
+  border-radius: 10px;
+
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 27px;
+  color: white;
+
+  border: none;
+  margin: 30px;
+}
+
+.postEdit form .cancel {
+  width: 106px;
+  height: 36px;
+
+  background: #b1b1b1;
+  border-radius: 10px;
+
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+
+  color: #ffffff;
+
+  border: none;
+  margin: 27px;
+
+  transform: translate(0, -110px);
+}

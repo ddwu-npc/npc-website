@@ -1,0 +1,23 @@
+.fileInput {
+  label {
+    display: flex;
+    font-size: 14px;
+
+    svg {
+      font-size: 20px;
+      margin-left: 4px;
+    }
+  }
+  > div {
+    font-size: 14px;
+    line-height: 20px;
+    color: #7e7e7e;
+
+    > div:hover {
+      text-decoration: line-through;
+    }
+  }
+  input {
+    display: none;
+  }
+}

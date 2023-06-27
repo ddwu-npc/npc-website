@@ -1,0 +1,25 @@
+.calender {
+  position: absolute;
+  width: 915px;
+  top: 410px;
+
+  background: #ffffff;
+  /* gray/default */
+
+  border: 1px solid #b1b1b1;
+  box-shadow: 4px 7px 10px rgba(0, 0, 0, 0.25);
+}
+
+.day {
+  position: absolute;
+  width: 1000px;
+  height: 19px;
+  top: 101.16px;
+  left: 38.5px;
+  display: flex; /*가로 정렬*/
+  font-family: "Noto Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  color: #7e7e7e;
+}

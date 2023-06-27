@@ -1,0 +1,214 @@
+.Forum {
+	font-size: 18px;
+
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+
+	width: 950px; height: 667px;
+
+	margin-top: 75px;
+	margin-bottom: 100px;
+}
+
+.Forum .upper {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	height: 38px;
+	width: 100%;
+	
+	transform: translate(0, 10px);
+}
+.Forum .upper .moveNewPost {
+	font-size: 14px;
+	display: flex;
+	transform:translate(0, -10px);
+}
+.Forum .upper .post_icon {
+	margin-left: 10px;
+	margin-right: 5px;
+	transform: translate(0, 3px);
+}
+
+.Forum .upper .view_scope, .Forum .upper .search_scope {
+	width: 90px; height: 30px;
+	border: solid 1px #7E7E7E;
+
+	text-align: center;
+	font-size: 14px;
+	line-height: 30px;
+
+	margin: 5px;
+	transform: translate(0, -12.5px);
+}
+.Forum .upper .search_scope {
+	margin-right: 10px;
+}
+.Forum .upper form {
+	height: 38px;
+}
+.Forum .upper .search {
+	width: 297px;
+	height: 38px;
+
+	border: solid 1px #B1B1B1;
+
+	transform: translate(0px, -13px);
+
+	padding-left: 10px;
+	margin-right: 7px;
+}
+.Forum .upper .search_button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    scale: 1.1;
+}
+.Forum .upper .button {
+	width: 37px; height: 38px;
+	background: #161E2E;
+	border-radius: 5px;
+}
+.Forum .upper .search_icon {
+	display: inline-flex;
+	position: absolute;
+	width: 20px; height: 20px;
+	color: white;
+	border: none;
+}
+
+.table {
+	width: 950px;
+	margin-top: 20px;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.top {
+	background: #BF4A4A;
+	border-radius: 10px;
+
+	width: 950px; height: 50px;
+
+	display: flex;
+	align-items: center;
+}
+.top div{
+	text-align: center;
+	line-height: 30px;
+	height: 30px;
+
+	font-size: 17px;
+	font-weight: 500;
+	color: white;
+	border-right: solid 1px white;
+}
+.top div:nth-child(1){
+	width: 109px;
+}
+.top div:nth-child(2){
+	width: 76px;
+}
+.top div:nth-child(3){
+	width: 386px;
+}
+.top div:nth-child(4){
+	width: 136px;
+}
+.top div:nth-child(5){
+	width: 105px;
+}
+.top div:nth-child(6){
+	width: 138px;
+	border: none;
+}
+
+.list {
+	width: 950px; margin-bottom: 50px;
+}
+.list a>div{
+	width: 950px; height: 45px;
+	border-top: solid 2px #B1B1B1;
+/*	border-bottom: solid 1px #B1B1B1;*/
+
+	margin: 1;
+
+	display: flex;
+}
+.list a>div:last-child{
+	border-bottom: solid 1px #B1B1B1;
+}
+.list .important{
+	background: #EDEDED;
+	border-color: white;
+}
+
+.list a>div >div {
+	font-size: 16px;
+	text-align: center;
+	line-height: 45px;
+}
+
+.list a>div >div:nth-child(1){
+	width: 20px;
+}
+.list a>div >div:nth-child(2){
+	width: 89px;
+}
+.list a>div >div:nth-child(3){
+	width: 76px;
+}
+.list a>div >div:nth-child(4){
+	width: 386px;
+}
+.list a>div >div:nth-child(5){
+	width: 136px;
+}
+.list a>div >div:nth-child(6){
+	width: 105px;
+}
+.list a>div >div:nth-child(6) img{
+	width: 24px; height: 24px;
+	transform:  translate(0px, 5px);
+}
+.list a>div >div:nth-child(7){
+	width: 138px;
+}
+
+
+.list a>div .star img {
+	width: 0px; height: 0px;
+}
+.list .important .star img{
+	width: 24px; height: 24px;
+	transform:  translate(30px, 5px);
+}
+
+.nav {
+	height: 22px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	/*padding-top: 33px;*/
+}
+.nav img{
+	margin: 5px;
+}
+.nav .after, .nav .last {
+	transform: rotate(180deg);
+}
+
+.nav span, .nav b{
+	display: inline-block;
+	text-align: center;
+	margin: 0 15px;
+	width: 20px;
+}
+
+.Post {
+	display: none;
+}

@@ -4,7 +4,7 @@ import accountRouter from "components/account";
 
 import Root, { loader as rootLoader } from "components/root";
 
-import Main from "components/main";
+import Main, { loader as mainLoader } from "components/main";
 import Board, { loader as boardLoader } from "components/board";
 import postRouter from "components/post";
 import Project from "components/project";
@@ -28,6 +28,7 @@ export default createBrowserRouter([
       {
         path: "",
         element: <Main />,
+        loader: mainLoader,
       },
       {
         path: "board/:boardId",

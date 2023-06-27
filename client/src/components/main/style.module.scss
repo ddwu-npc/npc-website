@@ -1,0 +1,101 @@
+.main {
+    display: flex;
+    margin-top: 50px;
+    
+    .boxContainer {
+
+        .box {
+            border: 1px solid #7E7E7E;
+            border-radius: 10px;
+
+            margin: 30px;
+        
+            > .header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+        
+                height: 45px;
+                padding-left: 25px;
+                padding-right: 10px;
+        
+                border-bottom: 1px solid #7E7E7E;
+        
+                font-size: 18px;
+                font-weight: 600;
+                line-height: 45px;
+                
+                > div > svg {
+                    margin-right: 10px;
+                    transform: translateY(2px);
+                    font-size: 18px;
+                }
+                > svg {
+                    font-size: 22px;
+                }
+            }
+        
+            > .content {
+                padding: 15px 30px;
+        
+                font-size: 16px;
+                line-height: 30px;
+            }
+        }
+        
+        .boardBox {
+            width: 605px;
+            height: 233px;
+
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        .noticeBox {
+            width: 323px;
+
+            > .header, >.content {
+                font-size: 14px;
+            } 
+        }
+
+        .profile {
+            width: 322px;
+            height: 403px;
+
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            .link {
+                width: 100%;
+
+                display: flex;
+                justify-content: flex-end;
+
+                > a {
+                    align-self: right;
+                    margin: 20px;
+                    text-decoration: none;
+                    color: #7E7E7E;
+
+                    > svg {
+                        transform: translateY(2px);
+                    }
+                }
+            }
+            
+            > img {
+                width: 200px;
+                height: 200px;
+            }
+
+            > .content {
+                width: 254px;
+            }
+        }
+
+    }
+    
+}

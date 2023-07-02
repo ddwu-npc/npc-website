@@ -7,7 +7,7 @@ import Root, { loader as rootLoader } from "components/root";
 import Main, { loader as mainLoader } from "components/main";
 import Board, { loader as boardLoader } from "components/board";
 import postRouter from "components/post";
-import Project from "components/project";
+import Project, { loader as projectLoader} from "components/project";
 import Calendar from "components/calendar";
 import Mypage, { loader as MypageLoader } from "components/mypage";
 
@@ -42,6 +42,7 @@ export default createBrowserRouter([
       {
         path: "/project",
         element: <Project />,
+        loader: projectLoader,
       },
       {
         path: "/calendar",

@@ -8,6 +8,8 @@ import styles from "./style.module.scss";
 
 export default () => {
   const { post } = useLoaderData();
+  const [important, setImportant] = useState(post ? post.important : false);
+
   return (
     <div className={styles.title}>
       <input
@@ -22,7 +24,10 @@ export default () => {
           id="important"
           name="important"
           type="checkbox"
-          checked={post ? post.important : ""}
+          checked={important}
+          onChange={(e) => {
+            setImportant(e.value);
+          }}
         />
       </div>
       <div className={styles.range}>

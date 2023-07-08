@@ -1,8 +1,13 @@
 import { useLoaderData, Link } from "react-router-dom";
 import { Icon } from "@iconify/react";
 
-import Option from "./option";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+import Option from "./option";
 import styles from "./style.module.scss";
 
 export default () => {
@@ -20,7 +25,29 @@ export default () => {
         <span>대상: {post.range}</span>
         <span>읽은 수: {post.read_count}</span>
       </div>
-      <div className={styles.content}>{post.content}</div>
+      <ReactMarkdown
+        children={post.content}
+        remarkPlugins={[remarkGfm]}
+        className={styles.content}
+        components={{
+        code({ node, inline, className, children, ...props }) {
+            const match = /language-(\w+)/.exec(className || "");
+            return !inline && match ? (
+            <SyntaxHighlighter
+                {...props}
+                children={String(children).replace(/\n$/, "")}
+                style={oneLight}
+                language={match[1]}
+                PreTag="div"
+            />
+            ) : (
+            <code {...props} className={className}>
+                {children}
+            </code>
+            );
+        },
+        }}
+      />
       <div className={styles.attachment}>
         <div>
           <Icon icon="ant-design:file-zip-outlined" /> 첨부파일

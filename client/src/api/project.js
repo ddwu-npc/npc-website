@@ -6,6 +6,10 @@
 // 1. 출석을 project가 아니라 schedule로 묶는 것도 한번 고려해보기 (더 적절하다 싶은 걸로 진행해주세요) 
 
 export const getProjectList = (search) => {
+  // search
+  // type: 0 전체, 1 팀 2 개인
+  // process: 0 전체, 1 개발중, 2 개발완료
+
   return new Promise((resolve) =>
     setTimeout(() => {
       resolve([

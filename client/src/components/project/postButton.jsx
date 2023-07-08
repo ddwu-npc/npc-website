@@ -5,9 +5,9 @@ import styles from "./style.module.scss";
 
 export default () => {
   return (
-    <Link className={styles.postButton}>
+    <Link className={styles.postButton} to="create">
       <Icon icon="bi:plus-square" />
-      게시글 작성하기
+      프로젝트 생성하기
     </Link>
   );
 };

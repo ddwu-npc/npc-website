@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useNavigationType } from "react-router-dom";
 import { login } from "api/user";
 
 import logo from "components/commons/img/logo.png";
@@ -8,15 +8,26 @@ import styles from "./style.module.scss";
 import { Icon } from "@iconify/react";
 
 export default () => {
+  const navigate = useNavigate();
+  const navigationType = useNavigationType();
+
   const formRef = useRef();
   const [fail, setFail] = useState(false);
 
   const submit = async () => {
     const form = formRef.current;
+    const data = {
+      loginId: form.loginId.value,
+      password: form.password.value
+    };
 
-    const result = await login(form.loginId.value, form.password.value);
+    const result = await login(data.loginId, data.password);
+
     if (result) {
-      window.location.href = "/";
+      form.remove();
+      
+      if(navigationType === "PUSH") navigate(-1);
+      else navigate("/");
     } else setFail(true);
   };
 

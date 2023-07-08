@@ -1,3 +1,5 @@
+import sha256 from 'crypto-js/sha256';
+
 export function readUser(userno) {
   return new Promise((resolve) =>
     setTimeout(
@@ -29,10 +31,12 @@ export const readUserInfo = (userno) => {
   );
 };
 
-export const login = (loginId, password) => {
+export const login = (loginId, raw_password) => {
+  let password = sha256(raw_password).toString();
+  
   return new Promise((resolve) =>
     setTimeout(() => {
-      if (loginId === "1234" && password === "1234") {
+      if (loginId === "1234" && password === sha256("1234").toString()) {
         sessionStorage.setItem("loginSession", 1);
         resolve(true);
       } else resolve(false);
@@ -55,7 +59,9 @@ export const getLoginSession = () => {
   );
 };
 
-export const signup = (loginId, password, nickname, email) => {
+export const signup = (loginId, raw_password, nickname, email) => {
+  let password = sha256(raw_password).toString();
+
   return new Promise((resolve) =>
     setTimeout(() => {
       resolve(true);

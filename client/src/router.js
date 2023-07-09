@@ -8,7 +8,8 @@ import Main, { loader as mainLoader } from "components/main";
 import Board, { loader as boardLoader, postRouter } from "components/board";
 import Project, { 
   loader as projectLoader,
-  viewRouter as projectViewRouter } from "components/project";
+  viewRouter as projectViewRouter,
+  editRouter as projectEditRouter } from "components/project";
 
 import Calendar from "components/calendar";
 import Mypage, { loader as MypageLoader } from "components/mypage";
@@ -49,6 +50,14 @@ export default createBrowserRouter([
       {
         path: "/project/:pid",
         ...projectViewRouter 
+      },
+      {
+        path: "/project/:pid/edit",
+        ...projectEditRouter,
+      },
+      {
+        path: "/project/create",
+        ...projectEditRouter,
       },
       {
         path: "/calendar",

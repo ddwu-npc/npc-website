@@ -10,6 +10,7 @@ import Search from "./search";
 import Table from "./table";
 
 import View, { loader as viewLoader } from "./view";
+import Edit, { loader as editLoader } from "./edit";
 
 export async function loader({ params, request }) {
   const searchParmas = new URL(request.url).searchParams;
@@ -40,4 +41,9 @@ export default () => {
 export const viewRouter = { 
   element: <View/>,
   loader: viewLoader,
+};
+
+export const editRouter = {
+  element: <Edit/>,
+  loader: editLoader
 };

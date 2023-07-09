@@ -22,7 +22,8 @@ export const getProjectList = (search) => {
             type: "팀", // 팀 or 개인
             tname: "[NAME]", // 팀 이름 or 유저 이름
             process: "개발 중", // 개발 완료, 개발 중
-            period: "2023-07-01 ~ 2023-08-31"
+            startDate: "2023-07-01",
+            endDate: "2023-08-31",
           },
           { 
             pid: 2,
@@ -30,7 +31,8 @@ export const getProjectList = (search) => {
             type: "팀",
             tname: "[NAME]",
             process: "개발 중",
-            period: "2023-07-01 ~ 2023-08-31"
+            startDate: "2023-07-01",
+            endDate: "2023-08-31",
           },
           { 
             pid: 3,
@@ -38,7 +40,8 @@ export const getProjectList = (search) => {
             type: "팀",
             tname: "[NAME]",
             process: "개발 중",
-            period: "2023-07-01 ~ 2023-08-31"
+            startDate: "2023-07-01",
+            endDate: "2023-08-31",
           },
       ]);
     }, 100)
@@ -51,10 +54,11 @@ export const getProjectInfo = (pid) => {
       resolve({
         pid: 2,
         pname: "컬러미",
-        type: "팀",
+        type: 0,
         tname: "[NAME]",
         process: "개발 중",
-        period: "2023-07-01 ~ 2023-08-31",
+        startDate: "2023-07-01",
+        endDate: "2023-08-31",
         description: "불라불라불라", // 게시글과 같이 markdown 식으로 정리할 까 생각 중
         member: [1, 2, 3], // userId list
       });
@@ -66,6 +70,22 @@ export const getQuickAttendance = (pid) => {
   return new Promise((resolve) =>
     setTimeout(() => {
       resolve(1); // project에서 현재 생성되어 있는 출석의 id를 가져옴
+    }, 100)
+  );
+};
+
+export const createProject = (project) => {
+  return new Promise((resolve) =>
+    setTimeout(() => {
+      resolve(true); // project에서 현재 생성되어 있는 출석의 id를 가져옴
+    }, 100)
+  );
+};
+
+export const updateProject = (project) => {
+  return new Promise((resolve) =>
+    setTimeout(() => {
+      resolve(true); // project에서 현재 생성되어 있는 출석의 id를 가져옴
     }, 100)
   );
 };

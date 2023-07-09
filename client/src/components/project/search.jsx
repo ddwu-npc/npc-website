@@ -11,6 +11,7 @@ export default () => {
       formRef.current.submit();
     };
   });
+  
   return (
     <form className={styles.search} ref={formRef}>
       <select name="type">

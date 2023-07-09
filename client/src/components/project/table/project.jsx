@@ -16,7 +16,7 @@ export default ({ link, project, empty }) => {
       <div>{project.pname}</div>
       <div>[NAME]</div>
       <div>개발 중</div>
-      <div>2023.07.02 ~ 2023.08.31</div>
+      <div>{project.startDate} ~ {project.endDate}</div>
     </Link>
   );
 };

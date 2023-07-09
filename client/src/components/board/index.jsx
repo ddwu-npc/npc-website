@@ -8,6 +8,9 @@ import styles from "./style.module.scss";
 import PostButton from "./postButton";
 import Search from "./search";
 import Table from "./table";
+import post from "./post";
+
+export const postRouter = post;
 
 export async function loader({ params, request }) {
   const searchParmas = new URL(request.url).searchParams;

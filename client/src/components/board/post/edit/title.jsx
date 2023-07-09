@@ -2,8 +2,7 @@ import { createRef, useState, useEffect } from "react";
 import { useLoaderData } from "react-router-dom";
 import { Icon } from "@iconify/react";
 
-import FileInput from "components/post/fileInput";
-
+import FileInput from "../fileInput";
 import styles from "./style.module.scss";
 
 export default () => {

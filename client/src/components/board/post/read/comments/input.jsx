@@ -3,7 +3,7 @@ import { useLoaderData } from "react-router-dom";
 
 import { createComment } from "api/post";
 
-import FileInput from "components/post/fileInput";
+import FileInput from "../../fileInput";
 import styles from "./style.module.scss";
 
 export default () => {

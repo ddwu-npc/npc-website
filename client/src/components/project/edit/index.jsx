@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
+import { usePos } from "hooks";
 
 import CodeMirror from "@uiw/react-codemirror";
 import { githubLightInit } from "@uiw/codemirror-theme-github";
@@ -30,6 +31,8 @@ export const loader = async ({ params }) => {
 }
 
 export default () => {
+    usePos("프로젝트");
+    
     const navigate = useNavigate();
     const [project, setProject] = useState(useLoaderData());
 

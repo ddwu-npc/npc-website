@@ -6,12 +6,16 @@ import { getAttendanceInfo, attend } from "api/attendance";
 import styles from "./style.module.scss";
 import Header from "components/commons/header";
 
+import { usePos } from "hooks";
+
 export const loader = async ({ params }) => {
     const attendanceId = params.attendanceId;
     return await getAttendanceInfo(attendanceId);
 }
 
 export default () => {
+    usePos("출석");
+    
     const navigate = useNavigate();
     const navigationType = useNavigationType();
 

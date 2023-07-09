@@ -1,5 +1,5 @@
 // 마찬가지로 상황에 맞춰 변경하시고 통보하시면 맞게 수정해서 쓸게요
-// + date는 string으로 전달함. 원하는 format있으면 맞춰드려요.
+// + date는 string으로 전달함.
 // main 화면에서 할일은 어떻게 할까요
 
 export const getSchedule = (year, month) => {
@@ -45,7 +45,7 @@ export const getNearSchedule = (date) => { // 앞으로 3주 내에 있는 일�
   );
 }
 
-export const addSchedule = (schedule) => { // {date, content}
+export const addSchedule = (schedule) => { // { date, content }
     return new Promise((resolve) =>
         setTimeout(() => {
         resolve(true);

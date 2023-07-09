@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 
+import { usePos } from "hooks";
+
 import Header from "components/commons/header";
 import Tag from "components/commons/tag";
 import styles from "./style.module.scss";
@@ -22,6 +24,7 @@ export const loader = async ({ params }) => {
 };
 
 export default () => {
+    usePos("프로젝트");
     const navigate = useNavigate();
 
     const project = useLoaderData();

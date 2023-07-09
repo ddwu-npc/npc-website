@@ -23,8 +23,16 @@ export const attend = (attendanceId, authcode) => {
 
 export const createAttendance = (pid) => {
     return new Promise((resolve) =>
-    setTimeout(() => {
-        resolve(1); // 생성한 attendance Id
-    }
-));
+        setTimeout(() => {
+            resolve(1); // 생성한 attendance Id
+        }
+    ));
+};
+
+export const getMyAttendance = () => {
+    return new Promise((resolve) =>
+        setTimeout(() => {
+            resolve([1, 2, 3]); // 내가 속한 프로젝트에서 오늘 출석 중인 출석들
+        }
+    ));
 };

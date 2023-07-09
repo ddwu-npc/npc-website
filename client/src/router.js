@@ -12,7 +12,7 @@ import Project, {
   editRouter as projectEditRouter } from "components/project";
 import Attendance, { loader as attendanceLoader } from "components/attendance";
 
-import Calendar from "components/calendar";
+import Calendar, { loader as calendarLoader } from "components/calendar";
 import Mypage, { loader as MypageLoader } from "components/mypage";
 
 import ErrorPage from "./error-page";
@@ -63,6 +63,7 @@ export default createBrowserRouter([
       {
         path: "/calendar",
         element: <Calendar />,
+        loader: calendarLoader,
       },
       {
         path: "/mypage",

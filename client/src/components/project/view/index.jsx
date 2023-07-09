@@ -11,7 +11,8 @@ import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
 
-import { getProjectInfo, deleteProject } from "api/project";
+import { getProjectInfo, deleteProject, getQuickAttendance } from "api/project";
+import { createAttendance } from "api/attendance";
 import { Icon } from "@iconify/react";
 
 export const loader = async ({ params }) => {
@@ -39,7 +40,15 @@ export default () => {
                         onClick={() => setOption(!option)}/>
                     {option && (
                         <div>
-                            <div>출석 생성</div>
+                            <div onClick={async () => {
+                                const result = await createAttendance(project.pid);
+                                if(result) {
+                                    navigate(`/attendance/${result}`);
+                                }
+                                else {
+                                    alert("출석 삭제에 실패했습니다.\n해당 현상이 반복될 시 관리자에게 문의바랍니다.")  
+                                }
+                            }}>출석 생성</div>
                             <div onClick={() => navigate("edit")}>수정</div>
                             <div onClick={async () => {
                                 if (await deleteProject(project.pid)) navigate("/project");
@@ -76,7 +85,9 @@ export default () => {
                 }}
             />
             <div className={styles.button}>
-                <input type="button" value="빠른 출석 바로가기" /> 
+                <input type="button" value="빠른 출석 바로가기" onClick={async () => {
+                   navigate(`/attendance/${await getQuickAttendance(project.pid)}`); 
+                }}/> 
             </div>
         </div>
     </div>

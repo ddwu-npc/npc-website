@@ -1,0 +1,70 @@
+.root {
+    width: 950px;
+    padding: 40px;
+
+    .content {
+        padding: 40px;
+        padding-bottom: 0px;
+
+        border-radius: 10px;
+        border: 1px solid var(--gray-dark, #7E7E7E);
+        background: #FFF;
+        
+        .title {
+            color: var(--gray-dark, #7E7E7E);
+            /* 20px/SemiBold */
+            font-family: Noto Sans;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 600;
+            padding-left: 10px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #7E7E7E;
+        }
+
+        .authCode {
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            .error {
+                color: #BC8686;
+                margin-bottom: 25px;
+            }
+
+            input[type="text"] {
+                border-radius: 5px;
+                width: 200px;
+                height: 80px;
+                border: 1px solid #4C5058;
+                background: #FFF;
+                box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+                font-size: 20px;
+                text-align: center;
+            }
+
+            input[type="button"] {
+                width: 145px;
+                height: 50px;
+                flex-shrink: 0;
+
+                border-radius: 20px;
+                background: var(--black-blue, #161E2E);
+                box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+                color: #FFF;
+                font-family: Noto Sans;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 40px;
+
+                margin-top: 25px;
+            }
+        }
+    }
+    
+}

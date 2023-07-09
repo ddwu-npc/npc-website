@@ -10,6 +10,7 @@ import Project, {
   loader as projectLoader,
   viewRouter as projectViewRouter,
   editRouter as projectEditRouter } from "components/project";
+import Attendance, { loader as attendanceLoader } from "components/attendance";
 
 import Calendar from "components/calendar";
 import Mypage, { loader as MypageLoader } from "components/mypage";
@@ -68,6 +69,11 @@ export default createBrowserRouter([
         element: <Mypage />,
         loader: MypageLoader,
       },
+      {
+        path: "/attendance/:attendanceId",
+        element: <Attendance/>,
+        loader: attendanceLoader
+      }
     ],
   },
 ]);

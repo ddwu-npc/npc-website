@@ -68,4 +68,12 @@ export const getQuickAttendance = (pid) => {
       resolve(1); // project에서 현재 생성되어 있는 출석의 id를 가져옴
     }, 100)
   );
-}
+};
+
+export const deleteProject = (pid) => {
+  return new Promise((resolve) =>
+    setTimeout(() => {
+      resolve(true);
+    }, 100)
+  );
+};

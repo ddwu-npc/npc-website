@@ -9,6 +9,8 @@ import PostButton from "./postButton";
 import Search from "./search";
 import Table from "./table";
 
+import View, { loader as viewLoader } from "./view";
+
 export async function loader({ params, request }) {
   const searchParmas = new URL(request.url).searchParams;
   const search = {
@@ -33,4 +35,9 @@ export default () => {
       <Table />
     </div>
   );
+};
+
+export const viewRouter = { 
+  element: <View/>,
+  loader: viewLoader,
 };

@@ -11,13 +11,8 @@ export default ({text, src}) => {
     <div className={styles.header}>
       <Link className={styles.button} to={src} 
         onClick={() => {
-          if(src) {
-            navigate(src);
-          }
-          else {
-            if(navigationType === "PUSH") navigate(-1);
-            else navigate("/");
-          }
+          if(navigationType === "PUSH") navigate(-1);
+          else navigate(src);
         }}>
         <Icon icon="solar:alt-arrow-left-outline" color="white" />
       </Link>

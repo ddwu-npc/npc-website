@@ -65,7 +65,7 @@ export const Post = () => {
 
   return (
     <div className={styles.root}>
-      <Header src={`/board/${boardId}`} text={bName} />
+      <Header text={bName} />
       <Outlet />
     </div>
   );

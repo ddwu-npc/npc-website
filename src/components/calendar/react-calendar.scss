@@ -1,0 +1,110 @@
+.npc_shedule_calendar {
+    width: 885px;
+    // height: 770px;
+
+    border: 1px solid #B1B1B1;
+    background: #FFF;
+    box-shadow: 4px 7px 10px 0px rgba(0, 0, 0, 0.25);
+
+    padding: 50px 30px;
+
+    > .react-calendar__navigation {
+        display: flex;
+        align-items: center;
+        
+        > .react-calendar__navigation__label {
+            color: #262729;
+            font-family: Noto Sans;
+            font-size: 30px;
+            font-weight: 700;
+
+            background: none;
+            border: none;
+        }
+
+        > .react-calendar__navigation__arrow {
+            width: 30px;
+            height: 30px;
+            padding-bottom: 2.5px;
+
+            background: none;
+            border: 3px solid #bc8686;
+            border-radius: 50%;
+
+            font-size: 30px;
+            line-height: 10px;
+            color: #bc8686;
+        }
+
+        > .react-calendar__navigation__prev2-button, 
+        > .react-calendar__navigation__next2-button {
+            display: none;
+        }
+    }
+
+    > .react-calendar__viewContainer {
+        margin-top: 10px;
+
+        .react-calendar__month-view__weekdays {
+
+            > .react-calendar__month-view__weekdays__weekday {
+                flex: 0 0 14% !important;
+
+                width: 100px;
+                height: 15px;
+                padding: 10px 0;
+                margin: 0px 2px;
+                
+                > abbr {
+                    padding: 0 10px;
+
+                    font-family: Noto Sans;
+                    color: #7E7E7E;
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+            }
+
+            > .react-calendar__month-view__weekdays__weekday--weekend > abbr {
+                color: #BF4A4A;
+            }
+        }
+
+        .react-calendar__month-view__days {
+            display: grid;
+            
+            > .react-calendar__tile {
+                flex: 0 0 14% !important;
+
+                width: 100px;
+                height: 120px;
+                padding: 10px;
+                margin: 10px 2px; 
+
+                display: flex;
+                flex-direction: column;
+
+                background: none;
+                border: 1px solid #7E7E7E;
+                
+                > .abbr {
+                    color: #262729;
+                    font-family: Lato;
+                    font-size: 12px;
+                    font-weight: 700;
+                }
+
+                > span {
+                    margin: 5px;
+
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+            }
+
+            > .react-calendar__month-view__days__day--neighboringMonth {
+                opacity: 0.45;
+            }
+        }
+    }
+}

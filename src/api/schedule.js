@@ -7,16 +7,16 @@ export const getSchedule = (year, month) => {
         setTimeout(() => {
         resolve([
             { 
-                date: "2023-05-01",
+                date: "2023-08-10",
                 content: "전체 회의",
                 participants: [1, 2, 3] // 참가자 리스트
             },
             { 
-                date: "2023-05-01",
+                date: "2023-08-17",
                 content: "전체 회의"
             },
             { 
-                date: "2023-05-01",
+                date: "2023-08-24",
                 content: "전체 회의"
             },
         ]);

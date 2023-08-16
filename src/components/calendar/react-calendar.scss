@@ -1,46 +1,4 @@
-.npc_shedule_calendar {
-    width: 885px;
-    // height: 770px;
-
-    border: 1px solid #B1B1B1;
-    background: #FFF;
-    box-shadow: 4px 7px 10px 0px rgba(0, 0, 0, 0.25);
-
-    padding: 50px 30px;
-
-    > .react-calendar__navigation {
-        display: flex;
-        align-items: center;
-        
-        > .react-calendar__navigation__label {
-            color: #262729;
-            font-family: Noto Sans;
-            font-size: 30px;
-            font-weight: 700;
-
-            background: none;
-            border: none;
-        }
-
-        > .react-calendar__navigation__arrow {
-            width: 30px;
-            height: 30px;
-            padding-bottom: 2.5px;
-
-            background: none;
-            border: 3px solid #bc8686;
-            border-radius: 50%;
-
-            font-size: 30px;
-            line-height: 10px;
-            color: #bc8686;
-        }
-
-        > .react-calendar__navigation__prev2-button, 
-        > .react-calendar__navigation__next2-button {
-            display: none;
-        }
-    }
+.react-calendar {
 
     > .react-calendar__viewContainer {
         margin-top: 10px;

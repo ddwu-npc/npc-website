@@ -1,6 +1,8 @@
 import sha256 from 'crypto-js/sha256';
 import axios from "./axios";
 
+// 게시글, 댓글 등에서 띄우는 간단한 유저 정보 
+// (다른 유저의 정보도 필요함 -> uri에 userId도 같이 받기 가람님이 구현한 형태 참고)
 export function readUser(userno) {
   return axios.get("/mypage", {
     userno,
@@ -8,6 +10,8 @@ export function readUser(userno) {
     profile: "profile",
   });
 }
+
+// 마이페이지에서 띄우는 상세 유저 정보 (로그인한 유저의 정보)
 export const readUserInfo = (userno) => {
   return axios.get("/mypage", {
     userno,
@@ -40,6 +44,7 @@ export const logout = () => {
     }, 100)
   );
 };
+
 export const getLoginSession = () => {
   return new Promise((resolve) =>
     setTimeout(() => {

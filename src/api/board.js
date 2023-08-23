@@ -1,5 +1,6 @@
 import axios from "./axios";
 
+// 게시판이 어떤게 있는지 리스트 필요
 export function getBoardList() {
   // none
   return new Promise((resolve) =>
@@ -45,6 +46,7 @@ export function getPostList(board_id, search) {
     ]);
 }
 
+// board_id로 게시판 이름 가져올 수 있어야 함.
 export const getBName = (board_id) => {
   // none
   return new Promise((resolve) =>
@@ -52,6 +54,7 @@ export const getBName = (board_id) => {
   );
 };
 
+// 유저가 생성한 post들 리스트 받아와야 함. (mypage 용)
 export const getPostListByUserId = (user_id) => {
   // none
   return new Promise((resolve) =>

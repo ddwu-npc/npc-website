@@ -61,6 +61,7 @@ export const deleteComment = (comment_id) => {
   return axios.delete(`/comment/${comment_id}`);
 };
 
+// 유저가 생성한 comment들 리스트 받아와야 함. (mypage 용)
 export const getCommentListByUserId = (user_id) => {
   // none
   return new Promise((resolve) =>

@@ -7,12 +7,6 @@ import Header from "components/commons/header";
 import Tag from "components/commons/tag";
 import styles from "./style.module.scss";
 
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
-
 import { getProjectInfo, deleteProject, getQuickAttendance } from "api/project";
 import { createAttendance } from "api/attendance";
 import { Icon } from "@iconify/react";
@@ -63,30 +57,31 @@ export default () => {
                     )}
                 </div>
             </div>
-            <div>* DB & api 수정 시 project info display 수정 예정임</div>
-            <ReactMarkdown
-                className={styles.content}
-                children={project.description}
-                remarkPlugins={[remarkGfm]}
-                components={{
-                code({ node, inline, className, children, ...props }) {
-                    const match = /language-(\w+)/.exec(className || "");
-                    return !inline && match ? (
-                    <SyntaxHighlighter
-                        {...props}
-                        children={String(children).replace(/\n$/, "")}
-                        style={oneLight}
-                        language={match[1]}
-                        PreTag="div"
-                    />
-                    ) : (
-                    <code {...props} className={className}>
-                        {children}
-                    </code>
-                    );
-                },
-                }}
-            />
+            <div className={styles.content}>
+                <div className={styles.describtion}>
+                    <div>
+                        <label>장르</label>
+                        <span>장르</span>
+                    </div>
+                    <div>
+                        <label>팀장</label>
+                        <span>홍길동</span>
+                    </div>
+                    <div>
+                        <label>개발 기간</label>
+                        <span>2023.00.00 ~ 2023.00.00</span>
+                    </div>
+                    <div>
+                        <label>팀원</label>
+                        <span>기획 홍길동 디자인 홍길동 개발 홍길동</span>
+                    </div>
+                    <div>
+                        <label>프로젝트 설명</label>
+                        <div>더미 텍스트입니다.더미 텍스트입니다.더미 텍스트입니다.더미 텍스트입니다.더미 텍스트입니다.더미 텍스트입니다.더미 텍스트입니다.더미 텍스트입니다.더미 텍스트입니다.더미 텍스트입니다.더미 텍스트입니다.더미 텍스트입니다.더미 텍스트입니다.더미 텍스트입니다.더미 텍스트입니다.더미 텍스트입니다.더미 텍스트입니다.</div>
+                    </div>
+                </div>
+                <img/>
+            </div>
             <div className={styles.button}>
                 <input type="button" value="빠른 출석 바로가기" onClick={async () => {
                    navigate(`/attendance/${await getQuickAttendance(project.pid)}`); 

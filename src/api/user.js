@@ -1,34 +1,23 @@
 import sha256 from 'crypto-js/sha256';
+import axios from "./axios";
 
 export function readUser(userno) {
-  return new Promise((resolve) =>
-    setTimeout(
-      () =>
-        resolve({
-          userno,
-          nickname: "[NAME]",
-          profile: "profile",
-        }),
-      100
-    )
-  );
+  return axios.get("/mypage", {
+    userno,
+    nickname: "[NAME]",
+    profile: "profile",
+  });
 }
 export const readUserInfo = (userno) => {
-  return new Promise((resolve) =>
-    setTimeout(
-      () =>
-        resolve({
-          userno,
-          nickname: "[NAME]",
-          profile: "profile",
-          email: "1234@gmail.com",
-          birthday: "2023.05.27",
-          npc_point: "10",
-          rank: "동장",
-        }),
-      100
-    )
-  );
+  return axios.get("/mypage", {
+    userno,
+    nickname: "[NAME]",
+    profile: "profile",
+    email: "1234@gmail.com",
+    birthday: "2023.05.27",
+    npc_point: "10",
+    rank: "동장",
+  });
 };
 
 export const login = (loginId, raw_password) => {

@@ -1,4 +1,7 @@
+import axios from "./axios";
+
 export function getBoardList() {
+  // none
   return new Promise((resolve) =>
     setTimeout(
       () =>
@@ -14,47 +17,43 @@ export function getBoardList() {
 }
 
 export function getPostList(board_id, search) {
-  return new Promise((resolve) =>
-    setTimeout(
-      () =>
-        resolve([
-          {
-            post_id: 1,
-            userno: 1,
-            title: "임시 게시글입니다.",
-            create_date: "2022-08-08",
-            important: 1,
-            range: "전체",
-          },
-          {
-            post_id: 2,
-            userno: 1,
-            title: "임시 게시글입니다.",
-            create_date: "2022-08-08",
-            important: 0,
-            range: "전체",
-          },
-          {
-            post_id: 3,
-            userno: 1,
-            title: "임시 게시글입니다.",
-            create_date: "2022-08-08",
-            important: 1,
-            range: "전체",
-          },
-        ]),
-      100
-    )
-  );
+  return axios.get(`/board/${board_id}`, 
+    [{
+        post_id: 1,
+        userno: 1,
+        title: "임시 게시글입니다.",
+        create_date: "2022-08-08",
+        important: 1,
+        range: "전체",
+      },
+      {
+        post_id: 2,
+        userno: 1,
+        title: "임시 게시글입니다.",
+        create_date: "2022-08-08",
+        important: 0,
+        range: "전체",
+      },
+      {
+        post_id: 3,
+        userno: 1,
+        title: "임시 게시글입니다.",
+        create_date: "2022-08-08",
+        important: 1,
+        range: "전체",
+      },
+    ]);
 }
 
 export const getBName = (board_id) => {
+  // none
   return new Promise((resolve) =>
     setTimeout(() => resolve(`임시게시판_${board_id}`), 100)
   );
 };
 
 export const getPostListByUserId = (user_id) => {
+  // none
   return new Promise((resolve) =>
     setTimeout(
       () =>

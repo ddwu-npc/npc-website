@@ -22,7 +22,7 @@
                 line-height: 32px;
 
                 margin: 15px;
-                width: 720px;
+                width: 715px;
             }
 
             .option {
@@ -56,12 +56,38 @@
         }
 
         .content {
-            padding: 40px 0;
+            padding: 40px 10px;
             border: 1px solid var(--gray-light, #E4E4E4);
             border-left: none;
             border-right: none;
 
-            min-height: 420px;
+            display: flex;
+            justify-content: space-between;
+
+            .describtion {
+                width: 55%;
+
+                font-family: Noto Sans;
+                font-size: 16px;
+
+                > div {
+                    > label {
+                        display: inline-block;
+                        margin: 10px;
+                        margin-left: 0;
+
+                        font-weight: 600;
+                    }
+                }
+            }
+
+            img {
+                width: 322px;
+                height: 180px;
+
+                border-radius: 10px;
+                margin: 0 20px;
+            }
         }
 
         .button {

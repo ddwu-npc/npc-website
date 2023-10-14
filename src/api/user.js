@@ -25,8 +25,8 @@ export const readUserInfo = (userno) => {
 };
 
 export const login = (loginId, raw_password) => {
-  // let password = sha256(raw_password).toString();
-  return axios.post("/login", { userId: loginId, userPw: raw_password }, true);
+  let password = sha256(raw_password).toString();
+  return axios.post("/login", { userId: loginId, userPw: password }, true);
 };
 
 export const logout = () => {

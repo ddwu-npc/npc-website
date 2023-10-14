@@ -18,6 +18,6 @@ export const login = (loginId, password) => {
 export const signup = (loginId, password, nickname, email) => {
   if (!loginId || !password || !nickname || !email) return null;
 
-  const userno = 1;
+  const userno = 100;
   return userno;
 };

@@ -37,6 +37,12 @@ export default (props) => {
           extensions={[markdown()]}
           onChange={(value, viewUpdate) => setContent(value)}
       />
+      <input
+        name="content"
+        type="text"
+        placeholder="내용 입력"
+        defaultValue={post ? post.content : ""}
+      />
     </div>
   );
 

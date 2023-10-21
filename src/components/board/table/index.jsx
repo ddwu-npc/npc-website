@@ -32,8 +32,8 @@ export default (props) => {
       <Header />
       <div className={styles.posts}>
         {curPostList.map((post) => (
-          <div key={`board_table_${post.post_id}`}>
-            <Post post={post} link={`post/${post.post_id}`} />
+          <div key={`board_table_${post.postId}`}>
+            <Post link={`post/${post.postId}`} post={post} />
           </div>
         ))}
         {emptyPosts}

@@ -31,12 +31,12 @@ export default () => {
       </div>
       <div className={styles.range}>
         <label htmlFor="range">대상</label>
-        <select id="range" name="range">
+        <select id="rangePost" name="rangePost">
           {["전체", "임원", "팀장"].map((value, idx) => (
             <option
               key={`range_option_${idx}`}
               value={value}
-              selected={post ? post.range === value : false}
+              selected={post ? post.rangePost === value : false}
             >
               {value}
             </option>

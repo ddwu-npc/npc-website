@@ -18,32 +18,7 @@ export function getBoardList() {
 }
 
 export function getPostList(board_id, search) {
-  return axios.get(`/board/${board_id}`, 
-    [{
-        post_id: 1,
-        userno: 1,
-        title: "임시 게시글입니다.",
-        create_date: "2022-08-08",
-        important: 1,
-        range: "전체",
-      },
-      {
-        post_id: 2,
-        userno: 1,
-        title: "임시 게시글입니다.",
-        create_date: "2022-08-08",
-        important: 0,
-        range: "전체",
-      },
-      {
-        post_id: 3,
-        userno: 1,
-        title: "임시 게시글입니다.",
-        create_date: "2022-08-08",
-        important: 1,
-        range: "전체",
-      },
-    ]);
+  return axios.get(`/board/${board_id}`);
 }
 
 // board_id로 게시판 이름 가져올 수 있어야 함.

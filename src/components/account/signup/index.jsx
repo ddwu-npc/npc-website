@@ -46,7 +46,7 @@ export default () => {
     )
       return;
 
-    if (!(await signup(loginId, password, nickname, email))) {
+    if ((await signup(loginId, password, nickname, email))) {
       alert("회원가입 실패");
     } else {
       alert("회원가입 성공");

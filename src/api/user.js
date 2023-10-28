@@ -39,7 +39,7 @@ export const getLoginSession = () => {
 
 export const signup = (loginId, raw_password, nickname, email) => {
   let password = sha256(raw_password).toString();
-  return axios.post("/users", { userId: loginId, userPw: password, nickname, email }, true);
+  return axios.post("/users", { userId: loginId, userPw: password, nickname, email });
 };
 
 export const vaildateNickname = (nickname) => {

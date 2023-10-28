@@ -16,7 +16,7 @@ export const loader = async () => {
   const userId = await getLoginSession();
 
   const data = {};
-  data.user = await readUserInfo(userId);
+  data.user = await readUserInfo();
   data.pinedBoard = [
     { board_id: 1, bName: await getBName(1), postList: await getPostList(0) },
     { board_id: 2, bName: await getBName(2), postList: await getPostList(1) },

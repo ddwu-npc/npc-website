@@ -23,15 +23,15 @@ export default () => {
             <div className={styles.info}>
               <div className={styles.infoData}>
                 <label>닉네임</label>
-                <input value={user.nickname}></input>
+                <input defaultValue={user.nickname}></input>
               </div>
               <div className={styles.infoData}>
                 <label>이메일</label>
-                <input value={user.email}></input>
+                <input defaultValue={user.email}></input>
               </div>
               <div className={styles.infoData}>
                 <label>생일</label>
-                <input value={user.birthday}></input>
+                <input defaultValue={user.birthday}></input>
               </div>
               <div className={styles.infoData}>
                 <label>NPC Point</label>

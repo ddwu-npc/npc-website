@@ -26,6 +26,7 @@ const dataLoader = async ({ request, params }) => {
 
   if (params.postId) {
     data.postId = params.postId;
+    console.log("data.pastId", params.postId);
     data.post = await readPost(data.postId);
 
     if (new URL(request.url).pathname.indexOf("edit") === -1) {
@@ -33,7 +34,8 @@ const dataLoader = async ({ request, params }) => {
       for (const comment of data.comments) {
         comment.user = await readUser(comment.userno);
       }
-      data.user = await readUser(data.post.userno);
+      //data.user = await readUser(data.post.userno);
+      data.user = await readUser(1);
     }
   }
   return data;

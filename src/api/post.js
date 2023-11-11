@@ -1,20 +1,15 @@
 import axios from "./axios";
 
-export const readPost = (post_id) => {
-  return axios.get(`/post/${post_id}`, 
-    {
-      post_id,
-      board_id: 1,
-      userno: 1,
-      title: "임시 게시글입니다.",
-      content: "임시 게시글입니다. 이곳에는 게시글의 내용을 포함합니다.",
-      create_date: "2022-08-08",
-      important: true,
-      range: "임원",
-      read_count: "5",
-      attachment: [{ name: "임시 파일1.pdf" }, { name: "임시 파일2.pdf" }],
-    }
-  );
+export const readPost = async (post_id) => {
+  console.log("readPost", post_id)
+  try {
+    const response = await axios.get(`/post/${post_id}`);
+    console.log("res",response);
+    return response;
+  } catch (error) {
+    console.error("Error while fetching post:", error);
+    throw error; // 에러 처리 가능
+  }
 };
 
 export const createPost = (boardId, postData) => {

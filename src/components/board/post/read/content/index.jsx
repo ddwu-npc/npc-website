@@ -12,6 +12,8 @@ import styles from "./style.module.scss";
 
 export default () => {
   const { post, user } = useLoaderData();
+  console.log("post", post);
+  console.log("title",post.title);
   return (
     <div className={styles.contentBox}>
       <Option />

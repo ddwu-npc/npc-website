@@ -19,10 +19,6 @@ export default () => {
         birthday: newBirthday,
       });    
 
-      console.log("새로운 닉네임:", newNickname);
-      console.log("새로운 이메일:", newEmail);
-      console.log("새로운 생일:", newBirthday);
-
       setEdit(false);
       window.location.reload();
       

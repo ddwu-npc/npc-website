@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Icon } from "@iconify/react";
-import { readUser } from "api/user";
+import { readUserInfo } from "api/user";
 
 import styles from "./style.module.scss";
 
@@ -12,7 +12,7 @@ export default ({ link, post, empty }) => {
 
   useEffect(() => {
     async function findUser() {
-      const user = await readUser(post.userno);
+      const user = await readUserInfo(post.userno);
       setUser(user);
     }
     findUser();

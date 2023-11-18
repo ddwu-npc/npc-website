@@ -2,7 +2,7 @@ import { useLoaderData } from "react-router";
 import { Icon } from "@iconify/react";
 
 import { usePos } from "hooks";
-import { readUserInfo, getLoginSession } from "api/user";
+import { readUserInfo, getUserno } from "api/user";
 import { getPostList, getBName } from "api/board";
 
 import BoardBox from "./boardBox";
@@ -13,7 +13,7 @@ import styles from "./style.module.scss";
 
 
 export const loader = async () => {
-  const userId = await getLoginSession();
+  const userno = await getUserno();
 
   const data = {};
   data.user = await readUserInfo();

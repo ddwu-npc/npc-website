@@ -21,27 +21,7 @@ export const updatePost = (post_id, postData) => {
 };
 
 export const readComment = (post_id) => {
-  return axios.get(`/comment/${post_id}`, 
-    [
-      {
-        comment_id: 1,
-        userno: 1,
-        create_date: "2022-08-08",
-        content: "임시 댓글입니다.",
-      },
-      {
-        comment_id: 2,
-        userno: 1,
-        create_date: "2022-08-08",
-        content: "임시 댓글입니다.",
-      },
-      {
-        comment_id: 3,
-        userno: 1,
-        create_date: "2022-08-08",
-        content: "임시 댓글입니다.",
-      },
-    ]);
+  return axios.get(`/comment/${post_id}`);
 };
 
 export const deletePost = (post_id) => {

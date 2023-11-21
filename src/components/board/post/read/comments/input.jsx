@@ -25,7 +25,6 @@ export default () => {
       content: textarea.value,
     };
     await createComment(postId, data);
-    alert(JSON.stringify(data));
     window.location.reload();
   };
 

@@ -6,7 +6,7 @@ export default ({ comment }) => {
   return (
     <>
       <div className={styles.comment}>
-        <Option />
+        <Option commentId={comment.commentId}/>
         <img src={comment.user.profile} />
         <div>
           <div className={styles.info}>
@@ -15,7 +15,6 @@ export default ({ comment }) => {
           </div>
           <div className={styles.content}>{comment.content}</div>
           <div className={styles.attachment}>
-            <label>첨부파일</label>
             <div></div>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import { useLoaderData } from "react-router";
 import { usePos } from "hooks";
 
-import { readUserInfo, getLoginSession } from "api/user";
+import { readUserInfo, getUserno } from "api/user";
 import { getPostListByUserId } from "api/board";
 import { getCommentListByUserId } from "api/post";
 
@@ -12,7 +12,7 @@ import Written from "./written";
 import styles from "./style.module.scss";
 
 export const loader = async ({ request, params }) => {
-  const userId = await getLoginSession();
+  const userId = await getUserno();
 
   const data = {};
   data.user = await readUserInfo(userId);

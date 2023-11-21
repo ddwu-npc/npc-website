@@ -30,7 +30,7 @@ export default () => {
 
   return (
     <div className={styles.input} ref={formRef}>
-      <div className={styles.writer}>{user.nickname}</div>
+      <div className={styles.writer}>{user ? user.nickname : "로딩 중"}</div>
       <textarea
         name="content"
         placeholder="댓글 추가"

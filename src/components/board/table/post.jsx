@@ -1,22 +1,25 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Icon } from "@iconify/react";
-import { readUserInfo } from "api/user";
+import { readUser } from "api/user";
 
 import styles from "./style.module.scss";
 
 export default ({ link, post, empty }) => {
-  if (empty) return <div className={styles.post}></div>;
-
-  const [user, setUser] = useState({ userno:"", profile: "", nickname: "" });
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    async function findUser() {
+    if (!empty && post) {
+      const fetchData = async () => {
+        const userData = await readUser(post.userNo);
+        setUser(userData);
+      };
 
-      setUser(user);
+      fetchData();
     }
-    findUser();
-  });
+  }, [empty, post]);
+  
+  if (empty) return <div className={styles.post}></div>;
 
   return (
     <Link
@@ -36,8 +39,8 @@ export default ({ link, post, empty }) => {
       <div>{post.range}</div>
       <div>{post.title}</div>
       <div>
-        <img className={styles.profile} src={user.profile} />
-        {user.nickname}
+        {/* <img className={styles.profile} src={user.profile} /> */}
+        {user ? user.nickname : "로딩 중"}
       </div>
       <div></div>
       <div>{post.create_date}</div>

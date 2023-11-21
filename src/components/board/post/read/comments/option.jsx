@@ -12,7 +12,6 @@ export default ({ commentId }) => {
   const del = async () => {
     try {
       await deleteComment(commentId);
-      alert("현재 댓글을 삭제했습니다.");
       window.location.reload();
     } catch (err) {
       console.log(err);

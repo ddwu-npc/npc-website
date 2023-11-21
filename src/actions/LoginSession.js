@@ -1,12 +1,15 @@
 
 class LoginSession {
-    static userno = 1; // 임시
+    static getUsernoFromSession = (req) => {
+        return req.session.userno || null;
+    };
 
     static login = (loginId, password) => {
         if (!loginId || !password) return null;
-    
-        this.userno = 1;
-        return this.userno;
+
+        console.log('Userno in session:', req.session.userno);
+
+        return req.session.userno;
     };
 }
 

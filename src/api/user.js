@@ -27,15 +27,9 @@ export function readUser(userno) {
   const uri = '/users/' + userno;
   return axios.get(uri).then(response => {
     if (response) {
-<<<<<<< HEAD
-      // console.log(response);
-=======
       console.log(response);
->>>>>>> 097a56f30678b92a217c633b8236dde3db85953d
       return response;
     }
-  });
-}
 
 // 마이페이지에서 띄우는 상세 유저 정보 (로그인한 유저의 정보)
 export const readUserInfo = (userno) => {

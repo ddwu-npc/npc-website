@@ -43,13 +43,20 @@ export default {
     );
   },
 
-  delete: (uri) => {
+  delete: (uri, contentType, board_id) => {
     console.log(uri);
     return new Promise(() =>
       axios
         .delete(uri)
         .then((response) => {
-          console.log(JSON.stringify(response.data));
+          //console.log("axios delete ",JSON.stringify(response.data));
+          if (contentType === "comment") {
+            window.location.reload();
+          } else if (contentType === "post") {
+            window.location.href = "/board/"+board_id; // Change the URL as needed
+          } else {
+            // Handle other content types as needed
+          }
         })
         .catch((error) => {
           console.log(error);
@@ -57,3 +64,4 @@ export default {
     );
   },
 };
+

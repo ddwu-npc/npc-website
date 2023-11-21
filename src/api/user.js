@@ -45,6 +45,11 @@ export const readUserInfo = (userno) => {
   })
 };
 
+// 마이페이지에서 띄우는 상세 유저 정보 수정 
+export const updateUserInfo = (updatedInfo) => {
+  return axios.put("/mypage/update", updatedInfo);
+};
+
 export const login = (loginId, raw_password) => {
   let password = sha256(raw_password).toString();
 

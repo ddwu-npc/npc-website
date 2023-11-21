@@ -52,12 +52,16 @@ export default () => {
         <div>
           <Icon icon="ant-design:file-zip-outlined" /> 첨부파일
         </div>
+        /* */
+      </div>
+    </div>
+  );
+};
+/*
+
         {post.attachment.map((e, idx) => (
           <span key={`post_attachment_${idx}`}>
             {e.name} <Icon icon="bx:download" />
           </span>
         ))}
-      </div>
-    </div>
-  );
-};
+        */

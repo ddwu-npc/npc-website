@@ -1,4 +1,5 @@
 import axios from "./axios";
+import ex_axios from "axios";
 
 export const readPost = async (post_id) => {
   try {
@@ -12,8 +13,22 @@ export const readPost = async (post_id) => {
 };
 
 export const createPost = (boardId, postData) => {
-  return axios.post(`/post/${boardId}`, postData);
+  const jwtToken = localStorage.getItem('jwtToken'); // localStorage에서 JWT 토큰 가져오기
+  const uri = '/post/' + boardId;
+  console.log(postData);
+  return ex_axios({
+    method: 'post',
+    url: uri,
+    data: postData,
+    headers: {
+      Authorization: `Bearer ${jwtToken}`, // 토큰을 Authorization 헤더에 추가
+    },
+  })
 };
+
+// export const createPost = (boardId, postData) => {
+//   return axios.post(`/post/${boardId}`, postData);
+// };
 
 export const updatePost = (post_id, postData) => {
   return axios.put(`/post/${post_id}`, postData);

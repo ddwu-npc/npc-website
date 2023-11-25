@@ -62,7 +62,7 @@ export default () => {
               </div>
               <div className={styles.infoData}>
                 <label>NPC Point</label>
-                <input value={user.npc_point}></input>
+                <input value={user.npcPoint}></input>
               </div>
               <div className={styles.infoData}>
                 <label>소속</label>
@@ -91,7 +91,7 @@ export default () => {
               </div>
               <div className={styles.infoData}>
                 <label>NPC Point</label>
-                <div>{user.npc_point}</div>
+                <div>{user.npcPoint}</div>
               </div>
               <div className={styles.infoData}>
                 <label>소속</label>

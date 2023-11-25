@@ -14,7 +14,7 @@ export default () => {
             <img src={user.profile} />
             <div className={styles.content}>
                 <div><Icon icon="charm:person" /> 닉네임: {user.nickname}</div>
-                <div><Icon icon="carbon:condition-point" /> NPC Point: {user.npc_point}</div>
+                <div><Icon icon="carbon:condition-point" /> NPC Point: {user.npcPoint}</div>
                 <div><Icon icon="fluent:people-team-28-regular" /> 소속: </div>
             </div>
         </div>

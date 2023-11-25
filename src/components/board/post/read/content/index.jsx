@@ -18,8 +18,8 @@ export default () => {
       <div className={styles.title}>{post.title}</div>
       <div className={styles.info}>
         <div className={styles.profile}>
-          <img src={user.profile} />
-          <div>{user.nickname}</div>
+          <img src={user ? user.profile : "로딩 중"} />
+          <div>{user ? user.nickname : "로딩 중"}</div>
           <span>{post.create_date}</span>
         </div>
         <span>대상: {post.range}</span>

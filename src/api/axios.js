@@ -29,6 +29,23 @@ export default {
     );
   },
 
+  getWithHeader: (uri, token) => {
+    return new Promise((resolve) =>
+      axios
+        .get(uri, { 
+          headers: {
+            Authorization: token, 
+          },
+        })
+        .then((response) => {
+          resolve(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    );
+  },
+
   put: (uri, data, defaultValue) => {
     return new Promise((resolve) =>
       axios

@@ -1,6 +1,6 @@
 import sha256 from "crypto-js/sha256";
 import axios from "./axios";
-import ex_axios from 'axios';
+import { redirect } from "react-router-dom";
 
 // 토큰 가져오기
 export const getToken = () => {
@@ -9,17 +9,14 @@ export const getToken = () => {
 
 export const getUserno = () => {
   const jwtToken = localStorage.getItem('jwtToken'); // localStorage에서 JWT 토큰 가져오기
+  if (jwtToken == null)
+    return redirect("/account");
 
-  return ex_axios({
-    method: 'get',
-    url: '/login',
-    headers: {
-      Authorization: `Bearer ${jwtToken}`, // 토큰을 Authorization 헤더에 추가
-    },
-  }).then(response => {
-      return response.data;
-  })
+  const token = `Bearer ${jwtToken}` // 토큰을 Authorization 헤더에 추가
+
+  return axios.getWithHeader('/login', token)
 };
+
 
 // 게시글, 댓글 등에서 띄우는 간단한 유저 정보
 // (다른 유저의 정보도 필요함 -> uri에 userId도 같이 받기 가람님이 구현한 형태 참고)
@@ -36,12 +33,7 @@ export function readUser(userno) {
 // 마이페이지에서 띄우는 상세 유저 정보 (로그인한 유저의 정보)
 export const readUserInfo = (userno) => {
   const uri = "/mypage?userno=" + userno;
-  return ex_axios({
-    method: 'get',
-    url: uri,
-  }).then(response => {
-      return response.data;
-  })
+  return axios.get(uri)
 };
 
 // 마이페이지에서 띄우는 상세 유저 정보 수정 

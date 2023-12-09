@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import styles from "./style.module.scss";
 
 export default ({ title, count, preview }) => {
+  const limitedPreview = preview.slice(0, 5);
+
   return (
     <div className={styles.written}>
       <div>
@@ -10,15 +12,20 @@ export default ({ title, count, preview }) => {
       </div>
       <hr />
       <div className={styles.preview}>
-        {preview.map((view, idx) => (
-          <Link
-            to={`/board/${view.board_id}/post/${view.post_id}`}
-            key={`preview_${title}_${idx}`}
-          >
-            <div>{view.content}</div>
-            <div>{view.create_date}</div>
-          </Link>
-        ))}
+        {limitedPreview && limitedPreview.length > 0 ? (
+          limitedPreview.map((view, idx) => (
+            <Link
+              to={`/board/${view.boardId}/post/${view.postId}`}
+              key={`preview_${title}_${idx}`}
+            >
+              <div>{view.title}</div>
+              <div>{view.content}</div>
+              <div>{view.createDate}</div>
+            </Link>
+          ))
+        ) : (
+          <div>  </div>
+        )}
       </div>
     </div>
   );

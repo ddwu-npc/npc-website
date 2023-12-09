@@ -3,6 +3,10 @@ import styles from "./style.module.scss";
 
 export default ({ title, count, preview }) => {
   const limitedPreview = preview.slice(0, 5);
+  
+  const limitDateString = (dateString, maxLength) => {
+    return dateString.substring(0, maxLength);
+  };
 
   return (
     <div className={styles.written}>
@@ -20,7 +24,7 @@ export default ({ title, count, preview }) => {
             >
               <div>{view.title}</div>
               <div>{view.content}</div>
-              <div>{view.createDate}</div>
+              <div>{limitDateString(view.createDate + "", 10)}</div>
             </Link>
           ))
         ) : (

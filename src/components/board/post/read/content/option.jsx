@@ -5,7 +5,7 @@ import {
   Link,
   useNavigate,
 } from "react-router-dom";
-import { deletePost } from "api/post";
+import { deletePost, findAuthor } from "api/post";
 import { Icon } from "@iconify/react";
 
 import styles from "./style.module.scss";
@@ -48,7 +48,11 @@ export default () => {
     };
   });
 
-  return (
+  const userno = 12;  //jwtToken으로 수정 필요
+  const postUser = findAuthor(postId, "post");
+  const shouldRenderOptions = userno && postUser && userno === postUser;
+
+  return shouldRenderOptions? (
     <div className={styles.option}>
       <div className={styles.icon} ref={optionRef}>
         <Icon icon="bi:three-dots-vertical" />
@@ -61,5 +65,12 @@ export default () => {
         <div onClick={del}>삭제</div>
       </div>
     </div>
-  );
+  ):<div className={styles.option}>
+  <div className={styles.icon} ref={optionRef}>
+    <Icon icon="bi:three-dots-vertical" />
+  </div>
+  <div className={styles.dropdown} ref={dropdownRef}>
+    <div onClick={share}>공유</div>
+  </div>
+</div>;
 };

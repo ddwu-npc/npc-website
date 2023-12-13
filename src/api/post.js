@@ -56,6 +56,14 @@ export const getBoardIdByPostId = async (post_id) => {
   }
 };
 
+export const findAuthor = (id, type)=>{
+  if(type=="comment"){
+    return 12;
+  }else if(type=="post"){
+    return 12;
+  }
+}
+
 export const createComment = (post_id, commentData) => {
   return axios.post(`/comment/${post_id}`, commentData);
 };

@@ -50,12 +50,12 @@ const uploadAction = async ({ request, params }) => {
     const postId = params.postId;
 
     await updatePost(postId, post);
-    alert(`게시글 수정 완료 \n${JSON.stringify(post)}`);
+    //alert(`게시글 수정 완료 \n${JSON.stringify(post)}`);
 
     return redirect(`/board/${boardId}/post/${postId}`);
   }
   await createPost(boardId, post);
-  alert(`게시글 생성 완료 \n${JSON.stringify(post)} ${boardId}`);
+  //alert(`게시글 생성 완료 \n${JSON.stringify(post)} ${boardId}`);
 
   return redirect(`/board/${boardId}`);
 };

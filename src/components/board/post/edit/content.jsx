@@ -19,12 +19,8 @@ export default (props) => {
   const [preview, setPreview] = useState(false);
   const [content, setContent] = useState(post ? post.content : "");
 
-  const editElement = (
-    <div className={styles.content}>
-      <div className={styles.contentButton} onClick={() => setPreview(true)}>
-        <Icon icon="mdi:print-preview" /> 미리보기
-      </div>
-      <CodeMirror
+  /*
+  <CodeMirror
           height= "550px"
           value={content}
           theme={githubLightInit({
@@ -37,7 +33,15 @@ export default (props) => {
           extensions={[markdown()]}
           onChange={(value, viewUpdate) => setContent(value)}
       />
-      <input
+
+  */
+  const editElement = (
+    <div className={styles.content}>
+      <div className={styles.contentButton} onClick={() => setPreview(true)}>
+        <Icon icon="mdi:print-preview" /> 미리보기
+      </div>
+      
+      <textarea rows="30" cols="75"
         name="content"
         type="text"
         placeholder="내용 입력"
@@ -46,12 +50,8 @@ export default (props) => {
     </div>
   );
 
-  const previewElement = (
-    <div className={styles.content}>
-      <div className={styles.contentButton} onClick={() => setPreview(false)}>
-        <Icon icon="material-symbols:edit-document-outline" /> 수정하기
-      </div>
-      <ReactMarkdown
+  /*
+    <ReactMarkdown
         children={content}
         remarkPlugins={[remarkGfm]}
         className="markdown-body"
@@ -73,6 +73,18 @@ export default (props) => {
             );
         },
         }}
+      />
+  */
+
+  const previewElement = (
+    <div className={styles.content}>
+      <div className={styles.contentButton} onClick={() => setPreview(false)}>
+        <Icon icon="material-symbols:edit-document-outline" /> 수정하기
+      </div>
+      <textarea rows="30" cols="75"
+        name="content"
+        type="text"
+        defaultValue={post ? post.content : ""}
       />
     </div>
   );

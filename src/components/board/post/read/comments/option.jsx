@@ -1,9 +1,10 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 
-import { deleteComment } from "api/post";
+import { deleteComment, findAuthor } from "api/post";
 import { Icon } from "@iconify/react";
 
 import styles from "./style.module.scss";
+import comment from "./comment";
 
 export default ({ commentId }) => {
   const optionRef = useRef();
@@ -29,7 +30,12 @@ export default ({ commentId }) => {
     };
   });
 
-  return (
+  const userno = 12;  //jwtToken으로 수정 필요
+  const commentUser = async()=>{findAuthor(commentId, "comment")};
+  console.log("commentUser", commentUser);
+  const shouldRenderOptions = userno && commentUser && userno === commentUser;
+
+  return shouldRenderOptions ?(
     <div className={styles.option}>
       <div className={styles.icon} ref={optionRef}>
         <Icon icon="bi:three-dots-vertical" />
@@ -39,5 +45,5 @@ export default ({ commentId }) => {
         <div onClick={del}>삭제</div>
       </div>
     </div>
-  );
+  ):null;
 };

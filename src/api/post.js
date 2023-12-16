@@ -76,7 +76,6 @@ export const deleteComment = (comment_id) => {
 export const getCommentListByUserId = (userno) => {
   return axios.post(`/mypage/comment/${userno}`)
     .then(response => {
-      console.log("response", response);
       return {count: response.length, preview: response} || { count: 0, preview: [] }; 
     })
     .catch(error => {

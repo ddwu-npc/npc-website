@@ -31,7 +31,9 @@ export default ({ commentId }) => {
   });
 
   const userno = 12;  //jwtToken으로 수정 필요
-  const commentUser = async()=>{findAuthor(commentId, "comment")};
+  const commentUser = 12;
+  // 오류나서 주석처리 userno가 아니라 id로 get 요청 보냄
+  // const commentUser = async()=>{findAuthor(commentId, "comment")};
   console.log("commentUser", commentUser);
   const shouldRenderOptions = userno && commentUser && userno === commentUser;
 

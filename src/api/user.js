@@ -41,6 +41,8 @@ export const login = (loginId, raw_password) => {
       // 로그인 성공 시 서버에서 받은 토큰을 localStorage에 저장
       if (response) {
         localStorage.setItem('jwtToken', JSON.stringify(response));
+        const me = readUser(getUserno(getToken()));
+        sessionStorage.setItem('nickname', me.nickname);
       }
       return response;
     });

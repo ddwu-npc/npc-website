@@ -28,16 +28,12 @@ const dataLoader = async ({ request, params }) => {
   if (params.postId) {
     data.postId = params.postId;
     data.post = await readPost(data.postId);
-
     if (new URL(request.url).pathname.indexOf("edit") === -1) {
       data.comments = await readComment(data.postId);
-      console.log(data.commnets); // 여기부터 안 들어옴
       for (const comment of data.comments) {
-        console.log("comment user : " + comment);
-        comment.user = await readUser(comment.userno);
+        comment.user = await readUser(comment.userNo);
       }
-      console.log("post user: " + data.post.userno);
-      data.user = await readUser(data.post.userno);
+      data.user = await readUser(data.post.userNo);
     }
   }
   return data;

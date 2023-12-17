@@ -1,6 +1,6 @@
 import { redirect } from "react-router-dom";
 
-export const getToken = () => {  
+export function getToken() {  
     const jwtToken = localStorage.getItem('jwtToken');
     if (jwtToken == null)
         return redirect("/account");

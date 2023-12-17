@@ -9,6 +9,7 @@ import styles from "./style.module.scss";
 export default () => {
   const { postId, user } = useLoaderData(); // 로그인 세션에서 가져오도록 수정 필요
   const formRef = useRef();
+  const nickname = sessionStorage.getItem('nickname');
 
   const handleResizeHeight = (e) => {
     const textarea = e.target;
@@ -30,7 +31,7 @@ export default () => {
 
   return (
     <div className={styles.input} ref={formRef}>
-      <div className={styles.writer}>{user ? user.nickname : "로딩 중"}</div>
+      <div className={styles.writer}>{nickname}</div>
       <textarea
         name="content"
         placeholder="댓글 추가"

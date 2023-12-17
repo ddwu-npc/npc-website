@@ -22,7 +22,7 @@ export default () => {
     console.log("queryParams", queryParams);
 
     //navigate(`/board/1/search?${queryParams}`);
-    fetch(`/board/1/search`, {
+    fetch(window.location.href+`/search`, {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",

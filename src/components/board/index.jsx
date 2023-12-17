@@ -15,10 +15,12 @@ export const postRouter = post;
 export async function loader({ params, request }) {
   const searchParmas = new URL(request.url).searchParams;
   const search = {
-    range: searchParmas.get("range"),
+    rangePost: searchParmas.get("rangePost"),
     searchRange: searchParmas.get("searchRange"),
     text: searchParmas.get("text"),
   };
+
+  console.log("search-index", search);
 
   const boardId = params.boardId;
   const postList = await getPostList(boardId, search);

@@ -18,7 +18,19 @@ export function getBoardList() {
 }
 
 export function getPostList(board_id, search) {
-  return axios.get(`/board/${board_id}`);
+  if(search.rangePost==null)
+    return axios.get(`/board/${board_id}`);
+  else{
+    console.log("search",search.rangePost+" "+search.searchRange+" "+search.text);
+    const rangePost = search.rangePost;
+    const searchRange = search.searchRange;
+    
+    return axios.post(`/board/${board_id}/search`, {
+      rangePost: search.rangePost,
+      searchRange: search.searchRange,
+      text: search.text
+    });
+  }
 }
 
 // board_id로 게시판 이름 가져올 수 있어야 함.

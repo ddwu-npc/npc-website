@@ -18,7 +18,7 @@ export function getBoardList() {
 }
 
 export function getPostList(board_id, search) {
-  if(search.rangePost==null)
+  if(search==null || search.rangePost==null)
     return axios.get(`/board/${board_id}`);
   else{
     return axios.post(`/board/${board_id}/search`, {

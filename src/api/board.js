@@ -31,7 +31,7 @@ export const getBName = (board_id) => {
 
 // 유저가 생성한 post들 리스트 받아와야 함. (mypage 용)
 export const getPostListByUserId = (userno) => {
-  return axios.post(`/mypage/${userno}`)
+  return axios.post(`/mypage/post/${userno}`)
     .then(response => {
       
       return {count: response.length, preview: response} || { count: 0, preview: [] }; 

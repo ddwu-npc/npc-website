@@ -73,49 +73,13 @@ export const deleteComment = (comment_id) => {
 };
 
 // 유저가 생성한 comment들 리스트 받아와야 함. (mypage 용)
-export const getCommentListByUserId = (user_id) => {
-  // none
-  return new Promise((resolve) =>
-    setTimeout(
-      () =>
-        resolve({
-          count: 20,
-
-          // 최근 5개 post
-          preview: [
-            {
-              board_id: 1,
-              post_id: 1,
-              content: "임시 댓글입니다.",
-              create_date: "2022-08-08",
-            },
-            {
-              board_id: 1,
-              post_id: 1,
-              content: "임시 댓글입니다.",
-              create_date: "2022-08-08",
-            },
-            {
-              board_id: 1,
-              post_id: 1,
-              content: "임시 댓글입니다.",
-              create_date: "2022-08-08",
-            },
-            {
-              board_id: 1,
-              post_id: 1,
-              content: "임시 댓글입니다.",
-              create_date: "2022-08-08",
-            },
-            {
-              board_id: 1,
-              post_id: 1,
-              content: "임시 댓글입니다.",
-              create_date: "2022-08-08",
-            },
-          ],
-        }),
-      100
-    )
-  );
+export const getCommentListByUserId = (userno) => {
+  return axios.post(`/mypage/comment/${userno}`)
+    .then(response => {
+      return {count: response.length, preview: response} || { count: 0, preview: [] }; 
+    })
+    .catch(error => {
+      console.error('Error fetching user comments:', error);
+      return { count: 0, preview: [] }; 
+    });
 };

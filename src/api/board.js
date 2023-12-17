@@ -21,10 +21,6 @@ export function getPostList(board_id, search) {
   if(search.rangePost==null)
     return axios.get(`/board/${board_id}`);
   else{
-    console.log("search",search.rangePost+" "+search.searchRange+" "+search.text);
-    const rangePost = search.rangePost;
-    const searchRange = search.searchRange;
-    
     return axios.post(`/board/${board_id}/search`, {
       rangePost: search.rangePost,
       searchRange: search.searchRange,

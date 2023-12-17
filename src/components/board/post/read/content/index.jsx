@@ -27,7 +27,7 @@ export default () => {
           <span>{post.create_date}</span>
         </div>
         <span>대상: {rangeP}</span>
-        <span>읽은 수: {post.read_count}</span>
+        <span>읽은 수: {post.readCount}</span>
       </div>
       <ReactMarkdown
         children={post.content}

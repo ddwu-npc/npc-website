@@ -1,17 +1,9 @@
 import sha256 from "crypto-js/sha256";
 import axios from "./axios";
-import { redirect } from "react-router-dom";
-
-// 토큰 가져오기
-export const getToken = () => {
-  return localStorage.getItem('jwtToken');
-};
+import { getToken } from "./jwtToken";
 
 export const getUserno = () => {
-  const jwtToken = localStorage.getItem('jwtToken'); // localStorage에서 JWT 토큰 가져오기
-  if (jwtToken == null)
-    return redirect("/account");
-
+  const jwtToken = getToken(); // localStorage에서 JWT 토큰 가져오기
   const token = `Bearer ${jwtToken}` // 토큰을 Authorization 헤더에 추가
 
   return axios.getWithHeader('/login', token)

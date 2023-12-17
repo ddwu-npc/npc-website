@@ -1,19 +1,15 @@
 import axios from "./axios";
 import ex_axios from "axios";
+import { getToken } from "./jwtToken";
 
-export const readPost = async (post_id) => {
-  try {
-    const response = await axios.get(`/post/${post_id}`);
-    console.log("res",response);
-    return response;
-  } catch (error) {
-    console.error("Error while fetching post:", error);
-    throw error; // 에러 처리 가능
-  }
+export const readPost = (post_id) => {
+  const jwtToken = getToken();
+  const token = `Bearer ${jwtToken}` 
+  return axios.getWithHeader(`/post/${post_id}`, token);
 };
 
 export const createPost = (boardId, postData) => {
-  const jwtToken = localStorage.getItem('jwtToken'); // localStorage에서 JWT 토큰 가져오기
+  const jwtToken = getToken(); // localStorage에서 JWT 토큰 가져오기
   const uri = '/post/' + boardId;
   console.log(postData);
   return ex_axios({

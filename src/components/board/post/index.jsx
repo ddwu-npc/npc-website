@@ -3,6 +3,7 @@ import { usePos } from "hooks";
 import { getBName } from "api/board";
 import { readPost, createPost, updatePost, readComment } from "api/post";
 import { readUser } from "api/user";
+import { getToken } from "../../../api/jwtToken";
 
 import Header from "components/commons/header";
 import Edit from "./edit";
@@ -27,13 +28,12 @@ const dataLoader = async ({ request, params }) => {
   if (params.postId) {
     data.postId = params.postId;
     data.post = await readPost(data.postId);
-
     if (new URL(request.url).pathname.indexOf("edit") === -1) {
       data.comments = await readComment(data.postId);
       for (const comment of data.comments) {
-        comment.user = await readUser(comment.userno);
+        comment.user = await readUser(comment.userNo);
       }
-      data.user = await readUser(data.post.userno);
+      data.user = await readUser(data.post.userNo);
     }
   }
   return data;
@@ -42,6 +42,7 @@ const dataLoader = async ({ request, params }) => {
 const uploadAction = async ({ request, params }) => {
   const formData = await request.formData();
   const post = Object.fromEntries(formData);
+  const token = getToken();
   console.log(post);
 
   const boardId = params.boardId;
@@ -49,10 +50,13 @@ const uploadAction = async ({ request, params }) => {
     const postId = params.postId;
 
     await updatePost(postId, post);
+    alert(`게시글 수정 완료 \n${JSON.stringify(post)}`);
 
     return redirect(`/board/${boardId}/post/${postId}`);
   }
-  await createPost(boardId, post);
+
+  await createPost(boardId, post, token);
+  alert(`게시글 생성 완료 \n${JSON.stringify(post)} ${boardId}`);
 
   return redirect(`/board/${boardId}`);
 };

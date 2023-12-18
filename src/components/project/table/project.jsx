@@ -14,8 +14,8 @@ export default ({ link, project, empty }) => {
         {project.pid}
       </div>
       <div>{project.pname}</div>
-      <div>[NAME]</div>
-      <div>개발 중</div>
+      <div>{project.tname}</div>
+      <div>{project.process}</div>
       <div>{project.startDate} ~ {project.endDate}</div>
     </Link>
   );

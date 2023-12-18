@@ -16,7 +16,7 @@ export function readUser(userno) {
   const uri = '/users/' + userno;
   return axios.get(uri).then(response => {
     if (response) {
-      console.log("read user:" + JSON.stringify(response, null, 2));
+      //console.log("read user:" + JSON.stringify(response, null, 2));
       return response;
     }
   });

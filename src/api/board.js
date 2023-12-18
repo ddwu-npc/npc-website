@@ -18,13 +18,13 @@ export function getBoardList() {
 }
 
 export function getPostList(board_id, search) {
-  if(search==null || search.rangePost==null)
+  if (search == null || search.rangePost == null)
     return axios.get(`/board/${board_id}`);
-  else{
+  else {
     return axios.post(`/board/${board_id}/search`, {
       rangePost: search.rangePost,
       searchRange: search.searchRange,
-      text: search.text
+      text: search.text,
     });
   }
 }
@@ -32,20 +32,40 @@ export function getPostList(board_id, search) {
 // board_id로 게시판 이름 가져올 수 있어야 함.
 export const getBName = (board_id) => {
   // none
-  return new Promise((resolve) =>
-    setTimeout(() => resolve(`임시게시판_${board_id}`), 100)
-  );
+  if (board_id == 1) {
+    return new Promise((resolve) =>
+      setTimeout(() => resolve(`공지사항`), 100)
+    );
+  } else if (board_id == 2) {
+    return new Promise((resolve) =>
+      setTimeout(() => resolve(`강의자료`), 100)
+    );
+  } else if (board_id == 3) {
+    return new Promise((resolve) =>
+      setTimeout(() => resolve(`자유 게시판`), 100)
+    );
+  } else if (board_id == 4) {
+    return new Promise((resolve) =>
+      setTimeout(() => resolve(`구인 게시판`), 100)
+    );
+  }
 };
 
 // 유저가 생성한 post들 리스트 받아와야 함. (mypage 용)
 export const getPostListByUserId = (userno) => {
-  return axios.post(`/mypage/post/${userno}`)
-    .then(response => {
-      
-      return {count: response.length, preview: response} || { count: 0, preview: [] }; 
+  return axios
+    .post(`/mypage/post/${userno}`)
+    .then((response) => {
+      return (
+        { count: response.length, preview: response } || {
+          count: 0,
+          preview: [],
+        }
+      );
     })
-    .catch(error => {
-      console.error('Error fetching user posts:', error);
-      return { count: 0, preview: [] }; 
+    .catch((error) => {
+      console.error("Error fetching user posts:", error);
+      return { count: 0, preview: [] };
     });
 };
+

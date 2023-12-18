@@ -40,7 +40,7 @@ export default (props) => {
       </div>
       <Nav
         cur={page}
-        max={Math.floor(postList.length / 11) + 1}
+        max={Math.floor(postList.length / 11)}
         setPage={setPage}
       />
     </div>

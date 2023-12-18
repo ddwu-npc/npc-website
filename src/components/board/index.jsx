@@ -20,8 +20,6 @@ export async function loader({ params, request }) {
     text: searchParmas.get("text"),
   };
 
-  console.log("search-index", search);
-
   const boardId = params.boardId;
   const postList = await getPostList(boardId, search);
   const pos = `게시판 >  ${await getBName(boardId)}`;

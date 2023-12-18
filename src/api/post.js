@@ -22,16 +22,16 @@ export const createPost = (boardId, postData) => {
   })
 };
 
-// export const createPost = (boardId, postData) => {
-//   return axios.post(`/post/${boardId}`, postData);
-// };
-
 export const updatePost = (post_id, postData) => {
   return axios.put(`/post/${post_id}`, postData);
 };
 
 export const readComment = (post_id) => {
-  return axios.get(`/comment/${post_id}`);
+  const jwtToken = getToken();
+  const token = `Bearer ${jwtToken}` 
+  return axios.getWithHeader(`/comment/${post_id}`, token);
+
+  //return axios.get(`/comment/${post_id}`);
 };
 
 export const deletePost = async(post_id) => {
@@ -61,6 +61,7 @@ export const findAuthor = (id, type)=>{
 }
 
 export const createComment = (post_id, commentData) => {
+  console.log("createComment", commentData);
   return axios.post(`/comment/${post_id}`, commentData);
 };
 

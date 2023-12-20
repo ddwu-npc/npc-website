@@ -7,6 +7,7 @@ import styles from "./style.module.scss";
 
 export default ({ link, post, empty }) => {
   const [user, setUser] = useState(null);
+  const createDate = post.createDate.substr(0, 10);
 
   useEffect(() => {
     if (!empty && post) {
@@ -43,7 +44,7 @@ export default ({ link, post, empty }) => {
         {user ? user.nickname : "로딩 중"}
       </div>
       <div></div>
-      <div>{post.create_date}</div>
+      <div>{createDate}</div>
     </Link>
   );
 };

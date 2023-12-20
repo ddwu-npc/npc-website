@@ -23,7 +23,7 @@ export default () => {
     const textarea = form.querySelector("textarea");
     const token = `Bearer ${getToken()}`
     const data = {
-      userno: user.userno,
+      userno: user.userNo,
       content: textarea.value,
     };
     await createComment(postId, data, token);

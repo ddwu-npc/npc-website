@@ -16,6 +16,7 @@ export default {
   },
 
   postWithHeader: (uri, data, token) => {
+    console.log("postWithHeader data", data);
     return new Promise((resolve) =>
       axios
         .post(uri, data, {
@@ -23,6 +24,7 @@ export default {
             Authorization: token, 
           },
         })
+        .then(window.location.reload())
         .catch((error) => {
           console.log(error);
         })

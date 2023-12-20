@@ -25,6 +25,12 @@ export default () => {
     try {
       const userId = await findUserno();
 
+      const birthdayCheck = /^\d{4}-\d{2}-\d{2}$/;
+      if (!newBirthday.match(birthdayCheck)) {
+        alert("생일은 YYYY-MM-DD 형식으로 입력해주세요.");
+        return; 
+      }
+
       await updateUserInfo({
         userNo: userId,
         nickname: newNickname,

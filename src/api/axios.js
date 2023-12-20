@@ -16,7 +16,6 @@ export default {
   },
 
   postWithHeader: (uri, data, token) => {
-    console.log("postWithHeader data", data);
     return new Promise((resolve) =>
       axios
         .post(uri, data, {

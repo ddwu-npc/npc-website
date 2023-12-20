@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { useLoaderData } from "react-router-dom";
 
 import { createComment } from "api/post";
+import { getToken } from "api/jwtToken";
 
 import FileInput from "../../fileInput";
 import styles from "./style.module.scss";
@@ -20,12 +21,12 @@ export default () => {
   const submit = async () => {
     const form = formRef.current;
     const textarea = form.querySelector("textarea");
-    console.log(textarea);
+    const token = `Bearer ${getToken()}`
     const data = {
       userno: user.userno,
       content: textarea.value,
     };
-    await createComment(postId, data);
+    await createComment(postId, data, token);
     window.location.reload();
   };
 

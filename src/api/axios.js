@@ -15,6 +15,20 @@ export default {
     );
   },
 
+  postWithHeader: (uri, data, token) => {
+    return new Promise((resolve) =>
+      axios
+        .post(uri, data, {
+          headers: {
+            Authorization: token, 
+          },
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    );
+  },
+
   get: (uri, defaultValue) => {
     return new Promise((resolve) =>
       axios

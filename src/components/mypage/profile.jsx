@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLoaderData } from "react-router";
 import { updateUserInfo } from "api/user"; 
+import { getUserno } from "api/user";
 
 import styles from "./style.module.scss";
 
@@ -10,10 +11,22 @@ export default () => {
   const [newNickname, setNewNickname] = useState(user.nickname);
   const [newEmail, setNewEmail] = useState(user.email);
   const [newBirthday, setNewBirthday] = useState(user.birthday);
+  
+  const findUserno = async () => {
+    try {
+      const userId = await getUserno();
+      return userId;
+    } catch (error) {
+      console.error("에러 발생:", error);
+    }
+  };
 
   const handleSave = async () => {
     try {
+      const userId = await findUserno();
+
       await updateUserInfo({
+        userNo: userId,
         nickname: newNickname,
         email: newEmail,
         birthday: newBirthday,
@@ -62,15 +75,15 @@ export default () => {
               </div>
               <div className={styles.infoData}>
                 <label>NPC Point</label>
-                <input value={user.npcPoint}></input>
+                <input value={user.npcPoint} readOnly></input>
               </div>
               <div className={styles.infoData}>
                 <label>소속</label>
-                <input value={user.rank}></input>
+                <input value={user.rank} readOnly></input>
               </div>
               <div className={styles.infoData}>
                 <label>참여 중인 프로젝트</label>
-                <input></input>
+                <input readOnly></input>
               </div>
             </div>
           </>

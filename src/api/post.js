@@ -29,6 +29,7 @@ export const updatePost = (post_id, postData) => {
 export const readComment = (post_id) => {
   const jwtToken = getToken();
   const token = `Bearer ${jwtToken}` 
+  console.log("post token :" + token);
   return axios.getWithHeader(`/comment/${post_id}`, token);
 
   //return axios.get(`/comment/${post_id}`);
@@ -60,9 +61,9 @@ export const findAuthor = (id, type)=>{
   }
 }
 
-export const createComment = (post_id, commentData) => {
+export const createComment = (post_id, commentData, token) => {
   console.log("createComment", commentData);
-  return axios.post(`/comment/${post_id}`, commentData);
+  return axios.postWithHeader(`/comment/${post_id}`, commentData, token);
 };
 
 export const deleteComment = (comment_id) => {

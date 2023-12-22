@@ -25,7 +25,7 @@ export function readUser(userno) {
 // 마이페이지에서 띄우는 상세 유저 정보 (로그인한 유저의 정보)
 export const readUserInfo = (userno) => {
   const uri = "/mypage?userno=" + userno;
-  return axios.get(uri)
+  return axios.get(uri);
 };
 
 // 마이페이지에서 띄우는 상세 유저 정보 수정 

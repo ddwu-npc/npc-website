@@ -76,7 +76,6 @@ export default {
   },
 
   delete: (uri, contentType, board_id) => {
-    console.log(uri);
     return new Promise(() =>
       axios
         .delete(uri)

@@ -26,15 +26,6 @@ export const updatePost = (post_id, postData) => {
   return axios.put(`/post/${post_id}`, postData);
 };
 
-export const readComment = (post_id) => {
-  const jwtToken = getToken();
-  const token = `Bearer ${jwtToken}` 
-  console.log("post token :" + token);
-  return axios.getWithHeader(`/comment/${post_id}`, token);
-
-  //return axios.get(`/comment/${post_id}`);
-};
-
 export const deletePost = async(post_id) => {
   const bId = await getBoardIdByPostId(post_id);
   console.log("bId", bId);
@@ -55,15 +46,24 @@ export const getBoardIdByPostId = async (post_id) => {
 
 export const findAuthor = (id, type)=>{
   if(type=="comment"){
-    return 12;
+    const res = axios.get(`/comment/find/${id}`);
+    return res;
   }else if(type=="post"){
-    return 12;
+    const res = axios.get(`/post/find/${id}`);
+    return res;
   }
 }
 
 export const createComment = (post_id, commentData, token) => {
   console.log("createComment", commentData);
   return axios.postWithHeader(`/comment/${post_id}`, commentData, token);
+};
+
+export const readComment = (post_id) => {
+  const jwtToken = getToken();
+  const token = `Bearer ${jwtToken}` 
+  console.log("post token :" + token);
+  return axios.getWithHeader(`/comment/${post_id}`, token);
 };
 
 export const deleteComment = (comment_id) => {

@@ -9,6 +9,8 @@ import comment from "./comment";
 export default ({ commentId }) => {
   const optionRef = useRef();
   const dropdownRef = useRef();
+  
+  const [shouldRenderOptions, setShouldRenderOptions] = useState();
 
   const del = async () => {
     try {
@@ -18,6 +20,25 @@ export default ({ commentId }) => {
       console.log(err);
     }
   };
+
+  async function fetchData() {
+    try {
+      const commentUser = await fetchUserData(); // 비동기 함수 호출
+      return commentUser;
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    }
+  }
+  
+  // 비동기 함수
+  function fetchUserData() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const userData = findAuthor(commentId, "comment");
+        resolve(userData);
+      }, 100);
+    });
+  }
 
   useEffect(() => {
     const option = optionRef.current;
@@ -31,8 +52,11 @@ export default ({ commentId }) => {
   });
 
   const userno = 12;  //jwtToken으로 수정 필요
-  const commentUser = findAuthor(commentId, "comment");
-  const shouldRenderOptions = userno && commentUser && userno === commentUser;
+  fetchData().then((commentUser) => {
+    setShouldRenderOptions(userno && commentUser && userno === commentUser);
+  }).catch((error) => {
+    console.error('Error:', error);
+  });
 
   return shouldRenderOptions ?(
     <div className={styles.option}>
@@ -44,5 +68,10 @@ export default ({ commentId }) => {
         <div onClick={del}>삭제</div>
       </div>
     </div>
-  ):null;
+  ):(<div className={styles.option}>
+      <div className={styles.icon} ref={optionRef}>
+        <Icon icon="bi:three-dots-vertical" />
+      </div>
+    </div>
+  );
 };

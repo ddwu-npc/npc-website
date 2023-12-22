@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import {
   useLoaderData,
   useLocation,
@@ -17,6 +17,8 @@ export default () => {
 
   const optionRef = useRef();
   const dropdownRef = useRef();
+
+  const [shouldRenderOptions, setShouldRenderOptions] = useState();
 
   const share = async () => {
     try {
@@ -37,6 +39,26 @@ export default () => {
     }
   };
 
+  async function fetchData() {
+    try {
+      const postUser = await fetchUserData(); // 비동기 함수 호출
+      return postUser;
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    }
+  }
+  
+  // 비동기 함수
+  function fetchUserData() {
+    return new Promise((resolve) => {
+      // 여기서 비동기 작업을 수행하고 작업이 완료되면 resolve를 호출하여 값을 반환
+      setTimeout(() => {
+        const userData = findAuthor(postId, "post");
+        resolve(userData);
+      }, 100);
+    });
+  }
+
   useEffect(() => {
     const option = optionRef.current;
     const dropdown = dropdownRef.current;
@@ -49,8 +71,11 @@ export default () => {
   });
 
   const userno = 12;  //jwtToken으로 수정 필요
-  const postUser = findAuthor(postId, "post");
-  const shouldRenderOptions = userno && postUser && userno === postUser;
+  fetchData().then((postUser) => {
+    setShouldRenderOptions(userno && postUser && userno === postUser);
+  }).catch((error) => {
+    console.error('Error:', error);
+  });
 
   return shouldRenderOptions? (
     <div className={styles.option}>

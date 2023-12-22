@@ -55,6 +55,7 @@ const uploadAction = async ({ request, params }) => {
   }
 
   await createPost(boardId, post, token);
+  alert(`게시글 생성 완료 \n${JSON.stringify(post)} ${boardId}`);
 
   return redirect(`/board/${boardId}`);
 };

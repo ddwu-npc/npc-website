@@ -17,7 +17,6 @@ export default (props) => {
       const newFiles = [e.target.files[0], ...files];
       setFiles(newFiles);
       fileInput.files = new DataTransfer().newFiles;
-      console.log("fileInput.onchange", fileInput.files);
     };
 
     const fileView = fileViewRef.current;
@@ -30,7 +29,6 @@ export default (props) => {
           ];
           setFiles(newFiles);
           fileInput.files = new DataTransfer().newFiles;
-          console.log("fileView",fileInput.files);
         }
       };
     });

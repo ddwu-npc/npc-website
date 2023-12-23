@@ -17,7 +17,6 @@ export const createPost = (boardId, postData) => {
   formData.append('rangePost', postData.rangePost);
   formData.append('important', postData.important);
 
-  // 파일이 존재하는 경우에만 FormData에 추가
   if (postData.attachment) {
     formData.append('attachment', postData.attachment);
   }

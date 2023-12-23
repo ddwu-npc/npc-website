@@ -43,7 +43,6 @@ const uploadAction = async ({ request, params }) => {
   const formData = await request.formData();
   const post = Object.fromEntries(formData);
   const token = getToken();
-  console.log(post);
 
   const boardId = params.boardId;
   if (params.postId) {
@@ -54,6 +53,7 @@ const uploadAction = async ({ request, params }) => {
     return redirect(`/board/${boardId}/post/${postId}`);
   }
 
+  console.log("post index.jsx", post);
   await createPost(boardId, post, token);
 
   return redirect(`/board/${boardId}`);

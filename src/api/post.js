@@ -11,15 +11,26 @@ export const readPost = (post_id) => {
 export const createPost = (boardId, postData) => {
   const jwtToken = getToken(); // localStorage에서 JWT 토큰 가져오기
   const uri = '/post/' + boardId;
-  console.log(postData);
+  const formData = new FormData();
+  formData.append('title', postData.title);
+  formData.append('content', postData.content);
+  formData.append('rangePost', postData.rangePost);
+  formData.append('important', postData.important);
+
+  // 파일이 존재하는 경우에만 FormData에 추가
+  if (postData.attachment) {
+    formData.append('attachment', postData.attachment);
+  }
+
   return ex_axios({
     method: 'post',
     url: uri,
-    data: postData,
+    data: formData,
     headers: {
-      Authorization: `Bearer ${jwtToken}`, // 토큰을 Authorization 헤더에 추가
+      Authorization: `Bearer ${jwtToken}`,
+      'Content-Type': 'multipart/form-data', // Content-Type 설정
     },
-  })
+  });
 };
 
 export const updatePost = (post_id, postData) => {

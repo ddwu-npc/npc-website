@@ -121,6 +121,17 @@
             border: none;
             outline: none;
           }
+          select {
+            display: block;
+            width: 240px;
+            height: 30px;
+            padding: 2.5px 5px;
+            background: #ededed;
+
+            border: none;
+            outline: none;
+
+          }
         }
       }
     }

@@ -25,7 +25,9 @@ export default ({ commentId }) => {
   async function fetchData() {
     try {
       const commentUser = await fetchUserData(); // 비동기 함수 호출
-      return commentUser;
+      const currUser = await getUserno();
+
+      return { commentUser, currUser };
     } catch (error) {
       console.error('Error fetching user data:', error);
     }
@@ -52,9 +54,8 @@ export default ({ commentId }) => {
     };
   });
 
-  const userno = getUserno();
-  fetchData().then((commentUser) => {
-    setShouldRenderOptions(userno && commentUser && userno === commentUser);
+  fetchData().then(({ commentUser, currUser }) => {
+    setShouldRenderOptions(currUser && commentUser && currUser === commentUser);
   }).catch((error) => {
     console.error('Error:', error);
   });

@@ -11,6 +11,7 @@ export default () => {
   const [newNickname, setNewNickname] = useState(user.nickname);
   const [newEmail, setNewEmail] = useState(user.email);
   const [newBirthday, setNewBirthday] = useState(user.birthday);
+  const [newDname, setNewDname] = useState(user.dname);
   
   const findUserno = async () => {
     try {
@@ -36,6 +37,7 @@ export default () => {
         nickname: newNickname,
         email: newEmail,
         birthday: newBirthday,
+        dname: newDname,
       });    
 
       setEdit(false);
@@ -91,7 +93,7 @@ export default () => {
               </div>
               <div className={styles.infoData}>
                 <label>소속</label>
-                <input value={user.rank} readOnly></input>
+                <input value={user.dname} readOnly></input>
               </div>
               <div className={styles.infoData}>
                 <label>참여 중인 프로젝트</label>
@@ -120,7 +122,7 @@ export default () => {
               </div>
               <div className={styles.infoData}>
                 <label>소속</label>
-                <div>{user.rank}</div>
+                <div>{user.dname}</div>
               </div>
               <div className={styles.infoData}>
                 <label>참여 중인 프로젝트</label>

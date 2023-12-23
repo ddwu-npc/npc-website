@@ -58,6 +58,37 @@
         margin-right: 50px;
       }
 
+      .imgContainer {
+        position: relative;
+        display: inline-block;
+      }
+
+      .editImg {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        left: 10%;
+        
+        margin-top: 5px;
+
+        width: 125px;
+        height: 25px;
+
+        border: 1px solid #7e7e7e;
+
+        font-weight: 400;
+        font-size: 14px;
+        color: #7e7e7e;
+
+        cursor: pointer;
+
+        &:active {
+          background: #7e7e7e;
+          color: white;
+        }
+      }
+
       .info {
         height: 220px;
         display: flex;
@@ -132,6 +163,13 @@
           color: black;
           text-decoration: none;
           margin: 10px 0px;
+          .preContent {
+            width: 120px;
+            height: 25px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
         }
       }
     }

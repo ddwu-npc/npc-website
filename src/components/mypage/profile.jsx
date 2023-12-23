@@ -63,7 +63,13 @@ export default () => {
       </div>
       <hr />
       <div>
-        <img src={user.profile} />
+        <div className={styles.imgContainer}>
+          <div><img src={user.profile} /></div>
+          <div className={styles.editImg}>
+            <label for="img-upload">프로필 변경하기</label>
+            <input type="file" name="file" accept="image/*" id="img-upload" style={{display:"none"}}/>
+          </div>
+        </div>
         {edit ? (
           <>
             <div className={styles.info}>

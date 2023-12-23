@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 
 import { deleteComment, findAuthor } from "api/post";
+import { getUserno } from "api/user";
 import { Icon } from "@iconify/react";
 
 import styles from "./style.module.scss";
@@ -24,7 +25,9 @@ export default ({ commentId }) => {
   async function fetchData() {
     try {
       const commentUser = await fetchUserData(); // 비동기 함수 호출
-      return commentUser;
+      const currUser = await getUserno();
+
+      return { commentUser, currUser };
     } catch (error) {
       console.error('Error fetching user data:', error);
     }
@@ -51,9 +54,8 @@ export default ({ commentId }) => {
     };
   });
 
-  const userno = 12;  //jwtToken으로 수정 필요
-  fetchData().then((commentUser) => {
-    setShouldRenderOptions(userno && commentUser && userno === commentUser);
+  fetchData().then(({ commentUser, currUser }) => {
+    setShouldRenderOptions(currUser && commentUser && currUser === commentUser);
   }).catch((error) => {
     console.error('Error:', error);
   });

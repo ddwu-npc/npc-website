@@ -93,7 +93,12 @@ export default () => {
               </div>
               <div className={styles.infoData}>
                 <label>소속</label>
-                <input value={user.dname} readOnly></input>
+                <select defaultValue={user.dname} onChange={(e) => setNewDname(e.target.value)}>
+                  <option value="DEVELOPER">DEVELOPER</option>
+                  <option value="PLAN">PLAN</option>
+                  <option value="DESIGN">DESIGN</option>
+                </select>
+                
               </div>
               <div className={styles.infoData}>
                 <label>참여 중인 프로젝트</label>

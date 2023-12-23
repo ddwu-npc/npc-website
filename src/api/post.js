@@ -5,6 +5,11 @@ import { getToken } from "./jwtToken";
 export const readPost = (post_id) => {
   const jwtToken = getToken();
   const token = `Bearer ${jwtToken}` 
+
+  const response = axios.getWithHeader(`/post/${post_id}`, token);
+
+  console.log("read post res", response);
+
   return axios.getWithHeader(`/post/${post_id}`, token);
 };
 
@@ -12,12 +17,16 @@ export const createPost = (boardId, postData) => {
   const jwtToken = getToken(); // localStorage에서 JWT 토큰 가져오기
   const uri = '/post/' + boardId;
   const formData = new FormData();
-  formData.append('title', postData.title);
+  if(postData.title != "")
+    formData.append('title', postData.title);
+  else
+  formData.append('title', "제목이 없습니다.");
+
   formData.append('content', postData.content);
   formData.append('rangePost', postData.rangePost);
   formData.append('important', postData.important);
 
-  if (postData.attachment) {
+  if (postData.attachment && postData.attachment.size > 0) {
     formData.append('attachment', postData.attachment);
   }
 

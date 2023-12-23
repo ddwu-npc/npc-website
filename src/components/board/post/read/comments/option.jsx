@@ -66,7 +66,6 @@ export default ({ commentId }) => {
         <Icon icon="bi:three-dots-vertical" />
       </div>
       <div className={styles.dropdown} ref={dropdownRef}>
-        <div>수정</div>
         <div onClick={del}>삭제</div>
       </div>
     </div>

@@ -6,6 +6,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import { deletePost, findAuthor } from "api/post";
+import { getUserno } from "api/user";
 import { Icon } from "@iconify/react";
 
 import styles from "./style.module.scss";
@@ -42,7 +43,8 @@ export default () => {
   async function fetchData() {
     try {
       const postUser = await fetchUserData(); // 비동기 함수 호출
-      return postUser;
+      const currUser = await getUserno();
+      return { postUser, currUser };
     } catch (error) {
       console.error('Error fetching user data:', error);
     }
@@ -70,9 +72,8 @@ export default () => {
     };
   });
 
-  const userno = 12;  //jwtToken으로 수정 필요
-  fetchData().then((postUser) => {
-    setShouldRenderOptions(userno && postUser && userno === postUser);
+  fetchData().then(({ postUser, currUser }) => {
+    setShouldRenderOptions(currUser && postUser && currUser === postUser);
   }).catch((error) => {
     console.error('Error:', error);
   });

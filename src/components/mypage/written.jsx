@@ -22,8 +22,8 @@ export default ({ title, count, preview }) => {
               to={`/board/${view.boardId}/post/${view.postId}`}
               key={`preview_${title}_${idx}`}
             >
-              <div>{view.title}</div>
-              <div>{view.content}</div>
+              <div className={styles.preContent}>{view.title}</div>
+              <div className={styles.preContent}>{view.content}</div>
               <div>{limitDateString(view.createDate + "", 10)}</div>
             </Link>
           ))

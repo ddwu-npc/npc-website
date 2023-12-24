@@ -28,6 +28,7 @@ const dataLoader = async ({ request, params }) => {
   if (params.postId) {
     data.postId = params.postId;
     data.post = await readPost(data.postId);
+
     if (new URL(request.url).pathname.indexOf("edit") === -1) {
       data.comments = await readComment(data.postId);
       for (const comment of data.comments) {
@@ -53,7 +54,6 @@ const uploadAction = async ({ request, params }) => {
     return redirect(`/board/${boardId}/post/${postId}`);
   }
 
-  console.log("post index.jsx", post);
   await createPost(boardId, post, token);
 
   return redirect(`/board/${boardId}`);

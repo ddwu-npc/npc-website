@@ -1,4 +1,5 @@
 import { useLoaderData, Link } from "react-router-dom";
+import {useState, useEffect} from 'react';
 import { Icon } from "@iconify/react";
 
 import ReactMarkdown from "react-markdown";
@@ -6,15 +7,33 @@ import remarkGfm from "remark-gfm";
 
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { readFile } from "api/post";
 
 import Option from "./option";
 import styles from "./style.module.scss";
 
 export default () => {
-  const { post, user } = useLoaderData();
+  const { post, user} = useLoaderData();
   var rangeP = post.rangePost;
-  if(post.rangePost=="public")
+  if(post.rangePost=="public"){
     rangeP = "전체";
+  }
+    const [attachment, setAttachment] = useState([]);
+    useEffect(() => {
+      const fetchAttachment = async () => {
+        try {
+          const result = await readFile(post.postId);
+          setAttachment(result);
+        } catch (error) {
+          console.error("첨부 파일을 가져오는 중 오류 발생:", error);
+        }
+      };
+  
+      fetchAttachment();
+    }, [post.postId]);
+  
+  console.log("post", post.postId);
+  console.log("attachment", attachment);
 
   return (
     <div className={styles.contentBox}>
@@ -56,7 +75,9 @@ export default () => {
         <div>
           <Icon icon="ant-design:file-zip-outlined" /> 첨부파일
         </div>
-        /* */
+        <span key={`post_attachment_0`}>
+        {attachment.orgName} <Icon icon="bx:download" />
+        </span>
       </div>
     </div>
   );

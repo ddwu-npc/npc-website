@@ -1,14 +1,11 @@
 import axios from "./axios";
 import ex_axios from "axios";
 import { getToken } from "./jwtToken";
+import post from "components/board/post";
 
 export const readPost = (post_id) => {
   const jwtToken = getToken();
   const token = `Bearer ${jwtToken}` 
-
-  const response = axios.getWithHeader(`/post/${post_id}`, token);
-
-  console.log("read post res", response);
 
   return axios.getWithHeader(`/post/${post_id}`, token);
 };
@@ -25,6 +22,7 @@ export const createPost = (boardId, postData) => {
   formData.append('content', postData.content);
   formData.append('rangePost', postData.rangePost);
   formData.append('important', postData.important);
+  formData.append('attachment', postData.attachment);
 
   if (postData.attachment && postData.attachment.size > 0) {
     formData.append('attachment', postData.attachment);
@@ -55,7 +53,6 @@ export const deletePost = async(post_id) => {
 export const getBoardIdByPostId = async (post_id) => {
   try {
     const response = await axios.get(`/post/findBoard/${post_id}`);
-    console.log("get bId", response);
     return response;
   } catch (error) {
     console.error(`Error while fetching board_id for post_id ${post_id}:`,error);
@@ -72,6 +69,16 @@ export const findAuthor = (id, type)=>{
     return res;
   }
 }
+
+export const readFile = async (post_id) => {
+  try {
+    const res = await axios.get(`/files/${post_id}`);
+    return res; // 응답에 파일 데이터가 포함되어 있다고 가정합니다.
+  } catch (error) {
+    console.error("첨부 파일을 가져오는 중 오류 발생:", error);
+    throw error;
+  }
+};
 
 export const createComment = (post_id, commentData, token) => {
   console.log("createComment", commentData);

@@ -14,11 +14,7 @@ export const getProjectList = (search) => {
 };
 
 export const getProjectInfo = (pid) => {
-  return axios.get(`/project/${pid}`).then(response => {
-    if (response) {
-      console.log("read project :" + JSON.stringify(response, null, 2));
-    }
-  });
+  return axios.get(`/project/${pid}`);
 };
 
 export const getQuickAttendance = (pid) => {

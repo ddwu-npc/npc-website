@@ -31,9 +31,6 @@ export default () => {
   
       fetchAttachment();
     }, [post.postId]);
-  
-  console.log("post", post.postId);
-  console.log("attachment", attachment);
 
   return (
     <div className={styles.contentBox}>
@@ -75,9 +72,11 @@ export default () => {
         <div>
           <Icon icon="ant-design:file-zip-outlined" /> 첨부파일
         </div>
-        <span key={`post_attachment_0`}>
-        {attachment.orgName} <Icon icon="bx:download" />
-        </span>
+        {attachment && (
+          <span key={`post_attachment_0`}>
+            {attachment.orgName} <Icon icon="bx:download" />
+          </span>
+        )}
       </div>
     </div>
   );

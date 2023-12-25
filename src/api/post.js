@@ -22,8 +22,7 @@ export const createPost = (boardId, postData) => {
   formData.append('content', postData.content);
   formData.append('rangePost', postData.rangePost);
   formData.append('important', postData.important);
-  formData.append('attachment', postData.attachment);
-
+  
   if (postData.attachment && postData.attachment.size > 0) {
     formData.append('attachment', postData.attachment);
   }

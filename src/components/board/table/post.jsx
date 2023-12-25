@@ -43,7 +43,7 @@ export default ({ link, post, empty }) => {
         {user ? user.nickname : "로딩 중"}
       </div>
       <div></div>
-      <div>{post.createDate.substr(0, 10)}</div>
+      <div>{post.createDate}</div>
     </Link>
   );
 };

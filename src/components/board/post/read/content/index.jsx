@@ -1,5 +1,5 @@
 import { useLoaderData, Link } from "react-router-dom";
-import {useState, useEffect} from 'react';
+import { useState, useEffect} from 'react';
 import { Icon } from "@iconify/react";
 
 import ReactMarkdown from "react-markdown";
@@ -7,7 +7,7 @@ import remarkGfm from "remark-gfm";
 
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { readFile } from "api/post";
+import { readFile, downloadFile } from "api/post";
 
 import Option from "./option";
 import styles from "./style.module.scss";
@@ -32,6 +32,10 @@ export default () => {
       fetchAttachment();
     }, [post.postId]);
 
+    const handleDownloadClick = () => {
+      downloadFile(attachment.sName);
+    };
+    
   return (
     <div className={styles.contentBox}>
       <Option />
@@ -73,7 +77,7 @@ export default () => {
           <Icon icon="ant-design:file-zip-outlined" /> 첨부파일
         </div>
         {attachment && (
-          <span key={`post_attachment_0`}>
+          <span key={`post_attachment_0`} onClick={handleDownloadClick}>
             {attachment.orgName} <Icon icon="bx:download" />
           </span>
         )}

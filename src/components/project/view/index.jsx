@@ -74,7 +74,7 @@ export default () => {
                         <span>{projectData.projectRes.startDate}~{projectData.projectRes.endDate}</span>
                     </div>
                     <div>
-                        <label>팀원</label>
+                        <label>팀원</label><br></br>
                         <span>
                         {Object.entries(projectData.userList).map(([name, department], index) => (
                             <span
@@ -89,7 +89,7 @@ export default () => {
                                         : ""
                                 }
                             >
-                                {name} - {department}
+                            {name} - {department}<br></br>
                             </span>
                         ))}
                     </span>

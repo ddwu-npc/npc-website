@@ -78,9 +78,49 @@ export const readFile = async (post_id) => {
     throw error;
   }
 };
+export const downloadFile = async (fileName) => {
+  try {
+    const response = await axios.get(`/files/download/${fileName}`, {
+      responseType: 'arraybuffer', // 데이터를 ArrayBuffer로 받도록 설정
+    });
+
+    // 파일을 Blob으로 변환
+    const blob = new Blob([response.data]);
+
+    // a 태그를 생성하고 다운로드 링크 설정
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = fileName;
+
+    // 링크를 추가하고 클릭하여 다운로드
+    document.body.appendChild(link);
+    link.click();
+
+    // 링크 제거
+    document.body.removeChild(link);
+  } catch (error) {
+    console.error('다운로드 실패:', error);
+  }
+};
+/*
+export const downloadFile = async (fileName)=>{
+  try {
+    const response = await axios.get(`/files/download/${fileName}`,{responseType: 'blob',});
+    // 파일 다운로드를 위한 코드
+    const url = window.URL.createObjectURL(new Blob([response.data]));
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', fileName);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  } catch (error) {
+    console.error('다운로드 실패:', error);
+  }
+}
+*/
 
 export const createComment = (post_id, commentData, token) => {
-  console.log("createComment", commentData);
   return axios.postWithHeader(`/comment/${post_id}`, commentData, token);
 };
 

@@ -28,9 +28,24 @@ export const readUserInfo = (userno) => {
   return axios.get(uri);
 };
 
+// 사용자 프로필 사진
+export const readUserFile = async (userno) => {
+  try {
+    const res = await axios.get(`/userfile/${userno}`);
+    return res; 
+  } catch (error) {
+    console.error("첨부 파일을 가져오는 중 오류 발생:", error);
+    throw error;
+  }
+};
+
 // 마이페이지에서 띄우는 상세 유저 정보 수정 
 export const updateUserInfo = (updatedInfo) => {
-  return axios.put("/mypage/update", updatedInfo);
+  return axios.put("/mypage/update", updatedInfo, {
+    headers: {
+      'Content-Type': 'multipart/form-data' 
+    }
+  });
 };
 
 export const login = (loginId, raw_password) => {

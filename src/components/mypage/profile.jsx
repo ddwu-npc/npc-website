@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLoaderData } from "react-router";
-import { updateUserInfo } from "api/user"; 
+import { readUserFile, updateUserInfo } from "api/user"; 
 import { getUserno } from "api/user";
 
 import styles from "./style.module.scss";
@@ -12,6 +12,8 @@ export default () => {
   const [newEmail, setNewEmail] = useState(user.email);
   const [newBirthday, setNewBirthday] = useState(user.birthday);
   const [newDname, setNewDname] = useState(user.dname);
+  const [newProfile, setNewProfile] = useState(user.profile);
+  const [newProfileView, setNewProfileView] = useState(user.profile);
   
   const findUserno = async () => {
     try {
@@ -19,6 +21,18 @@ export default () => {
       return userId;
     } catch (error) {
       console.error("에러 발생:", error);
+    }
+  };
+
+  const handleFileInputChange = (event) => {
+    const file = event.target.files[0]; 
+    if (file) {
+      setNewProfile(file); 
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setNewProfileView(reader.result); 
+      };
+      reader.readAsDataURL(file); 
     }
   };
 
@@ -32,13 +46,16 @@ export default () => {
         return; 
       }
 
-      await updateUserInfo({
-        userNo: userId,
-        nickname: newNickname,
-        email: newEmail,
-        birthday: newBirthday,
-        dname: newDname,
-      });    
+      const formData = new FormData();
+      formData.append('userNo', userId);
+      formData.append('nickname', newNickname);
+      formData.append('email', newEmail);
+      formData.append('birthday', newBirthday);
+      formData.append('dname', newDname);
+
+      formData.append('profile', newProfile); 
+
+      await updateUserInfo(formData);    
 
       setEdit(false);
       window.location.reload();
@@ -65,15 +82,15 @@ export default () => {
       </div>
       <hr />
       <div>
-        <div className={styles.imgContainer}>
-          <div><img src={user.profile} /></div>
-          <div className={styles.editImg}>
-            <label for="img-upload">프로필 변경하기</label>
-            <input type="file" name="file" accept="image/*" id="img-upload" style={{display:"none"}}/>
-          </div>
-        </div>
         {edit ? (
-          <>
+          <>    
+            <div className={styles.imgContainer}>
+              <div>{newProfileView ? <img src={newProfileView}/> : <img src={user.profile}/>}</div>
+              <div className={styles.editImg}>
+                <label htmlFor="img-upload">프로필 변경하기</label>
+                <input type="file" name="file" accept="image/*" id="img-upload" onChange={handleFileInputChange} style={{display:"none"}}/>
+              </div>
+            </div>
             <div className={styles.info}>
               <div className={styles.infoData}>
                 <label>닉네임</label>
@@ -108,6 +125,9 @@ export default () => {
           </>
         ) : (
           <>
+            <div className={styles.imgContainer}>
+              <div><img src={user.profile} /></div>
+            </div>
             <div className={styles.info}>
               <div className={styles.infoData}>
                 <label>닉네임</label>

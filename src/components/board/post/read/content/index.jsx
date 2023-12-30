@@ -48,11 +48,12 @@ export default () => {
   
       fetchAttachment();
     }, [post.postId]);
-    /*
+    
     const handleDownloadClick = () => {
       downloadFile(attachment.sName);
     };
-    */
+
+   /*
     const handleDownloadClick = () => {
       console.log("fileName", attachment.sName);
       const jwtToken = getToken();
@@ -89,7 +90,7 @@ export default () => {
           console.error('파일 다운로드 중 오류 발생 :', error);
       });
   };
-    
+  */
   return (
     <div className={styles.contentBox}>
       <Option />

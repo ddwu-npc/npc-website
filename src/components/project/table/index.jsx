@@ -10,8 +10,6 @@ export default (props) => {
   const { projectList } = useLoaderData();
   const [page, setPage] = useState(1);
 
-  projectList.sort((a, b) => a.pid - b.pid);
-
   const curProjectList = projectList.slice((page - 1) * 11, (page - 1) * 11 + 11);
   const emptyProjects = [];
   while (curProjectList.length + emptyProjects.length < 11) {

@@ -7,13 +7,16 @@ import Header from "components/commons/header";
 import Tag from "components/commons/tag";
 import styles from "./style.module.scss";
 
+import { readUserInfo, getUserno } from "api/user";
 import { getProjectInfo, deleteProject, getQuickAttendance } from "api/project";
 import { createAttendance } from "api/attendance";
 import { Icon } from "@iconify/react";
 
 export const loader = async ({ params }) => {
+    const userId = await getUserno();
     const pid = params.pid;
     const data = await getProjectInfo(pid);
+    data.user = await readUserInfo(userId);
     console.log(data);
     return data;
 };
@@ -26,6 +29,8 @@ export default () => {
     console.log(projectData);
     const [option, setOption] = useState(false);
 
+    const isLeader = projectData.projectRes.leader == projectData.user.nickname
+
     return (
     <div className={styles.root}>
         <Header text="프로젝트" src="/project"/>
@@ -34,10 +39,12 @@ export default () => {
                 <Tag text={projectData.projectRes.process} color="#FED5A5"/>
                 <h2>{projectData.projectRes.pname}</h2>
                 <div className={styles.option}>
-                    <Icon 
-                        icon="bi:three-dots-vertical" color="#7E7E7E" 
-                        onClick={() => setOption(!option)}/>
-                    {option && (
+                    {isLeader && (
+                        <Icon 
+                            icon="bi:three-dots-vertical" color="#7E7E7E" 
+                            onClick={() => setOption(!option)}/>
+                    )}
+                    {option && isLeader && (
                         <div>
                             <div onClick={async () => {
                                 const result = await createAttendance(projectData.projectRes.pid);

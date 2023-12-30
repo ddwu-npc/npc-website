@@ -78,6 +78,30 @@ export const readFile = async (post_id) => {
     throw error;
   }
 };
+
+export  const downloadFile = (fileName) => {
+  const jwtToken = getToken();
+  axios.get(`/files/download/${fileName}`, {
+      withCredentials: true,
+      headers: {
+          'Authorization': `Bearer ${jwtToken}`
+      },
+      responseType: 'blob'
+  })
+      .then(res => {
+          const url = window.URL.createObjectURL(new Blob([res.data]));
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = fileName;
+          document.body.appendChild(a);
+          a.click();
+          window.URL.revokeObjectURL(url);
+      })
+      .catch(error => {
+          console.error('파일 다운로드 중 오류 발생 :', error);
+      });
+};
+/*
 export const downloadFile = async (fileName) => {
   try {
     const response = await axios.get(`/files/download/${fileName}`, {
@@ -85,11 +109,12 @@ export const downloadFile = async (fileName) => {
     });
 
     // 파일을 Blob으로 변환
-    const blob = new Blob([response.data]);
+    //const blob = new Blob([response.data], { type: response.headers['blob'] });
+    //console.log("blob", blob);
 
     // a 태그를 생성하고 다운로드 링크 설정
     const link = document.createElement('a');
-    link.href = window.URL.createObjectURL(blob);
+    link.href = window.URL.createObjectURL(new Blob([response.data]));
     link.download = fileName;
 
     // 링크를 추가하고 클릭하여 다운로드
@@ -102,6 +127,7 @@ export const downloadFile = async (fileName) => {
     console.error('다운로드 실패:', error);
   }
 };
+*/
 /*
 export const downloadFile = async (fileName)=>{
   try {

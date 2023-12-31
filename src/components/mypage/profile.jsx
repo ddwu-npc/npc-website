@@ -13,8 +13,9 @@ export default () => {
   const [newBirthday, setNewBirthday] = useState(user.birthday);
   const [newDname, setNewDname] = useState(user.dname);
   const [newProfile, setNewProfile] = useState(user.profile);
-  const [newProfileView, setNewProfileView] = useState(user.profile);
-  
+  const [newProfileView, setNewProfileView] = useState(null);
+  const [attachment, setAttachment] = useState([]);
+
   const findUserno = async () => {
     try {
       const userId = await getUserno();
@@ -24,10 +25,25 @@ export default () => {
     }
   };
 
+  useEffect(() => {
+    const fetchAttachment = async () => {
+      try {
+        const userId = await findUserno(); 
+        const result = await readUserFile(userId); 
+        setAttachment(result);
+      } catch (error) {
+        console.error("Error fetching user file:", error);
+      }
+    };
+  
+    fetchAttachment();
+  }, []);
+
   const handleFileInputChange = (event) => {
     const file = event.target.files[0]; 
     if (file) {
       setNewProfile(file); 
+      setAttachment(null);
       const reader = new FileReader();
       reader.onloadend = () => {
         setNewProfileView(reader.result); 
@@ -85,7 +101,17 @@ export default () => {
         {edit ? (
           <>    
             <div className={styles.imgContainer}>
-              <div>{newProfileView ? <img src={newProfileView}/> : <img src={user.profile}/>}</div>
+            <div>
+              {(newProfileView && !attachment) ? (
+                <img src={newProfileView} alt="New Profile" />
+              ) : (
+                attachment && attachment.sName ? (
+                  <img src={`/userfile/look/${attachment.sName}`}/>
+                ) : (
+                  <img src={`/userfile/look/default.png`}/>
+                )
+              )}
+            </div>
               <div className={styles.editImg}>
                 <label htmlFor="img-upload">프로필 변경하기</label>
                 <input type="file" name="file" accept="image/*" id="img-upload" onChange={handleFileInputChange} style={{display:"none"}}/>
@@ -125,9 +151,15 @@ export default () => {
           </>
         ) : (
           <>
-            <div className={styles.imgContainer}>
-              <div><img src={user.profile} /></div>
-            </div>
+            {attachment && attachment.sName ? (
+              <div className={styles.imgContainer}>
+                <img src={`/userfile/look/${attachment.sName}`} />
+              </div>
+            ) : (
+              <div className={styles.imgContainer}>
+              <img src={`/userfile/look/default.png`} />
+              </div>
+            )}
             <div className={styles.info}>
               <div className={styles.infoData}>
                 <label>닉네임</label>

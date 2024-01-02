@@ -17,7 +17,6 @@ export const loader = async ({ params }) => {
     const pid = params.pid;
     const data = await getProjectInfo(pid);
     data.user = await readUserInfo(userId);
-    console.log(data);
     return data;
 };
 
@@ -26,7 +25,6 @@ export default () => {
     const navigate = useNavigate();
 
     const projectData = useLoaderData();
-    console.log(projectData);
     const [option, setOption] = useState(false);
 
     const isLeader = projectData.projectRes.leader == projectData.user.nickname

@@ -1,7 +1,7 @@
 import axios from "./axios";
 import ex_axios from "axios";
 import { getToken } from "./jwtToken";
-import post from "components/board/post";
+import Edit from "components/board/post/edit";
 
 export const readPost = (post_id) => {
   const jwtToken = getToken();
@@ -10,29 +10,35 @@ export const readPost = (post_id) => {
   return axios.getWithHeader(`/post/${post_id}`, token);
 };
 
-export const createPost = (boardId, postData) => {
-  const jwtToken = getToken(); // localStorage에서 JWT 토큰 가져오기
+export const createPost = (boardId, fData, token) => {
   const uri = '/post/' + boardId;
-  const formData = new FormData();
-  if(postData.title != "")
-    formData.append('title', postData.title);
-  else
-  formData.append('title', "제목이 없습니다.");
+  //console.log("fData", fData);
 
+  const postData = Object.fromEntries(fData);
+  const formData = new FormData();
+
+  formData.append('title', postData.title);
   formData.append('content', postData.content);
   formData.append('rangePost', postData.rangePost);
   formData.append('important', postData.important);
-  
-  if (postData.attachment && postData.attachment.size > 0) {
-    formData.append('attachment', postData.attachment);
-  }
 
+  const attachmentFiles = fData.getAll("attachment");
+  //console.log("files ",attachmentFiles);
+  //formData.append('attachment', attachmentFiles);
+  
+  // 각 파일에 대한 자세한 정보 출력
+  attachmentFiles.forEach((file, index) => {
+    console.log(`첨부파일 ${index + 1} - 이름: ${file.name}, 크기: ${file.size} bytes, 타입: ${file.type}`);
+
+    formData.append(`attachment_${index}`, file);
+  });
+  
   return ex_axios({
     method: 'post',
     url: uri,
     data: formData,
     headers: {
-      Authorization: `Bearer ${jwtToken}`,
+      Authorization: `Bearer ${token}`,
       'Content-Type': 'multipart/form-data', // Content-Type 설정
     },
   });
@@ -79,72 +85,32 @@ export const readFile = async (post_id) => {
   }
 };
 
-export  const downloadFile = (fileName) => {
-  const jwtToken = getToken();
-  axios.get(`/files/download/${fileName}`, {
-      withCredentials: true,
-      headers: {
-          'Authorization': `Bearer ${jwtToken}`
-      },
-      responseType: 'blob'
-  })
-      .then(res => {
-          const url = window.URL.createObjectURL(new Blob([res.data]));
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = fileName;
-          document.body.appendChild(a);
-          a.click();
-          window.URL.revokeObjectURL(url);
-      })
-      .catch(error => {
-          console.error('파일 다운로드 중 오류 발생 :', error);
-      });
-};
-/*
-export const downloadFile = async (fileName) => {
-  try {
-    const response = await axios.get(`/files/download/${fileName}`, {
-      responseType: 'arraybuffer', // 데이터를 ArrayBuffer로 받도록 설정
-    });
+export const downloadFile =(file)=>{
+  console.log("fileName", file.sName);
+  const backendEndpoint = '/files/download/';
+  const fileName = file.sName;
+  const downloadUrl = `${backendEndpoint}/${fileName}`;
+  
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', downloadUrl, true);
+  xhr.responseType = 'blob';
 
-    // 파일을 Blob으로 변환
-    //const blob = new Blob([response.data], { type: response.headers['blob'] });
-    //console.log("blob", blob);
+  xhr.onload = function () {
+    // Create a blob from the response
+    const blob = new Blob([xhr.response], { type: 'application/octet-stream' });
 
-    // a 태그를 생성하고 다운로드 링크 설정
+    // Create a link element and trigger a click to initiate the download
     const link = document.createElement('a');
-    link.href = window.URL.createObjectURL(new Blob([response.data]));
+    link.href = window.URL.createObjectURL(blob);
     link.download = fileName;
-
-    // 링크를 추가하고 클릭하여 다운로드
-    document.body.appendChild(link);
     link.click();
 
-    // 링크 제거
-    document.body.removeChild(link);
-  } catch (error) {
-    console.error('다운로드 실패:', error);
-  }
-};
-*/
-/*
-export const downloadFile = async (fileName)=>{
-  try {
-    const response = await axios.get(`/files/download/${fileName}`,{responseType: 'blob',});
-    // 파일 다운로드를 위한 코드
-    const url = window.URL.createObjectURL(new Blob([response.data]));
-    const link = document.createElement('a');
-    link.href = url;
-    link.setAttribute('download', fileName);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  } catch (error) {
-    console.error('다운로드 실패:', error);
-  }
+    // Clean up
+    window.URL.revokeObjectURL(link.href);
+  };
+  
+  xhr.send();
 }
-*/
 
 export const createComment = (post_id, commentData, token) => {
   return axios.postWithHeader(`/comment/${post_id}`, commentData, token);

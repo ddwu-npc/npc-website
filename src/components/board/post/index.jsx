@@ -54,7 +54,7 @@ const uploadAction = async ({ request, params }) => {
     return redirect(`/board/${boardId}/post/${postId}`);
   }
 
-  await createPost(boardId, post, token);
+  await createPost(boardId, formData, token);
 
   return redirect(`/board/${boardId}`);
 };

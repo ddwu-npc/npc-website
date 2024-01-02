@@ -16,81 +16,30 @@ import { saveAs } from 'file-saver';
 import Option from "./option";
 import styles from "./style.module.scss";
 
-const determineContentType = (extension) => {
-  switch (extension.toLowerCase()) {
-    case "jpg":
-    case "jpeg":
-      return "image/jpeg";
-    case "png":
-      return "image/png";
-    // 다른 파일 형식에 대한 처리 추가
-    default:
-      return null; // 알 수 없는 확장자인 경우, null 또는 다른 기본값 설정
-  }
-};
-
 export default () => {
   const { post, user} = useLoaderData();
   var rangeP = post.rangePost;
   if(post.rangePost=="public"){
     rangeP = "전체";
   }
-    const [attachment, setAttachment] = useState([]);
-    useEffect(() => {
-      const fetchAttachment = async () => {
-        try {
-          const result = await readFile(post.postId);
-          setAttachment(result);
-        } catch (error) {
-          console.error("첨부 파일을 가져오는 중 오류 발생:", error);
-        }
-      };
   
-      fetchAttachment();
-    }, [post.postId]);
-    
-    const handleDownloadClick = () => {
-      downloadFile(attachment.sName);
+  const [attachment, setAttachment] = useState([]);
+
+  useEffect(() => {
+    const fetchAttachment = async () => {
+      try {
+        const result = await readFile(post.postId);
+        setAttachment(result);
+      } catch (error) {
+        console.error("첨부 파일을 가져오는 중 오류 발생:", error);
+      }
     };
+    fetchAttachment();
+  }, [post.postId]);
 
-   /*
-    const handleDownloadClick = () => {
-      console.log("fileName", attachment.sName);
-      const jwtToken = getToken();
-      axios.get(`/files/download/${attachment.sName}`, {
-          withCredentials: true,
-          headers: {
-              'Authorization': `Bearer ${jwtToken}`
-          },
-          responseType: 'blob'
-      })
-      .then(res => {
-          //saveAs(res, attachment.sName);
-          //console.log("Content-Type", res.headers['content-type']);
-          //const blob = new Blob([res.data]);
-          //saveAs(blob, attachment.sName);
-          
-          
-          const url = window.URL.createObjectURL(new Blob([res.data]));
-          const a = document.createElement('a');
-          a.href = url;
-
-          //const extension = attachment.sName.split('.').pop().toLowerCase();
-          //const blobContentType = determineContentType(extension);
-          a.download = attachment.sName;
-          //a.type = blobContentType;
-          //console.log("blobContentType", blobContentType);
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          window.URL.revokeObjectURL(url);
-          
-      })
-      .catch(error => {
-          console.error('파일 다운로드 중 오류 발생 :', error);
-      });
+  const handleDownloadClick = (file) => {
+      downloadFile(file);
   };
-  */
   return (
     <div className={styles.contentBox}>
       <Option />
@@ -131,12 +80,11 @@ export default () => {
         <div>
           <Icon icon="ant-design:file-zip-outlined" /> 첨부파일
         </div>
-        {attachment && (
-          <span key={`post_attachment_0`} onClick={handleDownloadClick}>
-            {attachment.orgName} <Icon icon="bx:download" />
-            <img src={`/files/download/${attachment.sName}`} alt={attachment.orgName} />
+        {attachment && attachment.map((e, idx) => (
+          <span key={`post_attachment_${idx}`}>
+            <div onClick={() => handleDownloadClick(e)}>{e.orgName}</div><Icon icon="bx:download" onClick={() => handleDownloadClick(e)}/>
           </span>
-        )}
+        ))}
       </div>
     </div>
   );
@@ -150,4 +98,10 @@ export default () => {
         ))}
         */
 
-//<img src={`/files/download/${attachment.sName}`} alt={attachment.orgName} />
+/*
+{attachment && (
+          <span key={`post_attachment_0`}>
+            <div onClick={handleDownloadClick}>{attachment.orgName}</div> <Icon icon="bx:download" onClick={handleDownloadClick}/>
+          </span>
+        )}
+*/

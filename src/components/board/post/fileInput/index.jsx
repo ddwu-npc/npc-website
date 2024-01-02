@@ -11,14 +11,17 @@ export default (props) => {
 
   const handleFileChange = (e) => {
     const newFiles = [...e.target.files, ...files];
-    setFiles(newFiles);
+    if (newFiles.length > 3) {
+      alert('최대 3개까지 업로드 가능합니다.');
+    }else{
+      setFiles(newFiles);
+    }
+    
   };
 
   const handleFileDelete = (idx) => {
     const newFiles = [...files.slice(0, idx), ...files.slice(idx + 1)];
     setFiles(newFiles);
-
-    fileRef.current.value = null;
   };
   return (
     <div
@@ -37,7 +40,7 @@ export default (props) => {
         id="attachment"
         name="attachment"
         type="file"
-        multiple
+        multiple="multiple"
         onChange={handleFileChange}
         ref={fileRef}
       ></input>

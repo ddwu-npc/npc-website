@@ -17,7 +17,7 @@ export default (props) => {
   const { post } = useLoaderData();
 
   const [preview, setPreview] = useState(false);
-  const [content, setContent] = useState(post ? post.content : "");
+  //const [content, setContent] = useState(post ? post.content : "");
 
   /*
   <CodeMirror

@@ -43,7 +43,7 @@ export default () => {
           ))}
         </select>
       </div>
-      <FileInput files={[]} post />
+      <FileInput files={[]} post/>
     </div>
   );
 };

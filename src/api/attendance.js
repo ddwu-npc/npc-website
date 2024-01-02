@@ -5,12 +5,7 @@ export const getAttendanceInfo = (attendanceId) => {
 };
 
 export const attend = (attendanceId, authcode) => {
-    return new Promise((resolve) =>
-        setTimeout(() => {
-            if(authcode==="123") resolve(true);
-            else resolve(false);
-        }
-    ));
+    return axios.get(`/attendance/${attendanceId}/${authcode}`);
 }
 
 export const createAttendance = (pid) => {

@@ -29,6 +29,15 @@ export default () => {
 
     const isLeader = projectData.projectRes.leader == projectData.user.nickname
 
+    const handleQuickAttendance = async () => {
+        const quickAttendanceId = await getQuickAttendance(projectData.projectRes.pid);
+        if (quickAttendanceId === -1) {
+            alert("현재 열린 출석이 없습니다.");
+        } else {
+            navigate(`/attendance/${quickAttendanceId}`);
+        }
+    };
+
     return (
     <div className={styles.root}>
         <Header text="프로젝트" src="/project"/>
@@ -107,9 +116,8 @@ export default () => {
                 <img/>
             </div>
             <div className={styles.button}>
-                <input type="button" value="빠른 출석 바로가기" onClick={async () => {
-                   navigate(`/attendance/${await getQuickAttendance(projectData.projectRes.pid)}`); 
-                }}/> 
+            <input  type="button"  value="빠른 출석 바로가기"
+                    onClick={handleQuickAttendance}/>
             </div>
         </div>
     </div>

@@ -1,7 +1,6 @@
 import axios from "./axios";
 import ex_axios from "axios";
 import { getToken } from "./jwtToken";
-import Edit from "components/board/post/edit";
 
 export const readPost = (post_id) => {
   const jwtToken = getToken();
@@ -23,13 +22,12 @@ export const createPost = (boardId, fData, token) => {
   formData.append('important', postData.important);
 
   const attachmentFiles = fData.getAll("attachment");
-  //console.log("files ",attachmentFiles);
-  //formData.append('attachment', attachmentFiles);
   
   // 각 파일에 대한 자세한 정보 출력
   attachmentFiles.forEach((file, index) => {
     console.log(`첨부파일 ${index + 1} - 이름: ${file.name}, 크기: ${file.size} bytes, 타입: ${file.type}`);
 
+    if(file.size>0)
     formData.append(`attachment_${index}`, file);
   });
   

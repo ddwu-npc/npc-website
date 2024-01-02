@@ -35,7 +35,7 @@ export default () => {
                     <input type="button" value="출석" 
                         onClick={async () => {
                             if (await attend(attendance.attendanceId, authCode)) {
-                                alert(`${attendance.meeting} 회의 출석에 성공했습니다.`);
+                                alert(`${attendance.meeting} 출석에 성공했습니다.`);
                                 if(navigationType === "PUSH") navigate(-1);
                                 else navigate("/");
                             }

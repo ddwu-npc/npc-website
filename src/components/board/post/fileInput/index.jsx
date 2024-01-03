@@ -10,18 +10,40 @@ export default (props) => {
   const fileViewRef = createRef();
 
   const handleFileChange = (e) => {
-    const newFiles = [...e.target.files, ...files];
+    const newFiles = [...files, ...Array.from(e.target.files)];
+    console.log("file list change", newFiles);
+
     if (newFiles.length > 3) {
       alert('최대 3개까지 업로드 가능합니다.');
     }else{
       setFiles(newFiles);
+      updateInputFiles(newFiles);
     }
     
   };
 
-  const handleFileDelete = (idx) => {
-    const newFiles = [...files.slice(0, idx), ...files.slice(idx + 1)];
+  const handleFileDelete = (fileToDelete) => {
+    //const newFiles = [...files.slice(0, idx), ...files.slice(idx + 1)];
+    const newFiles = files.filter(file => file !== fileToDelete);
+    console.log("file list delete", newFiles);
     setFiles(newFiles);
+
+    const remainingFiles = newFiles.map(file => new File([file], file.name));
+    const dataTransfer = new DataTransfer();
+    remainingFiles.forEach(file => {
+      dataTransfer.items.add(file);
+    });
+
+    // input 요소에 새로운 FileList를 할당
+    fileRef.current.files = dataTransfer.files;
+  };
+
+  const updateInputFiles = (newFiles) => {
+    const dataTransfer = new DataTransfer();
+    newFiles.forEach(file => {
+      dataTransfer.items.add(file);
+    });
+    fileRef.current.files = dataTransfer.files;
   };
   return (
     <div
@@ -33,7 +55,7 @@ export default (props) => {
       </label>
       <div ref={fileViewRef}>
         {files.map((file, idx) => (
-          <div key={`file_${idx}`} onClick={() => handleFileDelete(idx)}>{file.name}</div>
+          <div key={`file_${idx}`} onClick={() => handleFileDelete(file)}>{file.name}</div>
         ))}
       </div>
       <input

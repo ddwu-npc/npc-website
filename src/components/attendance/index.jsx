@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { redirect, useLoaderData, useNavigate, useNavigationType } from "react-router-dom";
 
 import { getAttendanceInfo, attend } from "api/attendance";
-
+import { getToken } from "api/jwtToken";
 import styles from "./style.module.scss";
 import Header from "components/commons/header";
 
@@ -20,6 +20,8 @@ export default () => {
     const navigationType = useNavigationType();
 
     const attendance = useLoaderData();
+    const token = `Bearer ${getToken()}`
+
     const [err, setErr] = useState(false);
     const [authCode, setAuthCode] = useState("");
     const [timeRemaining, setTimeRemaining] = useState(0);
@@ -68,8 +70,8 @@ export default () => {
                         onChange={(e) => setAuthCode(e.target.value)}/>
                     <input type="button" value="출석" 
                         onClick={async () => {
-                            if (await attend(attendance.attendanceId, authCode)) {
-                                alert(`${attendance.meeting} 출석에 성공했습니다.`);
+                            if (await attend(attendance.attendanceId, authCode, token)) {
+                                alert(`${attendance.meeting} 출석에 성공했습니다.\n10 포인트가 적립되었습니다.`);
                                 if(navigationType === "PUSH") navigate(-1);
                                 else navigate("/");
                             }

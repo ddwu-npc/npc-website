@@ -4,8 +4,8 @@ export const getAttendanceInfo = (attendanceId) => {
     return axios.get(`/attendance/${attendanceId}`);
 };
 
-export const attend = (attendanceId, authcode) => {
-    return axios.get(`/attendance/${attendanceId}/${authcode}`);
+export const attend = (attendanceId, authcode, token) => {
+    return axios.getWithHeader(`/attendance/${attendanceId}/${authcode}`, token);
 }
 
 export const createAttendance = (pid) => {

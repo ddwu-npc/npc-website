@@ -18,11 +18,7 @@ export const getProjectInfo = (pid) => {
 };
 
 export const getQuickAttendance = (pid) => {
-  return new Promise((resolve) =>
-    setTimeout(() => {
-      resolve(1); // project에서 현재 생성되어 있는 출석의 id를 가져옴
-    }, 100)
-  );
+  return axios.get(`/attendance/quick/${pid}`);
 };
 
 export const createProject = (project) => {

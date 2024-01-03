@@ -36,13 +36,15 @@ export default ({ link, post, empty }) => {
         />
         {post.post_id}
       </div>
-      <div>{post.range}</div>
+      <div>{post.rangePost}</div>
       <div>{post.title}</div>
       <div>
         {/* <img className={styles.profile} src={user.profile} /> */}
         {user ? user.nickname : "로딩 중"}
       </div>
-      <div></div>
+      <div>
+        {post.havePostfile==1? "O":""}
+      </div>
       <div>{post.createDate}</div>
     </Link>
   );

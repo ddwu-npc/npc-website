@@ -1,4 +1,5 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import ReactMarkdown from "react-markdown";
 import { useLoaderData, useNavigate } from "react-router-dom";
 
 import { usePos } from "hooks";
@@ -112,7 +113,7 @@ export default () => {
                     </div>
                     <div>
                         <label>프로젝트 설명</label>
-                        <div>{projectData.projectRes.content}</div>
+                        <ReactMarkdown>{projectData.projectRes.content}</ReactMarkdown>
                     </div>
                 </div>
                 <img/>

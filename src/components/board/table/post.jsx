@@ -6,19 +6,6 @@ import { readUser } from "api/user";
 import styles from "./style.module.scss";
 
 export default ({ link, post, empty }) => {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    if (!empty && post) {
-      const fetchData = async () => {
-        const userData = await readUser(post.userNo);
-        setUser(userData);
-      };
-
-      fetchData();
-    }
-  }, [empty, post]);
-  
   if (empty) return <div className={styles.post}></div>;
 
   return (
@@ -40,7 +27,7 @@ export default ({ link, post, empty }) => {
       <div>{post.title}</div>
       <div>
         {/* <img className={styles.profile} src={user.profile} /> */}
-        {user ? user.nickname : "로딩 중"}
+        {post.nickname}
       </div>
       <div>
         {post.havePostfile==1? "O":""}

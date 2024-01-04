@@ -3,7 +3,8 @@ import { Icon } from "@iconify/react";
 import styles from "./style.module.scss";
 
 export default ({icon, boardData}) => {
-    const { board_id, bName, postList } = boardData;
+    const { board_id, bName, postPaging } = boardData;
+    const postList = postPaging.postList;
     return (
         <div className={`${styles.box} ${styles.boardBox}`}>
             <div className={styles.header}>

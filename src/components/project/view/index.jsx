@@ -11,7 +11,9 @@ import styles from "./style.module.scss";
 import { readUserInfo, getUserno } from "api/user";
 import { getProjectInfo, deleteProject, getQuickAttendance } from "api/project";
 import { createAttendance } from "api/attendance";
-import { Icon } from "@iconify/react";
+import { getProcessColor } from "../optionColor";
+
+import { Icon } from "@iconify/react"; 
 
 export const loader = async ({ params }) => {
     const userId = await getUserno();
@@ -29,6 +31,7 @@ export default () => {
     const [option, setOption] = useState(false);
 
     const isLeader = projectData.projectRes.leader == projectData.user.nickname
+    const processColor = getProcessColor(projectData.projectRes.process);
 
     const handleQuickAttendance = async () => {
         const quickAttendanceId = await getQuickAttendance(projectData.projectRes.pid);
@@ -46,7 +49,7 @@ export default () => {
         <Header text="프로젝트" src="/project"/>
         <div className={styles.view}>
            <div className={styles.title}>
-                <Tag text={projectData.projectRes.process} color="#FED5A5"/>
+                <Tag text={projectData.projectRes.process} color={processColor}/>
                 <h2>{projectData.projectRes.pname}</h2>
                 <div className={styles.option}>
                     {isLeader && (

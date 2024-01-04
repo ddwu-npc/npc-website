@@ -17,8 +17,8 @@ export const loader = async () => {
   const data = {};
   data.user = await readUserInfo(userno);
   data.pinedBoard = [
-    { board_id: 1, bName: await getBName(1), postList: await getPostList(1) },
-    { board_id: 2, bName: await getBName(2), postList: await getPostList(2) },
+    { board_id: 1, bName: await getBName(1), postPaging: await getPostList(1, null, 1) },
+    { board_id: 2, bName: await getBName(2), postPaging: await getPostList(2, null, 1) },
   ];
   return data;
 }

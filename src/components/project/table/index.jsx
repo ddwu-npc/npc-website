@@ -7,11 +7,13 @@ import Project from "./project";
 import Nav from "./nav";
 
 export default (props) => {
-  const { projectList } = useLoaderData();
+  const { projectPaging } = useLoaderData();
   const [page, setPage] = useState(1);
 
-  const curProjectList = projectList.slice((page - 1) * 11, (page - 1) * 11 + 11);
+  const curProjectList = projectPaging.projects;
+  const pageInfo = projectPaging.pageInfo;
   const emptyProjects = [];
+
   while (curProjectList.length + emptyProjects.length < 11) {
     emptyProjects.push(
       <div key={`project_table_empty_${emptyProjects.length}`}>
@@ -32,8 +34,8 @@ export default (props) => {
         {emptyProjects}
       </div>
       <Nav
-        cur={page}
-        max={Math.floor(projectList.length / 11) + 1}
+        cur={pageInfo[0]}
+        max={pageInfo[1]}
         setPage={setPage}
       />
     </div>

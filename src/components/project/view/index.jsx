@@ -31,8 +31,10 @@ export default () => {
 
     const handleQuickAttendance = async () => {
         const quickAttendanceId = await getQuickAttendance(projectData.projectRes.pid);
-        if (quickAttendanceId === -1) {
+        if (quickAttendanceId === -100) {
             alert("현재 열린 출석이 없습니다.");
+        } else if (quickAttendanceId == -200) {
+            alert("프로젝트의 멤버가 아닙니다");
         } else {
             navigate(`/attendance/${quickAttendanceId}`);
         }

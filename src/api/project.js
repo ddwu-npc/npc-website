@@ -6,11 +6,12 @@ import axios from "./axios";
 // project team 정보는 어떻게?
 // 1. user의 point 얻고 잃었던 기록 [{날짜, 내용, 변경된 포인트(+4 / -4), 합계}, ...]
 
-export const getProjectList = (search) => {
+export const getProjectList = (search, page) => {
   // search
   // type: 0 전체, 1 팀 2 개인
   // process: 0 전체, 1 개발중, 2 개발완료
-  return axios.get('/project');
+  const url = '/project?page=' + page;
+  return axios.get(url);
 };
 
 export const getProjectInfo = (pid) => {

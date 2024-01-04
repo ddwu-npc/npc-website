@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { useLoaderData } from "react-router";
+import { redirect, useLoaderData } from "react-router";
 import { readUserFile, updateUserInfo } from "api/user"; 
 import { getUserno } from "api/user";
 
 import styles from "./style.module.scss";
+import { Icon } from '@iconify/react';
 
 export default () => {
   const { user } = useLoaderData();
@@ -174,8 +175,13 @@ export default () => {
                 <div>{user.birthday}</div>
               </div>
               <div className={styles.infoData}>
-                <label>NPC Point</label>
-                <div>{user.npcPoint}</div>
+                <label>NPC Point                   
+                  <span className={styles.historyText}>내역 보기
+                  <span className={styles.historyIcon}>
+                    <Icon icon="ic:baseline-arrow-forward-ios" width="14"/>
+                  </span></span></label>
+                <div>{user.npcPoint}
+                </div>
               </div>
               <div className={styles.infoData}>
                 <label>소속</label>

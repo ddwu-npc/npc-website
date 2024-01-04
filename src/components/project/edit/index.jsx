@@ -29,7 +29,7 @@ export const loader = async ({ params }) => {
             process: "",
             startDate: currentDate,
             endDate: currentDate,
-            description: "",
+            content: "",
             member: []
         };
     }
@@ -76,7 +76,7 @@ export default () => {
                 <div>
                     <CodeMirror
                         height= "400px"
-                        value={project.projectRes.description}
+                        value={project.projectRes.content}
                         theme={githubLightInit({
                             settings: {
                                 fontFamily: `"Fira Code", "Fira Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace`,
@@ -85,8 +85,15 @@ export default () => {
                         })}
                         basicSetup={{ highlightActiveLine: false, lineNumbers: false }}
                         extensions={[markdown()]}
-                        onChange={(value, viewUpdate) => setProject({...project.projectRes, description: value})}
-                    />
+                        onChange={(value, viewUpdate) =>
+                            setProject({
+                                ...project,
+                                projectRes: {
+                                    ...project.projectRes,
+                                    content: value
+                                }
+                            })
+                        }                    />
                 </div>
                 <div className={styles.button}>
                     {project.projectRes.pid 

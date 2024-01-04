@@ -4,7 +4,6 @@ import styles from "./style.module.scss";
 
 export default ({icon, boardData}) => {
     const { board_id, bName, postList } = boardData;
-
     return (
         <div className={`${styles.box} ${styles.boardBox}`}>
             <div className={styles.header}>
@@ -13,7 +12,7 @@ export default ({icon, boardData}) => {
             </div>
             <div className={styles.content}>
                 {postList.slice(0, 5).map((post, idx) => (
-                    <li key={`boardBox_${bName}_${idx}`}><Link to={`/board/${board_id}/post/${post.post_id}`}>{post.title}</Link></li>
+                    <li key={`boardBox_${bName}_${idx}`}><Link to={`/board/${board_id}/post/${post.postId}`}>{post.title}</Link></li>
                 ))}
             </div>
         </div>

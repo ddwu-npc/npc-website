@@ -23,6 +23,21 @@ export default {
             Authorization: token, 
           },
         })
+        .then(window.location.reload())
+        .catch((error) => {
+          console.log(error);
+        })
+    );
+  },
+
+  postWithHeaderNoReload: (uri, data, token) => {
+    return new Promise((resolve) =>
+      axios
+        .post(uri, data, {
+          headers: {
+            Authorization: token, 
+          },
+        })
         .then(response => {
           resolve(response.data); // 반환된 응답을 resolve 해줍니다.
         })

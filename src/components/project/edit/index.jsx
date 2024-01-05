@@ -6,7 +6,8 @@ import CodeMirror from "@uiw/react-codemirror";
 import { githubLightInit } from "@uiw/codemirror-theme-github";
 import { markdown } from "@codemirror/lang-markdown";
 
-import { getProjectInfo, createProject, updateProject } from "api/project";
+import { readUserInfo, getUserno } from "api/user";
+import { getProjectInfo, getNewProjectInfo, createProject, updateProject } from "api/project";
 
 import Header from "components/commons/header";
 
@@ -18,6 +19,8 @@ export const loader = async ({ params }) => {
         return data;
     } 
     else {
+        const userno = await getUserno();    
+        const data = await getNewProjectInfo(userno);
         const currentDate = new Date().toISOString().slice(0, 10); // YYYY-MM-DD 형식
         return {
             pname: "",
@@ -26,7 +29,7 @@ export const loader = async ({ params }) => {
             process: "",
             startDate: currentDate,
             endDate: currentDate,
-            description: "",
+            content: "",
             member: []
         };
     }
@@ -48,14 +51,14 @@ export default () => {
                         type="text"
                         name="pname" 
                         defaultValue={project.projectRes.pname}
-                        onChange={(e) => setProject({...project.projectRes, pname: e.target.value})}/>
+                        onChange={(e) => setProject({...project, projectRes: {...project.projectRes, pname: e.target.value}})}/>
                 </p>
                 <p>
                     <label>진행 상황</label>
                     <select 
                         name="process"
                         defaultValue={project.projectRes.process}
-                        onChange={(e) => setProject({...project.projectRes, process: e.target.value})}>
+                        onChange={(e) => setProject({...project, projectRes: {...project.projectRes, process: e.target.value}})}>
                         <option value={1}>팀</option>
                         <option value={2}>개인</option>
                     </select>
@@ -64,16 +67,16 @@ export default () => {
                     <label>프로젝트 기간</label>
                     <input type="date" name="startDate" defaultValue={project.projectRes.startDate}
                         max={project.endDate}
-                        onChange={(e) => setProject({...project.projectRes, startDate: e.target.value})}/>
+                        onChange={(e) => setProject({...project, projectRes: {...project.projectRes, startDate: e.target.value}})}/>
                     {" ~ "}
                     <input type="date" name="endDate" defaultValue={project.projectRes.endDate}
                         min={project.startDate}
-                        onChange={(e) => setProject({...project.projectRes, endDate: e.target.value})}/>
+                        onChange={(e) => setProject({...project, projectRes: {...project.projectRes, endDate: e.target.value}})}/>
                 </p>
                 <div>
                     <CodeMirror
                         height= "400px"
-                        value={project.projectRes.description}
+                        value={project.projectRes.content}
                         theme={githubLightInit({
                             settings: {
                                 fontFamily: `"Fira Code", "Fira Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace`,
@@ -82,14 +85,21 @@ export default () => {
                         })}
                         basicSetup={{ highlightActiveLine: false, lineNumbers: false }}
                         extensions={[markdown()]}
-                        onChange={(value, viewUpdate) => setProject({...project.projectRes, description: value})}
-                    />
+                        onChange={(value, viewUpdate) =>
+                            setProject({
+                                ...project,
+                                projectRes: {
+                                    ...project.projectRes,
+                                    content: value
+                                }
+                            })
+                        }                    />
                 </div>
                 <div className={styles.button}>
-                    {project.pid 
+                    {project.projectRes.pid 
                         ? <input type="button" value="수정"
                             onClick={async () => {
-                                if (await updateProject(project.projectRes)) navigate(`/project/${project.projectRes.pid}`);
+                                if (await updateProject(project)) navigate(`/project/${project.projectRes.pid}`);
                                 else alert("프로젝트 수정에 실패했습니다.\n해당 현상이 반복되면 관리자에게 문의하세요.");
                             }}/>
                         : <input type="button" value="생성"

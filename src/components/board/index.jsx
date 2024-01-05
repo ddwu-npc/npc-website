@@ -21,10 +21,10 @@ export async function loader({ params, request }) {
   };
 
   const boardId = params.boardId;
-  const postList = await getPostList(boardId, search);
+  const postPaging = await getPostList(boardId, search, 1);
   const pos = `게시판 >  ${await getBName(boardId)}`;
 
-  return { boardId, postList, pos };
+  return { boardId, postPaging, pos };
 }
 
 export default () => {

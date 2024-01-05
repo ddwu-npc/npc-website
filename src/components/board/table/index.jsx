@@ -1,23 +1,33 @@
 import { useState, useEffect } from "react";
 import { useLoaderData } from "react-router-dom";
+
 import styles from "./style.module.scss";
+
+import { getPostList } from "api/board";
 
 import Header from "./header";
 import Post from "./post";
 import Nav from "./nav";
 
-export default (props) => {
-  const { postList } = useLoaderData();
+export default () => {
+  const { postPaging, search, boardId } = useLoaderData();
   const [page, setPage] = useState(1);
+  const [curPostList, setCurPostList] = useState(postPaging.postList);
+  const [pageInfo, setPageInfo] = useState(postPaging.pageInfo);
+  
+  useEffect(() => {
+    setPage(1); // boardId가 변경될 때 항상 페이지를 1로 설정합니다.
+  }, [boardId]);
 
-  postList.sort((a, b) => {
-    if (a.important != b.important) {
-      return a.important == 1 ? -1 : 1;
-    }
-    return a.post_id - b.post_id;
-  });
+  useEffect(() => {
+    const fetchData = async () => {
+      const updatedPostPaging = await getPostList(boardId, search, page);
+      setCurPostList(updatedPostPaging.postList);
+      setPageInfo(updatedPostPaging.pageInfo);
+    };
+    fetchData(); 
+  }, [boardId, page]);
 
-  const curPostList = postList.slice((page - 1) * 11, (page - 1) * 11 + 11);
   const emptyPosts = [];
   while (curPostList.length + emptyPosts.length < 11) {
     emptyPosts.push(
@@ -39,8 +49,8 @@ export default (props) => {
         {emptyPosts}
       </div>
       <Nav
-        cur={page}
-        max={Math.floor(postList.length / 11)}
+        cur={pageInfo[0] + 1}
+        max={pageInfo[1]}
         setPage={setPage}
       />
     </div>

@@ -17,9 +17,9 @@ export function getBoardList() {
   );
 }
 
-export function getPostList(board_id, search) {
+export function getPostList(board_id, search, page) {
   if (search == null || search.rangePost == null)
-    return axios.get(`/board/${board_id}`);
+    return axios.get(`/board/${board_id}?page=${page}`);
   else {
     return axios.post(`/board/${board_id}/search`, {
       rangePost: search.rangePost,

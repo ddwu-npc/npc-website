@@ -19,9 +19,9 @@ export async function loader({ params, request }) {
     searchRange: searchParmas.get("searchRange"),
     text: searchParmas.get("text"),
   };
-  const projectList = await getProjectList(search);
-
-  return { projectList };
+  // 현재 1페이지
+  const projectPaging = await getProjectList(search, 1);
+  return { projectPaging };
 }
 
 export default () => {

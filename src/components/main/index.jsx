@@ -2,6 +2,7 @@ import { useLoaderData } from "react-router";
 import { Icon } from "@iconify/react";
 
 import { usePos } from "hooks";
+import { getToken } from "api/jwtToken";
 import { getUserno, readUserInfo } from "api/user";
 import { getPostList, getBName } from "api/board";
 
@@ -14,11 +15,12 @@ import styles from "./style.module.scss";
 
 export const loader = async () => {
   const userno = await getUserno();
+  const token = getToken();
   const data = {};
   data.user = await readUserInfo(userno);
   data.pinedBoard = [
-    { board_id: 1, bName: await getBName(1), postPaging: await getPostList(1, null, 1) },
-    { board_id: 2, bName: await getBName(2), postPaging: await getPostList(2, null, 1) },
+    { board_id: 1, bName: await getBName(1), postPaging: await getPostList(1, null, 1, token) },
+    { board_id: 2, bName: await getBName(2), postPaging: await getPostList(2, null, 1, token) },
   ];
   return data;
 }

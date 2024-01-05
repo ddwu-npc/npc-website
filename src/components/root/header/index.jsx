@@ -7,6 +7,7 @@ import Nav from "./nav";
 
 export default (props) => {
   return (
+    
     <div className={styles.header}>
       <Upper />
       <Link to="/">

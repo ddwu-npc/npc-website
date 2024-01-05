@@ -25,7 +25,7 @@ export default (props) => {
     };
 
     fetchData();
-  }, [page]); // 
+  }, [page]); 
 
   const emptyProjects = [];
   while (curProjectList.length + emptyProjects.length < 11) {

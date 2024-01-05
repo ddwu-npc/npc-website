@@ -4,7 +4,7 @@ import { useLoaderData } from "react-router-dom";
 import styles from "./style.module.scss";
 
 import { getPostList } from "api/board";
-
+import { getToken } from "api/jwtToken";
 import Header from "./header";
 import Post from "./post";
 import Nav from "./nav";
@@ -14,19 +14,20 @@ export default () => {
   const [page, setPage] = useState(1);
   const [curPostList, setCurPostList] = useState(postPaging.postList);
   const [pageInfo, setPageInfo] = useState(postPaging.pageInfo);
-  
+  const token = getToken();
+
   useEffect(() => {
     setPage(1); // boardId가 변경될 때 항상 페이지를 1로 설정합니다.
   }, [boardId]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const updatedPostPaging = await getPostList(boardId, search, page);
+      const updatedPostPaging = await getPostList(boardId, search, page, token);
       setCurPostList(updatedPostPaging.postList);
       setPageInfo(updatedPostPaging.pageInfo);
     };
     fetchData(); 
-  }, [boardId, page]);
+  }, [search, boardId, page]);
 
   const emptyPosts = [];
   while (curPostList.length + emptyPosts.length < 11) {

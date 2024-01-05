@@ -23,7 +23,9 @@ export default {
             Authorization: token, 
           },
         })
-        .then(window.location.reload())
+        .then(response => {
+          resolve(response.data); // 반환된 응답을 resolve 해줍니다.
+        })
         .catch((error) => {
           console.log(error);
         })

@@ -21,7 +21,7 @@ export function getPostList(board_id, search, page, token) {
   if (search == null || search.rangePost == null)
     return axios.getWithHeader(`/board/${board_id}?page=${page}`, token);
   else {
-    return axios.postWithHeader(`/board/${board_id}/search`, {
+    return axios.postWithHeader(`/board/${board_id}/search?page=${page}`, {
       rangePost: search.rangePost,
       searchRange: search.searchRange,
       text: search.text,

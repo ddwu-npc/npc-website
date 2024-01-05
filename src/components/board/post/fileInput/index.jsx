@@ -34,7 +34,6 @@ export default (props) => {
       dataTransfer.items.add(file);
     });
 
-    // input 요소에 새로운 FileList를 할당
     fileRef.current.files = dataTransfer.files;
   };
 

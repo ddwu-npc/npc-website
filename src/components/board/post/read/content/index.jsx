@@ -85,19 +85,3 @@ export default () => {
     </div>
   );
 };
-/*
-
-        {post.attachment.map((e, idx) => (
-          <span key={`post_attachment_${idx}`}>
-            {e.name} <Icon icon="bx:download" />
-          </span>
-        ))}
-        */
-
-/*
-{attachment && (
-          <span key={`post_attachment_0`}>
-            <div onClick={handleDownloadClick}>{attachment.orgName}</div> <Icon icon="bx:download" onClick={handleDownloadClick}/>
-          </span>
-        )}
-*/

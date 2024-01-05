@@ -5,7 +5,6 @@ import Title from "./title";
 import Content from "./content";
 
 import styles from "./style.module.scss";
-//import { upload } from "@testing-library/user-event/dist/upload";
 
 export default () => {
   return (

@@ -23,15 +23,22 @@ export const getQuickAttendance = (pid) => {
 };
 
 export const getNewProjectInfo = (userno) => {
-  return axios.get(`/project/creat/{userno}`);
+  return axios.get(`/project/create/${userno}`);
 };
 
 export const createProject = (project) => {
-  return new Promise((resolve) =>
-    setTimeout(() => {
-      resolve(true); // project에서 현재 생성되어 있는 출석의 id를 가져옴
-    }, 100)
-  );
+  return axios.put(`/project/create/${project.projectRes.pid}`, project.projectRes, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => {
+      return true; 
+    })
+    .catch((error) => {
+      console.error('There was a problem with the Axios request:', error);
+      throw error;
+    });
 };
 
 export const updateProject = (project) => {

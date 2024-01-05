@@ -6,32 +6,35 @@ import CodeMirror from "@uiw/react-codemirror";
 import { githubLightInit } from "@uiw/codemirror-theme-github";
 import { markdown } from "@codemirror/lang-markdown";
 
-import { readUserInfo, getUserno } from "api/user";
+import { getUserno } from "api/user";
 import { getProjectInfo, getNewProjectInfo, createProject, updateProject } from "api/project";
 
 import Header from "components/commons/header";
 
 import styles from "./style.module.scss";
 
+let isNew = null;
+
 export const loader = async ({ params }) => {
     if (params.pid) {
         const data = await getProjectInfo(params.pid);
+        isNew = false;
         return data;
     } 
     else {
         const userno = await getUserno();    
         const data = await getNewProjectInfo(userno);
         const currentDate = new Date().toISOString().slice(0, 10); // YYYY-MM-DD 형식
-        return {
-            pname: "",
-            type: 0,
-            tname: "",
-            process: "",
-            startDate: currentDate,
-            endDate: currentDate,
-            content: "",
-            member: []
-        };
+        
+        data.projectRes.pname = "";
+        data.projectRes.type = "";
+        data.projectRes.tname = "";
+        data.projectRes.process = "";
+        data.projectRes.content = "";
+
+        isNew = true;
+
+        return data;
     }
 }
 
@@ -96,7 +99,7 @@ export default () => {
                         }                    />
                 </div>
                 <div className={styles.button}>
-                    {project.projectRes.pid 
+                    {!isNew
                         ? <input type="button" value="수정"
                             onClick={async () => {
                                 if (await updateProject(project)) navigate(`/project/${project.projectRes.pid}`);
@@ -104,7 +107,7 @@ export default () => {
                             }}/>
                         : <input type="button" value="생성"
                             onClick={async () => {
-                                if (await createProject(project.projectRes)) navigate(`/project`);
+                                if (await createProject(project)) navigate(`/project`);
                                 else alert("프로젝트 생성에 실패했습니다.\n해당 현상이 반복되면 관리자에게 문의하세요.");
                             }}/> }
                 </div>

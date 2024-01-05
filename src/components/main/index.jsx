@@ -48,11 +48,11 @@ export default () => {
         <NoticeBox
           icon={<Icon icon="bi:bookmark-fill" color="#BF4A4A"/>}
           title="일정"
-          posts={["안녕하세요1234abcde"]}/>
+          posts={["추후 개발 예정입니다"]}/>
         <NoticeBox
           icon={<Icon icon="bi:bookmark-fill" color="#BF4A4A"/>}
           title="할 일"
-          posts={["안녕하세요1234abcde"]}/>
+          posts={["추후 개발 예정입니다"]}/>
       </div>
     </div>
   );

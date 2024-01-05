@@ -12,6 +12,7 @@ import Nav from "./nav";
 export default () => {
   const { postPaging, search, boardId } = useLoaderData();
   const [page, setPage] = useState(1);
+  console.log(postPaging);
   const [curPostList, setCurPostList] = useState(postPaging.postList);
   const [pageInfo, setPageInfo] = useState(postPaging.pageInfo);
   const token = getToken();
@@ -20,14 +21,16 @@ export default () => {
     setPage(1); // boardId가 변경될 때 항상 페이지를 1로 설정합니다.
   }, [boardId]);
 
+  // 페이지가 바뀌면 불러옴
   useEffect(() => {
     const fetchData = async () => {
+      console.log("curr page" + page);
       const updatedPostPaging = await getPostList(boardId, search, page, token);
       setCurPostList(updatedPostPaging.postList);
       setPageInfo(updatedPostPaging.pageInfo);
     };
     fetchData(); 
-  }, [search, boardId, page]);
+  }, [boardId, page]);
 
   const emptyPosts = [];
   while (curPostList.length + emptyPosts.length < 11) {

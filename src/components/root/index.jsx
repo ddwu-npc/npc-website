@@ -14,7 +14,7 @@ export async function loader() {
   const user = await readUserInfo(userno);
   sessionStorage.setItem("nickname", user.nickname);
   const boardList = await getBoardList();
-  return { user, boardList };
+  return { token, user, boardList };
 }
 
 export default function Root() {

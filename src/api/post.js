@@ -23,12 +23,11 @@ export const createPost = (boardId, fData, token) => {
 
   const attachmentFiles = fData.getAll("attachment");
   
-  // 각 파일에 대한 자세한 정보 출력
   attachmentFiles.forEach((file, index) => {
     console.log(`첨부파일 ${index + 1} - 이름: ${file.name}, 크기: ${file.size} bytes, 타입: ${file.type}`);
 
     if(file.size>0)
-    formData.append(`attachment_${index}`, file);
+      formData.append(`attachment_${index}`, file);
   });
   
   return ex_axios({
@@ -42,8 +41,23 @@ export const createPost = (boardId, fData, token) => {
   });
 };
 
-export const updatePost = (post_id, postData) => {
-  return axios.put(`/post/${post_id}`, postData);
+export const updatePost = (post_id, fData) => {
+  const postData = Object.fromEntries(fData);
+  const formData = new FormData();
+
+  formData.append('title', postData.title);
+  formData.append('content', postData.content);
+  formData.append('rangePost', postData.rangePost);
+  formData.append('important', postData.important);
+
+  const attachmentFiles = formData.getAll("attachment");
+  
+  attachmentFiles.forEach((file, index) => {
+    console.log(`첨부파일 ${index + 1} - 이름: ${file.name}, 크기: ${file.size} bytes, 타입: ${file.type}`);
+    if(file.size>0)
+      formData.append(`attachment_${index}`, file);
+  });
+  return axios.put(`/post/${post_id}`, formData);
 };
 
 export const deletePost = async(post_id) => {

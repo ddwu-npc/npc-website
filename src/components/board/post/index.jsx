@@ -42,14 +42,14 @@ const dataLoader = async ({ request, params }) => {
 
 const uploadAction = async ({ request, params }) => {
   const formData = await request.formData();
-  const post = Object.fromEntries(formData);
+  //const post = Object.fromEntries(formData);
   const token = getToken();
 
   const boardId = params.boardId;
   if (params.postId) {
     const postId = params.postId;
 
-    await updatePost(postId, post);
+    await updatePost(postId, formData);
 
     return redirect(`/board/${boardId}/post/${postId}`);
   }

@@ -1,6 +1,7 @@
 import { createRef, useState, useEffect } from "react";
 import { useLoaderData } from "react-router-dom";
 import { Icon } from "@iconify/react";
+import { readFile} from "api/post";
 
 import FileInput from "../fileInput";
 import styles from "./style.module.scss";
@@ -8,6 +9,19 @@ import styles from "./style.module.scss";
 export default () => {
   const { post } = useLoaderData();
   const [important, setImportant] = useState(post ? post.important : false);
+  const [files, setFiles] = useState([]);
+
+  useEffect(() => {
+    const fetchAttachment = async () => {
+      try {
+        const result = await readFile(post.postId);
+        setFiles(result);
+      } catch (error) {
+        console.error("첨부 파일을 가져오는 중 오류 발생:", error);
+      }
+    };
+    fetchAttachment();
+  }, [post.postId]);
 
   return (
     <div className={styles.title}>
@@ -43,7 +57,7 @@ export default () => {
           ))}
         </select>
       </div>
-      <FileInput files={[]} post/>
+      <FileInput files={files} post/>
     </div>
   );
 };

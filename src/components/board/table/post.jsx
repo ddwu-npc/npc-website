@@ -30,7 +30,7 @@ export default ({ link, post, empty }) => {
         {post.nickname}
       </div>
       <div>
-        {post.havePostfile==1? "O":""}
+        {post.havePostfile==1? <Icon icon="ic:baseline-attach-file" />:""}
       </div>
       <div>{post.createDate}</div>
     </Link>

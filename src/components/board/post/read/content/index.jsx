@@ -18,10 +18,6 @@ import styles from "./style.module.scss";
 
 export default () => {
   const { post, user} = useLoaderData();
-  var rangeP = post.rangePost;
-  if(post.rangePost=="public"){
-    rangeP = "전체";
-  }
   
   const [attachment, setAttachment] = useState([]);
 
@@ -50,7 +46,7 @@ export default () => {
           <div>{user ? user.nickname : "로딩 중"}</div>
           <span>{post.create_date}</span>
         </div>
-        <span>대상: {rangeP}</span>
+        <span>대상: {post.rangePost}</span>
         <span>읽은 수: {post.readCount}</span>
       </div>
       <ReactMarkdown

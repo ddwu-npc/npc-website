@@ -24,8 +24,8 @@ export default () => {
   useEffect(() => {
     const fetchAttachment = async () => {
       try {
-        const result = await readFile(post.postId);
-        setAttachment(result);
+        const res = await readFile(post.postId);
+        setAttachment(res);
       } catch (error) {
         console.error("첨부 파일을 가져오는 중 오류 발생:", error);
       }

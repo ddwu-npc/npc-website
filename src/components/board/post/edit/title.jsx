@@ -9,19 +9,22 @@ import styles from "./style.module.scss";
 export default () => {
   const { post } = useLoaderData();
   const [important, setImportant] = useState(post ? post.important : false);
+  
   const [files, setFiles] = useState([]);
 
-  useEffect(() => {
-    const fetchAttachment = async () => {
-      try {
-        const result = await readFile(post.postId);
-        setFiles(result);
-      } catch (error) {
-        console.error("첨부 파일을 가져오는 중 오류 발생:", error);
-      }
-    };
-    fetchAttachment();
-  }, [post.postId]);
+  if(post){
+    useEffect(() => {
+      const fetchAttachment = async () => {
+        try {
+          const response = await readFile(post.postId);
+          setFiles(response);
+        } catch (error) {
+          console.error("첨부 파일을 가져오는 중 오류 발생:", error);
+        }
+      };
+      fetchAttachment();
+    }, [post.postId]);
+  }
 
   return (
     <div className={styles.title}>
@@ -57,7 +60,7 @@ export default () => {
           ))}
         </select>
       </div>
-      <FileInput files={files} post/>
+      {post && post.havePostfile?files.length > 0 && <FileInput files={files} postId={post.postId} post />:<FileInput files={files} post />}
     </div>
   );
 };

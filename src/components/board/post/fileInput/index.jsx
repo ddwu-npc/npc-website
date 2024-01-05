@@ -7,7 +7,7 @@ import commentStyles from "./comment.module.scss";
 export default (props) => {
   const [files, setFiles] = useState(props.files ?? []);
   const fileRef = createRef();
-  const fileViewRef = createRef();
+  const fileViewRef = createRef();  
 
   const handleFileChange = (e) => {
     const newFiles = [...files, ...Array.from(e.target.files)];
@@ -54,7 +54,7 @@ export default (props) => {
       </label>
       <div ref={fileViewRef}>
         {files.map((file, idx) => (
-          <div key={`file_${idx}`} onClick={() => handleFileDelete(file)}>{file.name}</div>
+          <div key={`file_${idx}`} onClick={() => handleFileDelete(file)}>{file.name || file.orgName}</div>
         ))}
       </div>
       <input

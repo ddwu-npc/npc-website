@@ -31,14 +31,15 @@ export default () => {
     const [option, setOption] = useState(false);
 
     const isLeader = projectData.projectRes.leader == projectData.user.nickname
+    const isUserInList = Object.keys(projectData.userList).some(
+        (name) => name === projectData.user.nickname
+    );
     const processColor = getProcessColor(projectData.projectRes.process);
 
     const handleQuickAttendance = async () => {
         const quickAttendanceId = await getQuickAttendance(projectData.projectRes.pid);
         if (quickAttendanceId === -100) {
             alert("현재 열린 출석이 없습니다.");
-        } else if (quickAttendanceId == -200) {
-            alert("프로젝트의 멤버가 아닙니다");
         } else {
             navigate(`/attendance/${quickAttendanceId}`);
         }
@@ -122,8 +123,13 @@ export default () => {
                 <img/>
             </div>
             <div className={styles.button}>
-            <input  type="button"  value="빠른 출석 바로가기"
-                    onClick={handleQuickAttendance}/>
+                {isUserInList && (
+                    <input
+                        type="button"
+                        value="빠른 출석 바로가기"
+                        onClick={handleQuickAttendance}
+                    />
+                )}
             </div>
         </div>
     </div>

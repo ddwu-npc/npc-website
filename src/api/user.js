@@ -48,6 +48,15 @@ export const updateUserInfo = (updatedInfo) => {
   });
 };
 
+// 프로젝트 팀원 추가를 위한 팀원명 찾기
+export const addProjectUser = (nickname) => {
+  return axios.get(`/users/find/${nickname}`, {
+    headers: {
+      'Content-Type': 'multipart/form-data' 
+    }
+  });
+};
+
 export const login = (loginId, raw_password) => {
   let password = sha256(raw_password).toString();
 
@@ -65,6 +74,7 @@ export const login = (loginId, raw_password) => {
 
 export const logout = () => {
   localStorage.removeItem('jwtToken');
+  sessionStorage.removeItem('nickname');
   return axios.post("/logout", {}, true);
 };
 

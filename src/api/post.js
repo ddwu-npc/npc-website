@@ -11,7 +11,6 @@ export const readPost = (post_id) => {
 
 export const createPost = (boardId, fData, token) => {
   const uri = '/post/' + boardId;
-  //console.log("fData", fData);
 
   const postData = Object.fromEntries(fData);
   const formData = new FormData();
@@ -50,12 +49,20 @@ export const updatePost = (post_id, fData) => {
   formData.append('rangePost', postData.rangePost);
   formData.append('important', postData.important);
 
-  const attachmentFiles = formData.getAll("attachment");
+  const attachmentFiles = fData.getAll("attachment");
+
+  console.log("attachmentFiles", attachmentFiles);
   
   attachmentFiles.forEach((file, index) => {
     console.log(`첨부파일 ${index + 1} - 이름: ${file.name}, 크기: ${file.size} bytes, 타입: ${file.type}`);
     if(file.size>0)
       formData.append(`attachment_${index}`, file);
+  });
+
+  return ex_axios({
+    method: 'put',
+    url: `/post/${post_id}`,
+    data: formData,
   });
   return axios.put(`/post/${post_id}`, formData);
 };
@@ -98,7 +105,6 @@ export const readFile = async (post_id) => {
 };
 
 export const downloadFile =(file)=>{
-  console.log("fileName", file.sName);
   const backendEndpoint = '/files/download/';
   const fileName = file.sName;
   const downloadUrl = `${backendEndpoint}/${fileName}`;

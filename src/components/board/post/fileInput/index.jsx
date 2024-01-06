@@ -7,8 +7,8 @@ import commentStyles from "./comment.module.scss";
 export default (props) => {
   const [files, setFiles] = useState(props.files ?? []);
   const fileRef = createRef();
-  const fileViewRef = createRef();
-
+  const fileViewRef = createRef(); 
+  
   const handleFileChange = (e) => {
     const newFiles = [...files, ...Array.from(e.target.files)];
     console.log("file list change", newFiles);
@@ -16,8 +16,15 @@ export default (props) => {
     if (newFiles.length > 3) {
       alert('최대 3개까지 업로드 가능합니다.');
     }else{
-      setFiles(newFiles);
-      updateInputFiles(newFiles);
+      const uniqueFiles = newFiles.filter((file, index, self) =>
+        index === self.findIndex((f) => f.name === file.name)
+      );
+      if (uniqueFiles.length < newFiles.length) {
+        alert('중복된 파일은 추가되지 않습니다.');
+      }
+
+      setFiles(uniqueFiles);
+      updateInputFiles(uniqueFiles);
     }
     
   };
@@ -36,14 +43,21 @@ export default (props) => {
 
     fileRef.current.files = dataTransfer.files;
   };
-
+  
   const updateInputFiles = (newFiles) => {
     const dataTransfer = new DataTransfer();
     newFiles.forEach(file => {
-      dataTransfer.items.add(file);
+      if (file instanceof File)
+        dataTransfer.items.add(file);
     });
     fileRef.current.files = dataTransfer.files;
   };
+
+  useEffect(() => {
+    if (props.files && props.files.length > 0)
+      updateInputFiles(props.files);
+  }, [props.files]);
+
   return (
     <div
       className={props.post ? postStyles.fileInput : commentStyles.fileInput}
@@ -54,7 +68,7 @@ export default (props) => {
       </label>
       <div ref={fileViewRef}>
         {files.map((file, idx) => (
-          <div key={`file_${idx}`} onClick={() => handleFileDelete(file)}>{file.name}</div>
+          <div key={`file_${idx}`} onClick={() => handleFileDelete(file)}>{file.name || file.orgName}</div>
         ))}
       </div>
       <input

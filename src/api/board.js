@@ -44,7 +44,7 @@ export const getBName = (board_id) => {
     return new Promise((resolve) =>
       setTimeout(() => resolve(`자유 게시판`), 100)
     );
-  } else if (board_id == 4) {
+  } else {
     return new Promise((resolve) =>
       setTimeout(() => resolve(`구인 게시판`), 100)
     );

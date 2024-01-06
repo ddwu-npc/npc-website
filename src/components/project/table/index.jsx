@@ -7,25 +7,25 @@ import Nav from "./nav";
 import { getProjectList } from "api/project"; 
 
 export default (props) => {
-  const { projectPaging } = useLoaderData();
+  const { projectPaging, search } = useLoaderData();
   const [page, setPage] = useState(1);
   const [curProjectList, setCurProjectList] = useState(projectPaging.projects);
   const [pageInfo, setPageInfo] = useState(projectPaging.pageInfo);
 
   useEffect(() => {
+    setPage(1);
+  }, [search]);
+
+  useEffect(() => {
     const fetchData = async () => {
-      const updatedProjectPaging = await getProjectList({
-        range: "", 
-        searchRange: "", 
-        text: "", 
-      }, page);
+      const updatedProjectPaging = await getProjectList(search, page);
 
       setCurProjectList(updatedProjectPaging.projects);
       setPageInfo(updatedProjectPaging.pageInfo);
     };
 
     fetchData();
-  }, [page]); 
+  }, [search, page]); 
 
   const emptyProjects = [];
   while (curProjectList.length + emptyProjects.length < 11) {
@@ -47,7 +47,7 @@ export default (props) => {
         ))}
         {emptyProjects}
       </div>
-      <Nav cur={pageInfo[0]} max={pageInfo[1]} setPage={setPage} />
+      <Nav cur={pageInfo[0] + 1} max={pageInfo[1]} setPage={setPage} />
     </div>
   );
 };

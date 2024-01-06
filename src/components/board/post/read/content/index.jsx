@@ -2,16 +2,13 @@ import { useLoaderData, Link } from "react-router-dom";
 import { useState, useEffect} from 'react';
 import { Icon } from "@iconify/react";
 
-import axios from "api/axios";
-
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { readFile, downloadFile } from "api/post";
-import { getToken } from "api/jwtToken";
-import { saveAs } from 'file-saver';
+import { readUserFile } from "api/user"; 
 
 import Option from "./option";
 import styles from "./style.module.scss";
@@ -20,6 +17,7 @@ export default () => {
   const { post, user} = useLoaderData();
   
   const [attachment, setAttachment] = useState([]);
+  const [profile, setProfile] = useState([]);
 
   useEffect(() => {
     const fetchAttachment = async () => {
@@ -31,6 +29,19 @@ export default () => {
       }
     };
     fetchAttachment();
+
+    if(user.profile==1){
+      const fetchProfile = async () => {
+        try {
+          const userno = user.userNo;
+          const response = await readUserFile(userno); 
+          setProfile(response);
+        } catch (error) {
+          console.error("Error fetching user file:", error);
+        }
+      };
+      fetchProfile();
+    }
   }, [post.postId]);
 
   const handleDownloadClick = (file) => {
@@ -42,7 +53,11 @@ export default () => {
       <div className={styles.title}>{post.title}</div>
       <div className={styles.info}>
         <div className={styles.profile}>
-          <img src={user ? user.profile : "로딩 중"} />
+          {profile && user.profile==1 ? (
+            <img src={`/userfile/look/${profile.sName}`} />
+            ) : (
+              <img src={`/userfile/look/default.png`} />
+          )}
           <div>{user ? user.nickname : "로딩 중"}</div>
           <span>{post.create_date}</span>
         </div>

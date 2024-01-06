@@ -65,6 +65,7 @@ export const login = (loginId, raw_password) => {
 
 export const logout = () => {
   localStorage.removeItem('jwtToken');
+  sessionStorage.removeItem('nickname');
   return axios.post("/logout", {}, true);
 };
 

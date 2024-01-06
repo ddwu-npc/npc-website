@@ -6,7 +6,7 @@ import CodeMirror from "@uiw/react-codemirror";
 import { githubLightInit } from "@uiw/codemirror-theme-github";
 import { markdown } from "@codemirror/lang-markdown";
 
-import { getUserno } from "api/user";
+import { getUserno, addProjectUser } from "api/user";
 import { getProjectInfo, getNewProjectInfo, createProject, updateProject } from "api/project";
 
 import Header from "components/commons/header";
@@ -43,6 +43,19 @@ export default () => {
     
     const navigate = useNavigate();
     const [project, setProject] = useState(useLoaderData());
+    const [newUserName, setNewUserName] = useState("");
+
+    const handleAddButtonClick = async () => {
+        const response = await addProjectUser(newUserName);
+        console.log("확확", response);
+        
+        if (response.userNo  !== -1) {
+            alert("Name added successfully!");
+          } else {
+            alert("존재하지 않는 닉네임입니다.");
+        }
+       
+    };
 
     return (
         <div className={styles.root}>
@@ -76,6 +89,38 @@ export default () => {
                         min={project.startDate}
                         onChange={(e) => setProject({...project, projectRes: {...project.projectRes, endDate: e.target.value}})}/>
                 </p>
+                
+                <div>
+                <p>
+                    <label>팀원</label><br></br>
+                    <input
+                        type="text"
+                        placeholder="이름"
+                        value={newUserName}
+                        onChange={(e) => setNewUserName(e.target.value)}
+                    />
+                    <button type="button" onClick={handleAddButtonClick}>추가</button><br></br>
+                    <span>
+                        {Object.entries(project.userList).map(([name, department], index) => (
+                            <span
+                                key={index}
+                                className={
+                                    department === "개발팀"
+                                        ? "dev-team"
+                                        : department === "디자인팀"
+                                        ? "design-team"
+                                        : department === "기획팀"
+                                        ? "planning-team"
+                                        : ""
+                                }
+                            >
+                                {name} - {department}
+                                <button>삭제</button><br></br>
+                            </span>
+                        ))}
+                    </span>
+                </p>
+                </div>
                 <div>
                     <CodeMirror
                         height= "400px"

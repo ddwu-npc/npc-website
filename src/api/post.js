@@ -23,8 +23,6 @@ export const createPost = (boardId, fData, token) => {
   const attachmentFiles = fData.getAll("attachment");
   
   attachmentFiles.forEach((file, index) => {
-    console.log(`첨부파일 ${index + 1} - 이름: ${file.name}, 크기: ${file.size} bytes, 타입: ${file.type}`);
-
     if(file.size>0)
       formData.append(`attachment_${index}`, file);
   });
@@ -50,11 +48,8 @@ export const updatePost = (post_id, fData) => {
   formData.append('important', postData.important);
 
   const attachmentFiles = fData.getAll("attachment");
-
-  console.log("attachmentFiles", attachmentFiles);
   
   attachmentFiles.forEach((file, index) => {
-    console.log(`첨부파일 ${index + 1} - 이름: ${file.name}, 크기: ${file.size} bytes, 타입: ${file.type}`);
     if(file.size>0)
       formData.append(`attachment_${index}`, file);
   });
@@ -64,12 +59,10 @@ export const updatePost = (post_id, fData) => {
     url: `/post/${post_id}`,
     data: formData,
   });
-  return axios.put(`/post/${post_id}`, formData);
 };
 
 export const deletePost = async(post_id) => {
   const bId = await getBoardIdByPostId(post_id);
-  console.log("bId", bId);
   return axios.delete(`/post/${post_id}`, "post", bId);
 };
 

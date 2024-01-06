@@ -19,7 +19,6 @@ export default () => {
             console.error("Error fetching user file:", error);
           }
         };
-      
         fetchAttachment();
       }, []);
 

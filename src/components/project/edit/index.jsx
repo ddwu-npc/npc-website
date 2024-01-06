@@ -26,6 +26,7 @@ export const loader = async ({ params }) => {
         const data = await getNewProjectInfo(userno);
         const currentDate = new Date().toISOString().slice(0, 10); // YYYY-MM-DD 형식
         
+        console.log("확확", data.projectRes.pid);
         data.projectRes.pname = "";
         data.projectRes.type = "";
         data.projectRes.tname = "";
@@ -44,17 +45,28 @@ export default () => {
     const navigate = useNavigate();
     const [project, setProject] = useState(useLoaderData());
     const [newUserName, setNewUserName] = useState("");
+    const [users, setUsers] = useState(project.userList); 
+
 
     const handleAddButtonClick = async () => {
         const response = await addProjectUser(newUserName);
         console.log("확확", response);
-        
         if (response.userNo  !== -1) {
-            alert("Name added successfully!");
+            const newUser = { [newUserName]: response.dept }; 
+            setProject({
+                ...project,
+                userList: { ...project.userList, ...newUser }
+            });
           } else {
             alert("존재하지 않는 닉네임입니다.");
         }
        
+    };
+
+    const handleDeleteButtonClick = async (nickname) => {
+        const updatedUserList = { ...project.userList };
+        delete updatedUserList[nickname];
+        setProject({ ...project, userList: updatedUserList });
     };
 
     return (
@@ -70,13 +82,40 @@ export default () => {
                         onChange={(e) => setProject({...project, projectRes: {...project.projectRes, pname: e.target.value}})}/>
                 </p>
                 <p>
+                    <label>팀 명</label>
+                    <input 
+                        type="text"
+                        name="tname" 
+                        defaultValue={project.projectRes.tname}
+                        onChange={(e) => setProject({...project, projectRes: {...project.projectRes, tname: e.target.value}})}/>
+                </p>
+                <p>
                     <label>진행 상황</label>
                     <select 
                         name="process"
                         defaultValue={project.projectRes.process}
                         onChange={(e) => setProject({...project, projectRes: {...project.projectRes, process: e.target.value}})}>
-                        <option value={1}>팀</option>
-                        <option value={2}>개인</option>
+                        <option value={1}>0%</option>
+                        <option value={2}>10%</option>
+                        <option value={3}>20%</option>
+                        <option value={4}>30%</option>
+                        <option value={5}>40%</option>
+                        <option value={6}>50%</option>
+                        <option value={7}>60%</option>
+                        <option value={8}>70%</option>
+                        <option value={9}>80%</option>
+                        <option value={10}>90%</option>
+                        <option value={11}>100%</option>
+                    </select>
+                </p>
+                <p>
+                    <label>개인 / 팀</label>
+                    <select 
+                        name="type"
+                        defaultValue={project.projectRes.type}
+                        onChange={(e) => setProject({...project, projectRes: {...project.projectRes, type: e.target.value}})}>
+                        <option value={"1"}>팀</option>
+                        <option value={"2"}>개인</option>
                     </select>
                 </p>
                 <p>
@@ -100,6 +139,7 @@ export default () => {
                         onChange={(e) => setNewUserName(e.target.value)}
                     />
                     <button type="button" onClick={handleAddButtonClick}>추가</button><br></br>
+                    <input type="hidden" name="userList" onChange={(e) => setProject({ ...project, UserList: { ...project.UserList, endDate: e.target.value }})}/>
                     <span>
                         {Object.entries(project.userList).map(([name, department], index) => (
                             <span
@@ -115,7 +155,7 @@ export default () => {
                                 }
                             >
                                 {name} - {department}
-                                <button>삭제</button><br></br>
+                                <button type="button" onClick={() => handleDeleteButtonClick(name)}>삭제</button><br></br>
                             </span>
                         ))}
                     </span>

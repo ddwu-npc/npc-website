@@ -105,7 +105,6 @@ export const readFile = async (post_id) => {
 };
 
 export const downloadFile =(file)=>{
-  console.log("fileName", file.sName);
   const backendEndpoint = '/files/download/';
   const fileName = file.sName;
   const downloadUrl = `${backendEndpoint}/${fileName}`;

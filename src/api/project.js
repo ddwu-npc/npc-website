@@ -27,7 +27,7 @@ export const getNewProjectInfo = (userno) => {
 };
 
 export const createProject = (project) => {
-  return axios.put(`/project/create/${project.projectRes.pid}`, project.projectRes, {
+  return axios.put(`/project/create/${project.projectRes.pid}`, project, {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -42,7 +42,7 @@ export const createProject = (project) => {
 };
 
 export const updateProject = (project) => {
-  return axios.put(`/project/${project.projectRes.pid}`, project.projectRes, {
+  return axios.put(`/project/${project.projectRes.pid}`, project, {
     headers: {
       'Content-Type': 'application/json',
     },

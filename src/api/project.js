@@ -40,6 +40,15 @@ export const removeProjectUser = (nickname, pid) => {
   });
 };
 
+// 프로젝트 리더(팀장) 변경
+export const updateProjectLeader = (nickname, pid) => {
+  return axios.post(`/project/update/${pid}/${nickname}`, {
+    headers: {
+      'Content-Type': 'multipart/form-data' 
+    }
+  });
+};
+
 export const createProject = (project) => {
   return axios.put(`/project/create`, project, {
     headers: {

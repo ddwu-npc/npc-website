@@ -7,7 +7,7 @@ import { githubLightInit } from "@uiw/codemirror-theme-github";
 import { markdown } from "@codemirror/lang-markdown";
 
 import { getUserno, addProjectUser, readUserInfo} from "api/user";
-import { getProjectInfo, createProject, updateProject, insertProjectUser, removeProjectUser } from "api/project";
+import { getProjectInfo, createProject, updateProject, insertProjectUser, removeProjectUser, updateProjectLeader } from "api/project";
 
 import Header from "components/commons/header";
 
@@ -30,9 +30,9 @@ export const loader = async ({ params }) => {
             projectRes: {
                 pid: -1,
                 pname: "",
-                type: "",
+                type: "1",
                 tname: "",
-                process: "",
+                process: "개발 중",
                 content: "",
                 startDate: currentDate,
                 endDate: currentDate,
@@ -85,6 +85,14 @@ export default () => {
         setProject({ ...project, userList: updatedUserList });
     };
 
+    const handleChangeButtonClick = async (nickname) => {
+        
+        if (!isNew){
+            await updateProjectLeader(nickname, project.projectRes.pid);
+        }
+        setProject({...project, projectRes: {...project.projectRes, leader: nickname}});
+    };
+
     return (
         <div className={styles.root}>
             <Header text="프로젝트" src="/project" />
@@ -111,17 +119,8 @@ export default () => {
                         name="process"
                         defaultValue={project.projectRes.process}
                         onChange={(e) => setProject({...project, projectRes: {...project.projectRes, process: e.target.value}})}>
-                        <option value={1}>0%</option>
-                        <option value={2}>10%</option>
-                        <option value={3}>20%</option>
-                        <option value={4}>30%</option>
-                        <option value={5}>40%</option>
-                        <option value={6}>50%</option>
-                        <option value={7}>60%</option>
-                        <option value={8}>70%</option>
-                        <option value={9}>80%</option>
-                        <option value={10}>90%</option>
-                        <option value={11}>100%</option>
+                        <option value={"개발 중"}>개발 중</option>
+                        <option value={"개발 완료"}>개발 완료</option>
                     </select>
                 </p>
                 <p>
@@ -154,7 +153,7 @@ export default () => {
                         value={newUserName}
                         onChange={(e) => setNewUserName(e.target.value)}
                     />
-                    <button type="button" onClick={handleAddButtonClick}>추가</button><br></br>
+                    <button type="button" onClick={handleAddButtonClick}>추가</button><br></br><br></br>
                     <input type="hidden" name="userList" onChange={(e) => setProject({ ...project, UserList: { ...project.UserList, endDate: e.target.value }})}/>
                     <span>
                         {Object.entries(project.userList).map(([name, department], index) => (
@@ -170,11 +169,18 @@ export default () => {
                                         : ""
                                 }
                             >
-                                {name} - {department}
-                                <button type="button" onClick={() => handleDeleteButtonClick(name)}>삭제</button><br></br>
+                                {project.projectRes.leader === name ? `[팀장] ${name} - ${department}` : `${name} - ${department}`} &nbsp;
+                                {project.projectRes.leader !== name && (
+                                    <span>
+                                        <button type="button" onClick={() => handleChangeButtonClick(name)}>팀장 위임</button> &nbsp; &nbsp;
+                                        <button type="button" onClick={() => handleDeleteButtonClick(name)}>삭제</button>
+                                    </span>
+                                )}
+                                <br></br>
                             </span>
                         ))}
                     </span>
+                    <br></br>
                 </p>
                 </div>
                 <div>

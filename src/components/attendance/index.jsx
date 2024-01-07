@@ -25,8 +25,7 @@ export default () => {
     const isLeader = attendanceRes.leader;
     const token = `Bearer ${getToken()}`
 
-    console.log(attendanceRes);
-    const [err, setErr] = useState(false);
+    const [err, setErr] = useState(null);
     const [authCode, setAuthCode] = useState("");
     const [timeRemaining, setTimeRemaining] = useState(0);
 
@@ -74,11 +73,7 @@ export default () => {
                     </div>
                 ) : (
                     <div className={styles.authCode}>
-                        {err && (
-                            <div className={styles.error}>
-                                출석 번호가 일치하지 않습니다
-                            </div>
-                        )}
+                        <div className={styles.error}>{err}</div>
                         <input
                             type="text"
                             placeholder="출석 번호 입력"
@@ -89,14 +84,17 @@ export default () => {
                             type="button"
                             value="출석"
                             onClick={async () => {
-                                if (await attend(attendance.attendanceId, authCode, token)) {
+                                const result = await attend(attendance.attendanceId, authCode, token);
+                                console.log(result);
+                                if (result == 1) {
                                     alert(
                                         `${attendance.meeting} 출석에 성공했습니다.\n10 포인트가 적립되었습니다.`
                                     );
-                                    if (navigationType === "PUSH") navigate(-1);
-                                    else navigate("/");
+                                    navigate(-1);
+                                } else if (result == -100) {
+                                    setErr("출석 번호가 일치하지 않습니다");
                                 } else {
-                                    setErr(true);
+                                    setErr("이미 출석했습니다");
                                 }
                             }}
                         />

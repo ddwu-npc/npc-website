@@ -24,15 +24,25 @@ export default () => {
     const result = await login(data.loginId, data.password);
 
     if (result) {
-      form.remove();
-      
-      if(navigationType === "PUSH") navigate(-1);
+      if (navigationType === "PUSH") navigate(-1);
       else navigate("/");
-    } else setFail(true);
+    } else {
+      setFail(true);
+    }
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      submit();
+    }
+  };
+
+  const handleClick = () => {
+    submit();
   };
 
   return (
-    <form className={styles.login} ref={formRef}>
+    <form className={styles.login} ref={formRef} onSubmit={(e) => e.preventDefault()}>
       <Link to={"signup"}>
         회원가입하기 <Icon icon="ps:right" />
       </Link>
@@ -50,9 +60,10 @@ export default () => {
           name="password"
           type="password"
           placeholder="비밀번호를 입력하세요"
+          onKeyDown={handleKeyDown}
         />
       </div>
-      <input type="button" value="login" onClick={submit} />
+      <input type="button" value="login" onClick={handleClick} />
     </form>
   );
 };

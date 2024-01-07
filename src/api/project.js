@@ -22,10 +22,6 @@ export const getQuickAttendance = (pid) => {
   return axios.get(`/attendance/quick/${pid}`);
 };
 
-export const getNewProjectInfo = (userno) => {
-  return axios.get(`/project/create/${userno}`);
-};
-
 // 프로젝트 팀원 추가
 export const insertProjectUser = (nickname, pid) => {
   return axios.post(`/project/add/${pid}/${nickname}`, {
@@ -45,7 +41,7 @@ export const removeProjectUser = (nickname, pid) => {
 };
 
 export const createProject = (project) => {
-  return axios.put(`/project/create/${project.projectRes.pid}`, project, {
+  return axios.put(`/project/create`, project, {
     headers: {
       'Content-Type': 'application/json',
     },

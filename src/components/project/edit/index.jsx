@@ -6,8 +6,8 @@ import CodeMirror from "@uiw/react-codemirror";
 import { githubLightInit } from "@uiw/codemirror-theme-github";
 import { markdown } from "@codemirror/lang-markdown";
 
-import { getUserno, addProjectUser } from "api/user";
-import { getProjectInfo, getNewProjectInfo, createProject, updateProject, insertProjectUser, removeProjectUser } from "api/project";
+import { getUserno, addProjectUser, readUserInfo} from "api/user";
+import { getProjectInfo, createProject, updateProject, insertProjectUser, removeProjectUser } from "api/project";
 
 import Header from "components/commons/header";
 
@@ -22,15 +22,26 @@ export const loader = async ({ params }) => {
         return data;
     } 
     else {
-        const userno = await getUserno();    
-        const data = await getNewProjectInfo(userno);
+        const userno = await getUserno();
+        const userInfo = await readUserInfo(userno);
         const currentDate = new Date().toISOString().slice(0, 10); // YYYY-MM-DD 형식
         
-        data.projectRes.pname = "";
-        data.projectRes.type = "";
-        data.projectRes.tname = "";
-        data.projectRes.process = "";
-        data.projectRes.content = "";
+        const data = {
+            projectRes: {
+                pid: -1,
+                pname: "",
+                type: "",
+                tname: "",
+                process: "",
+                content: "",
+                startDate: currentDate,
+                endDate: currentDate,
+                leader: userInfo.nickname,
+            },
+            userList: {
+
+            }
+        };
 
         isNew = true;
 
@@ -49,14 +60,15 @@ export default () => {
 
     const handleAddButtonClick = async () => {
         const response = await addProjectUser(newUserName);
-        console.log("확확", response);
         if (response.userNo  !== -1) {
             const newUser = { [newUserName]: response.dept }; 
             setProject({
                 ...project,
                 userList: { ...project.userList, ...newUser }
             });
-            await insertProjectUser(newUserName, project.projectRes.pid);
+            if (!isNew){
+                await insertProjectUser(newUserName, project.projectRes.pid);
+            }
           } else {
             alert("존재하지 않는 닉네임입니다.");
         }
@@ -64,7 +76,10 @@ export default () => {
     };
 
     const handleDeleteButtonClick = async (nickname) => {
-        await removeProjectUser(nickname, project.projectRes.pid);
+        
+        if (!isNew){
+            await removeProjectUser(nickname, project.projectRes.pid);
+        }
         const updatedUserList = { ...project.userList };
         delete updatedUserList[nickname];
         setProject({ ...project, userList: updatedUserList });

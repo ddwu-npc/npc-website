@@ -26,6 +26,24 @@ export const getNewProjectInfo = (userno) => {
   return axios.get(`/project/create/${userno}`);
 };
 
+// 프로젝트 팀원 추가
+export const insertProjectUser = (nickname, pid) => {
+  return axios.post(`/project/add/${pid}/${nickname}`, {
+    headers: {
+      'Content-Type': 'multipart/form-data' 
+    }
+  });
+};
+
+// 프로젝트 팀원 삭제
+export const removeProjectUser = (nickname, pid) => {
+  return axios.post(`/project/remove/${pid}/${nickname}`, {
+    headers: {
+      'Content-Type': 'multipart/form-data' 
+    }
+  });
+};
+
 export const createProject = (project) => {
   return axios.put(`/project/create/${project.projectRes.pid}`, project, {
     headers: {

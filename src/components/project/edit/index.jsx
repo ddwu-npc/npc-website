@@ -7,7 +7,7 @@ import { githubLightInit } from "@uiw/codemirror-theme-github";
 import { markdown } from "@codemirror/lang-markdown";
 
 import { getUserno, addProjectUser } from "api/user";
-import { getProjectInfo, getNewProjectInfo, createProject, updateProject } from "api/project";
+import { getProjectInfo, getNewProjectInfo, createProject, updateProject, insertProjectUser, removeProjectUser } from "api/project";
 
 import Header from "components/commons/header";
 
@@ -26,7 +26,6 @@ export const loader = async ({ params }) => {
         const data = await getNewProjectInfo(userno);
         const currentDate = new Date().toISOString().slice(0, 10); // YYYY-MM-DD 형식
         
-        console.log("확확", data.projectRes.pid);
         data.projectRes.pname = "";
         data.projectRes.type = "";
         data.projectRes.tname = "";
@@ -45,7 +44,7 @@ export default () => {
     const navigate = useNavigate();
     const [project, setProject] = useState(useLoaderData());
     const [newUserName, setNewUserName] = useState("");
-    const [users, setUsers] = useState(project.userList); 
+    // const [users, setUsers] = useState(project.userList); 
 
 
     const handleAddButtonClick = async () => {
@@ -57,6 +56,7 @@ export default () => {
                 ...project,
                 userList: { ...project.userList, ...newUser }
             });
+            await insertProjectUser(newUserName, project.projectRes.pid);
           } else {
             alert("존재하지 않는 닉네임입니다.");
         }
@@ -64,6 +64,7 @@ export default () => {
     };
 
     const handleDeleteButtonClick = async (nickname) => {
+        await removeProjectUser(nickname, project.projectRes.pid);
         const updatedUserList = { ...project.userList };
         delete updatedUserList[nickname];
         setProject({ ...project, userList: updatedUserList });

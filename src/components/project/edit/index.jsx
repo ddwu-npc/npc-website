@@ -30,7 +30,7 @@ export const loader = async ({ params }) => {
             projectRes: {
                 pid: -1,
                 pname: "",
-                type: "1",
+                type: "팀",
                 tname: "",
                 process: "개발 중",
                 content: "",
@@ -124,13 +124,13 @@ export default () => {
                     </select>
                 </p>
                 <p>
-                    <label>개인 / 팀</label>
+                    <label>팀 / 개인</label>
                     <select 
                         name="type"
                         defaultValue={project.projectRes.type}
                         onChange={(e) => setProject({...project, projectRes: {...project.projectRes, type: e.target.value}})}>
-                        <option value={"1"}>팀</option>
-                        <option value={"2"}>개인</option>
+                        <option value={"팀"}>팀</option>
+                        <option value={"개인"}>개인</option>
                     </select>
                 </p>
                 <p>
@@ -169,7 +169,10 @@ export default () => {
                                         : ""
                                 }
                             >
-                                {project.projectRes.leader === name ? `[팀장] ${name} - ${department}` : `${name} - ${department}`} &nbsp;
+                                {project.projectRes.leader === name ? `[팀장] ${name}` : `${name}`}
+                                {department === 'DEVELOPER' ? ` - 개발팀 ` : ``}
+                                {department === 'DESIGN' ? ` - 디자인팀 ` : ``}
+                                {department === 'PLAN' ? ` - 기획팀 ` : ``}
                                 {project.projectRes.leader !== name && (
                                     <span>
                                         <button type="button" onClick={() => handleChangeButtonClick(name)}>팀장 위임</button> &nbsp; &nbsp;
@@ -184,6 +187,7 @@ export default () => {
                 </p>
                 </div>
                 <div>
+                    <label>프로젝트 설명</label>
                     <CodeMirror
                         height= "400px"
                         value={project.projectRes.content}
@@ -209,13 +213,29 @@ export default () => {
                     {!isNew
                         ? <input type="button" value="수정"
                             onClick={async () => {
-                                if (await updateProject(project)) navigate(`/project/${project.projectRes.pid}`);
-                                else alert("프로젝트 수정에 실패했습니다.\n해당 현상이 반복되면 관리자에게 문의하세요.");
+                                if (project.projectRes.pname === ""){
+                                    alert("프로젝트 이름을 입력하세요.");
+                                } else if (project.projectRes.tname === ""){
+                                    alert("팀 명을 입력하세요.");
+                                } else if (project.projectRes.content === ""){
+                                    alert("프로젝트 설명을 입력하세요.");
+                                } else{
+                                    if (await updateProject(project)) navigate(`/project/${project.projectRes.pid}`);
+                                    else alert("프로젝트 수정에 실패했습니다.\n해당 현상이 반복되면 관리자에게 문의하세요.");
+                                }
                             }}/>
                         : <input type="button" value="생성"
                             onClick={async () => {
-                                if (await createProject(project)) navigate(`/project`);
-                                else alert("프로젝트 생성에 실패했습니다.\n해당 현상이 반복되면 관리자에게 문의하세요.");
+                                if (project.projectRes.pname === ""){
+                                    alert("프로젝트 이름을 입력하세요.");
+                                } else if (project.projectRes.tname === ""){
+                                    alert("팀 명을 입력하세요.");
+                                } else if (project.projectRes.content === ""){
+                                    alert("프로젝트 설명을 입력하세요.");
+                                } else{
+                                    if (await createProject(project)) navigate(`/project`);
+                                    else alert("프로젝트 생성에 실패했습니다.\n해당 현상이 반복되면 관리자에게 문의하세요.");
+                                }
                             }}/> }
                 </div>
             </form>

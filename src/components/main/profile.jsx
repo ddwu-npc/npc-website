@@ -36,7 +36,11 @@ export default () => {
             <div className={styles.content}>
                 <div><Icon icon="charm:person" /> 닉네임: {user.nickname}</div>
                 <div><Icon icon="carbon:condition-point" /> NPC Point: {user.npcPoint}</div>
-                <div><Icon icon="fluent:people-team-28-regular" /> 소속: {user.dname}</div>
+                <div><Icon icon="fluent:people-team-28-regular" /> 소속: 
+                  {user.dname === 'DEVELOPER' ? ` 개발팀 ` : ``}
+                  {user.dname === 'DESIGN' ? ` 디자인팀 ` : ``}
+                  {user.dname === 'PLAN' ? ` 기획팀 ` : ``}
+                </div>
             </div>
         </div>
     );

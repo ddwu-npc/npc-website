@@ -30,7 +30,7 @@ export default () => {
     const projectData = useLoaderData();
     const [option, setOption] = useState(false);
 
-    const isLeader = projectData.projectRes.leader == projectData.user.nickname
+    const isLeader = projectData.projectRes.leader === projectData.user.nickname
     const isUserInList = Object.keys(projectData.userList).some(
         (name) => name === projectData.user.nickname
     );
@@ -83,7 +83,11 @@ export default () => {
             <div className={styles.content}>
                 <div className={styles.describtion}>
                     <div>
-                        <label>장르</label>
+                        <label>팀 명</label>
+                        <span>{projectData.projectRes.tname}</span>
+                    </div>
+                    <div>
+                        <label>팀 / 개인</label>
                         <span>{projectData.projectRes.type}</span>
                     </div>
                     <div>
@@ -110,10 +114,15 @@ export default () => {
                                         : ""
                                 }
                             >
-                            {name} - {department}<br></br>
+                            {projectData.projectRes.leader === name ? `[팀장] ${name}` : `${name}`}
+                            {department === 'DEVELOPER' ? ` - 개발팀 ` : ``}
+                            {department === 'DESIGN' ? ` - 디자인팀 ` : ``}
+                            {department === 'PLAN' ? ` - 기획팀 ` : ``}
+                            <br></br>
                             </span>
                         ))}
                     </span>
+                    <br></br>
                     </div>
                     <div>
                         <label>프로젝트 설명</label>

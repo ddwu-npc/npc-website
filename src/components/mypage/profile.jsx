@@ -138,9 +138,9 @@ export default () => {
               <div className={styles.infoData}>
                 <label>소속</label>
                 <select defaultValue={user.dname} onChange={(e) => setNewDname(e.target.value)}>
-                  <option value="DEVELOPER">DEVELOPER</option>
-                  <option value="PLAN">PLAN</option>
-                  <option value="DESIGN">DESIGN</option>
+                  <option value="DEVELOPER">개발팀</option>
+                  <option value="PLAN">기획팀</option>
+                  <option value="DESIGN">디자인팀</option>
                 </select>
                 
               </div>
@@ -185,7 +185,11 @@ export default () => {
               </div>
               <div className={styles.infoData}>
                 <label>소속</label>
-                <div>{user.dname}</div>
+                <div>
+                  {user.dname === 'DEVELOPER' ? `개발팀 ` : ``}
+                  {user.dname === 'DESIGN' ? `디자인팀 ` : ``}
+                  {user.dname === 'PLAN' ? `기획팀 ` : ``}
+                  </div>
               </div>
               <div className={styles.infoData}>
                 <label>참여 중인 프로젝트</label>

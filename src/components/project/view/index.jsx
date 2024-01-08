@@ -129,7 +129,6 @@ export default () => {
                         <ReactMarkdown>{projectData.projectRes.content}</ReactMarkdown>
                     </div>
                 </div>
-                <img/>
             </div>
             <div className={styles.button}>
                 {isUserInList && (

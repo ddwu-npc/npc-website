@@ -8,7 +8,6 @@ import { getCommentListByUserId } from "api/post";
 import Header from "components/commons/header";
 import Profile from "./profile";
 import Written from "./written";
-
 import styles from "./style.module.scss";
 
 export const loader = async ({ request, params }) => {

@@ -39,14 +39,17 @@ export default (props) => {
   return (
     <div className={styles.table}>
       <Header />
-      <div className={styles.posts}>
-        {curProjectList.map((project) => (
-          <div key={`project_table_${project.pid}`}>
-            <Project project={project} link={`${project.pid}`} />
-          </div>
-        ))}
-        {emptyProjects}
-      </div>
+      {curProjectList && curProjectList.length > 0 ? (
+        <div className={styles.posts}>
+          {curProjectList.map((project) => (
+            <div key={`project_table_${project.pid}`}>
+              <Project project={project} link={`${project.pid}`} />
+            </div>
+          ))}{emptyProjects}
+        </div>
+      ) : (
+        <div className={styles.noProjects}>등록된 프로젝트가 없습니다.</div>
+      )}
       <Nav cur={pageInfo[0] + 1} max={pageInfo[1]} setPage={setPage} />
     </div>
   );

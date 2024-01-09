@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { redirect, useLoaderData } from "react-router";
-import { readUserFile, updateUserInfo } from "api/user"; 
-import { getUserno } from "api/user";
+import { Link } from "react-router-dom";
+
+import { getUserno, readUserFile, updateUserInfo } from "api/user"; 
 
 import styles from "./style.module.scss";
 import { Icon } from '@iconify/react';
@@ -175,11 +176,10 @@ export default () => {
                 <div>{user.birthday}</div>
               </div>
               <div className={styles.infoData}>
-                <label>NPC Point                   
-                  <span className={styles.historyText}>내역 보기
-                  <span className={styles.historyIcon}>
-                    <Icon icon="ic:baseline-arrow-forward-ios" width="14"/>
-                  </span></span></label>
+                <label>NPC Point
+                  <Link to={"point"}>
+                  내역 보기 <Icon icon="ps:right" /></Link>
+                </label>
                 <div>{user.npcPoint}
                 </div>
               </div>

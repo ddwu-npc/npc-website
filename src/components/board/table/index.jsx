@@ -42,17 +42,20 @@ export default () => {
   return (
     <div className={styles.table}>
       <Header />
+      {curPostList && curPostList.length > 0 ? (
       <div className={styles.posts}>
         {curPostList.map((post) => (
           <div key={`board_table_${post.postId}`}>
             <Post link={`post/${post.postId}`} post={post} />
           </div>
-        ))}
-        {emptyPosts}
+        ))} {emptyPosts}
       </div>
+      ) : (
+        <div className={styles.noPosts}>등록된 게시글이 없습니다.</div>
+      )}
       <Nav
         cur={pageInfo[0] + 1}
-        max={pageInfo[1]}
+        max={pageInfo[1] !== 0 ? pageInfo[1] : 1}
         setPage={setPage}
       />
     </div>

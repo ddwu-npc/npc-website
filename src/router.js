@@ -11,9 +11,9 @@ import Project, {
   viewRouter as projectViewRouter,
   editRouter as projectEditRouter } from "components/project";
 import Attendance, { loader as attendanceLoader } from "components/attendance";
-
 import Calendar, { loader as calendarLoader } from "components/calendar";
 import Mypage, { loader as MypageLoader } from "components/mypage";
+import Point, { loader as PointLoader } from "components/point";
 
 import ErrorPage from "./error-page";
 
@@ -69,6 +69,11 @@ export default createBrowserRouter([
         path: "/mypage",
         element: <Mypage />,
         loader: MypageLoader,
+      },
+      {
+        path: "/mypage/point",
+        element: <Point/>,
+        loader: PointLoader
       },
       {
         path: "/attendance/:attendanceId",

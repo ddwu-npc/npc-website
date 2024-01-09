@@ -112,6 +112,19 @@
               color:#7e7e7e;
               margin-left: 86px;
             }
+
+            > a {
+              margin: 90px;
+              font-size: 16px;
+              font-weight: 400;
+              color: #b4b4b4;
+              text-decoration: none;
+            
+              > svg {
+                font-size: 13px;
+                font-weight: 700;
+              }
+            }
           }
           div {
             width: 230px;

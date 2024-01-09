@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { redirect, useLoaderData } from "react-router";
 import { Link } from "react-router-dom";
 
-import { getUserno, readUserFile, updateUserInfo } from "api/user"; 
+import { getUserno, readUserInfo, readUserFile, updateUserInfo, vaildateNickname } from "api/user"; 
 
 import styles from "./style.module.scss";
 import { Icon } from '@iconify/react';
@@ -57,6 +57,15 @@ export default () => {
   const handleSave = async () => {
     try {
       const userId = await findUserno();
+      const oldUserInfo = await readUserInfo(userId);
+      
+
+      if (oldUserInfo.nickname != newNickname){
+        if(!(await vaildateNickname(newNickname))){
+          alert("이미 존재하는 닉네임입니다.");
+          return; 
+        }
+      }
 
       const birthdayCheck = /^\d{4}-\d{2}-\d{2}$/;
       if (!newBirthday.match(birthdayCheck)) {

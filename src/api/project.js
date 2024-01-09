@@ -49,6 +49,11 @@ export const updateProjectLeader = (nickname, pid) => {
   });
 };
 
+// 사용자가 참여한 프로젝트 모음
+export const getProjectsByUser = (userno) => {
+  return axios.put(`/project/projectlist/${userno}`);
+};
+
 export const createProject = (project) => {
   return axios.put(`/project/create`, project, {
     headers: {

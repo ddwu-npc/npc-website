@@ -114,9 +114,9 @@ export default () => {
                                         : ""
                                 }
                             >
-                            {department === 'DEVELOPER' ? `개발팀 ` : ``}
-                            {department === 'DESIGN' ? `디자인팀 ` : ``}
-                            {department === 'PLAN' ? `기획팀 ` : ``}
+                            {department === 'DEVELOPER' ? `[개발팀] ` : ``}
+                            {department === 'DESIGN' ? `[디자인팀] ` : ``}
+                            {department === 'PLAN' ? `[기획팀] ` : ``}
                             {name}
                             <br></br>
                             </span>

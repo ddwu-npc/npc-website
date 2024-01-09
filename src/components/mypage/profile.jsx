@@ -3,6 +3,7 @@ import { redirect, useLoaderData } from "react-router";
 import { Link } from "react-router-dom";
 
 import { getUserno, readUserInfo, readUserFile, updateUserInfo, vaildateNickname } from "api/user"; 
+import { getProjectsByUser } from "api/project";
 
 import styles from "./style.module.scss";
 import { Icon } from '@iconify/react';
@@ -17,6 +18,7 @@ export default () => {
   const [newProfile, setNewProfile] = useState(user.profile);
   const [newProfileView, setNewProfileView] = useState(null);
   const [attachment, setAttachment] = useState([]);
+  const [projects, setProjects] = useState([]);
 
   const findUserno = async () => {
     try {
@@ -32,6 +34,8 @@ export default () => {
       try {
         const userId = await findUserno(); 
         const result = await readUserFile(userId); 
+        const userProjects = await getProjectsByUser(userId);
+        setProjects(userProjects || [{ pid: -1, pname: "없음" }]);
         setAttachment(result);
       } catch (error) {
         console.error("Error fetching user file:", error);
@@ -155,8 +159,8 @@ export default () => {
                 
               </div>
               <div className={styles.infoData}>
-                <label>참여 중인 프로젝트</label>
-                <input readOnly></input>
+                <label>참여 프로젝트</label>
+                <input value={"수정 불가"} readOnly></input>
               </div>
             </div>
           </>
@@ -201,8 +205,14 @@ export default () => {
                   </div>
               </div>
               <div className={styles.infoData}>
-                <label>참여 중인 프로젝트</label>
-                <div></div>
+                <label>참여 프로젝트</label>
+                <select readOnly>
+                  {projects.map((project) => (
+                    <option key={project.pid} value={project.pid}>
+                      {project.pname}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
           </>

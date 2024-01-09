@@ -4,8 +4,10 @@ import styles from "./style.module.scss";
 export default ({ title, count, preview }) => {
   const limitedPreview = preview.slice(0, 5);
   
-  const limitDateString = (dateString, maxLength) => {
-    return dateString.substring(0, maxLength);
+  const changeDateString = (dateString) => {
+    const date = new Date(dateString);
+    const formattedDate = date.toISOString();
+    return formattedDate.substring(0, 10);
   };
 
   return (
@@ -24,7 +26,7 @@ export default ({ title, count, preview }) => {
             >
               <div className={styles.preContent}>{view.title}</div>
               <div className={styles.preContent}>{view.content}</div>
-              <div>{limitDateString(view.createDate + "", 10)}</div>
+              <div>{changeDateString(view.createDate)}</div>
             </Link>
           ))
         ) : (

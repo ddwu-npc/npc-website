@@ -8,10 +8,13 @@ import { getPostList, getBName } from "api/board";
 
 import BoardBox from "./boardBox";
 import NoticeBox from "./noticeBox";
+import AttendanceBox from "./attendanceBox";
 import Profile from "./profile";
 
 import styles from "./style.module.scss";
-
+import { SocialIcon } from 'react-social-icons/component'
+import 'react-social-icons/instagram'
+import 'react-social-icons/youtube'
 
 export const loader = async () => {
   const userno = await getUserno();
@@ -31,20 +34,22 @@ export default () => {
 
   return (
     <div className={styles.main}>
+      <div className={`${styles.socialIcons}`}>
+          <SocialIcon url="https://www.instagram.com/npcddwu/" />
+          <SocialIcon url="https://www.youtube.com/@npcddwu" />
+      </div>
       <div className={`${styles.boxContainer}`}>
         <BoardBox 
           icon={<Icon icon="jam:alert-f" color="#BF4A4A"/>}
           boardData={pinedBoard[0]}/>
-        {/* <BoardBox 
-          icon={<Icon icon="bi:calendar-check-fill" color="#4C4ABF"/>}
-          title="빠른 출석"
-          posts={["안녕하세요1234abcde", "안녕하세요1234abcde", "안녕하세요1234abcde", "안녕하세요1234abcde", "안녕하세요1234abcde", "안녕하세요1234abcde"]}/>*/}
         <BoardBox 
           icon={<Icon icon="fluent:notebook-16-filled" color="#BF9E4A"/>}
           boardData={pinedBoard[1]}/>
       </div>
       <div className={`${styles.boxContainer}`}>
         <Profile/>
+        <AttendanceBox
+          icon={<Icon icon="bi:calendar-check-fill" color="#4C4ABF"/>} />
         <NoticeBox
           icon={<Icon icon="bi:bookmark-fill" color="#BF4A4A"/>}
           title="일정"

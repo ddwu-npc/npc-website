@@ -10,9 +10,7 @@ export default ({ link, post, empty }) => {
 
   return (
     <Link
-      className={`${styles.post} ${
-        post.important === 1 ? styles.important : ""
-      }`}
+      className={`${styles.post}`}
       to={link}
     >
       <div>

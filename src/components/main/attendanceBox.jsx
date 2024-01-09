@@ -19,18 +19,8 @@ export default ({icon}) => {
 
     return (
         <div className={`${styles.box} ${styles.attendanceBox}`}>
-            <div className={styles.header}>
+            <div className={styles.header} onClick={handleQuickAttendance}>
                 <div>{icon}정기 회의 출석</div>
-                <Icon icon="icon-park-outline:right" color="#B1B1B1"/>
-            </div>
-            <div className={styles.content}>
-            <div className={styles.button}>
-                <input
-                        type="button"
-                        value="빠른 출석 바로가기"
-                        onClick={handleQuickAttendance}
-                    />
-            </div>
             </div>
         </div>
     );

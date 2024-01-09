@@ -10,23 +10,6 @@
   flex-direction: column;
   align-items: center;
 
-  > a {
-    display: flex;
-    align-items: center;
-
-    align-self: end;
-    margin: 50px;
-
-    font-size: 20px;
-    color: #b4b4b4;
-    text-decoration: none;
-
-    > svg {
-      font-size: 24px;
-      margin-left: 10px;
-      margin-top: 5px;
-    }
-  }
   > p {
     height: 100px;
   }
@@ -53,6 +36,7 @@
       border: none;
       outline: none;
       font-size: 20px;
+      margin-left: 40px;
 
       ::placeholder {
         color: #b1b1b1;
@@ -80,4 +64,33 @@
     }
     border-color: #bf4a4a;
   }
+}
+
+.signup {
+  display: flex;
+  align-items: center;
+
+  align-self: end;
+  margin: 50px;
+
+  font-size: 20px;
+  color: #b4b4b4;
+  text-decoration: none;
+
+  > svg {
+    font-size: 24px;
+    margin-left: 10px;
+    margin-top: 5px;
+  }
+}
+
+.forgetPassword {
+  display: flex;
+  align-items: center;
+
+  margin: 20px;
+
+  font-size: 20px;
+  color: #b4b4b4;
+  text-decoration: none;
 }

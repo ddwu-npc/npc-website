@@ -34,10 +34,6 @@ export default () => {
 
   return (
     <div className={styles.main}>
-      <div className={`${styles.socialIcons}`}>
-          <SocialIcon url="https://www.instagram.com/npcddwu/" />
-          <SocialIcon url="https://www.youtube.com/@npcddwu" />
-      </div>
       <div className={`${styles.boxContainer}`}>
         <BoardBox 
           icon={<Icon icon="jam:alert-f" color="#BF4A4A"/>}
@@ -58,6 +54,10 @@ export default () => {
           icon={<Icon icon="bi:bookmark-fill" color="#BF4A4A"/>}
           title="할 일"
           posts={["추후 개발 예정입니다"]}/>
+      </div>
+      <div className={`${styles.socialIcons}`}>
+          <SocialIcon url="https://www.instagram.com/npcddwu/" />
+          <SocialIcon url="https://www.youtube.com/@npcddwu" />
       </div>
     </div>
   );

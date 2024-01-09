@@ -7,25 +7,25 @@ import Nav from "./nav";
 import { getProjectList } from "api/project"; 
 
 export default (props) => {
-  const { projectPaging } = useLoaderData();
+  const { projectPaging, search } = useLoaderData();
   const [page, setPage] = useState(1);
   const [curProjectList, setCurProjectList] = useState(projectPaging.projects);
   const [pageInfo, setPageInfo] = useState(projectPaging.pageInfo);
 
   useEffect(() => {
+    setPage(1);
+  }, [search]);
+
+  useEffect(() => {
     const fetchData = async () => {
-      const updatedProjectPaging = await getProjectList({
-        range: "", 
-        searchRange: "", 
-        text: "", 
-      }, page);
+      const updatedProjectPaging = await getProjectList(search, page);
 
       setCurProjectList(updatedProjectPaging.projects);
       setPageInfo(updatedProjectPaging.pageInfo);
     };
 
     fetchData();
-  }, [page]); 
+  }, [search, page]); 
 
   const emptyProjects = [];
   while (curProjectList.length + emptyProjects.length < 11) {
@@ -39,15 +39,18 @@ export default (props) => {
   return (
     <div className={styles.table}>
       <Header />
-      <div className={styles.posts}>
-        {curProjectList.map((project) => (
-          <div key={`project_table_${project.pid}`}>
-            <Project project={project} link={`${project.pid}`} />
-          </div>
-        ))}
-        {emptyProjects}
-      </div>
-      <Nav cur={pageInfo[0]} max={pageInfo[1]} setPage={setPage} />
+      {curProjectList && curProjectList.length > 0 ? (
+        <div className={styles.posts}>
+          {curProjectList.map((project) => (
+            <div key={`project_table_${project.pid}`}>
+              <Project project={project} link={`${project.pid}`} />
+            </div>
+          ))}{emptyProjects}
+        </div>
+      ) : (
+        <div className={styles.noProjects}>등록된 프로젝트가 없습니다.</div>
+      )}
+      <Nav cur={pageInfo[0] + 1} max={pageInfo[1]} setPage={setPage} />
     </div>
   );
 };

@@ -14,11 +14,11 @@ import styles from "./style.module.scss";
 export default () => {
   const formRef = useRef();
 
-  const [nicknameErr, setNicknameErr] = useState(null);
-  const [loginIdErr, setLoginIdErr] = useState(null);
-  const [passwordErr, setPasswordErr] = useState(null);
+  const [nicknameErr, setNicknameErr] = useState("닉네임을 입력하세요.");
+  const [loginIdErr, setLoginIdErr] = useState("아이디를 입력하세요.");
+  const [passwordErr, setPasswordErr] = useState("비밀번호를 입력하세요.");
   const [passwordComfirmErr, setPasswordComfirmErr] = useState(null);
-  const [emailErr, setEmailErr] = useState(null);
+  const [emailErr, setEmailErr] = useState("이메일을 입력하세요.");
 
   const submit = async () => {
     if (
@@ -56,27 +56,37 @@ export default () => {
 
   const vaildNickname = async () => {
     const form = formRef.current;
-
-    if (await vaildateNickname(form.nickname.value)) setNicknameErr(null);
-    else setNicknameErr("중복된 닉네임입니다.");
+    if (!form.nickname.value) 
+     setNicknameErr("닉네임을 입력하세요.");
+    else {
+      if (await vaildateNickname(form.nickname.value)) setNicknameErr(null);
+      else setNicknameErr("중복된 닉네임입니다.");
+    }
   };
   const vaildId = async () => {
     const form = formRef.current;
 
-    if (await vaildateLoginId(form.loginId.value)) setLoginIdErr(null);
-    else setLoginIdErr("중복된 ID입니다.");
-  };
+    if (!form.loginId.value) setLoginIdErr("아이디를 입력하세요.");
+    else {
+      if (await vaildateLoginId(form.loginId.value)) setLoginIdErr(null);
+      else setLoginIdErr("중복된 ID입니다.");
+    }
+ };
   const vaildEmail = async () => {
     const form = formRef.current;
 
-    if (form.email.value.indexOf("@") === -1)
-      setEmailErr("유효하지 않은 이메일입니다.");
-    else if (await vaildateEmail(form.email.value)) setEmailErr(null);
-    else setEmailErr("중복된 이메일입니다.");
+    if (!form.email.value) setEmailErr("이메일을 입력하세요.");
+    else {
+      if (form.email.value.indexOf("@") === -1)
+        setEmailErr("유효하지 않은 이메일입니다.");
+      else if (await vaildateEmail(form.email.value)) setEmailErr(null);
+      else setEmailErr("중복된 이메일입니다.");
+    }
   };
   const comfirmPW = () => {
     const form = formRef.current;
 
+    if (!form.password.value) setPasswordErr("비밀번호를 입력하세요.");
     if (form.password.value.length < 8) {
       setPasswordErr("비밀번호가 너무 짧습니다.");
       setPasswordComfirmErr(null);

@@ -1,7 +1,7 @@
 import axios from "./axios";
 
-export const getAttendanceInfo = (attendanceId) => {
-    return axios.get(`/attendance/${attendanceId}`);
+export const getAttendanceInfo = (attendanceId, token) => {
+    return axios.getWithHeader(`/attendance/${attendanceId}`, token);
 };
 
 export const attend = (attendanceId, authcode, token) => {

@@ -6,8 +6,8 @@ import CodeMirror from "@uiw/react-codemirror";
 import { githubLightInit } from "@uiw/codemirror-theme-github";
 import { markdown } from "@codemirror/lang-markdown";
 
-import { getUserno, addProjectUser } from "api/user";
-import { getProjectInfo, getNewProjectInfo, createProject, updateProject } from "api/project";
+import { getUserno, addProjectUser, readUserInfo} from "api/user";
+import { getProjectInfo, createProject, updateProject, insertProjectUser, removeProjectUser, updateProjectLeader } from "api/project";
 
 import Header from "components/commons/header";
 
@@ -22,15 +22,26 @@ export const loader = async ({ params }) => {
         return data;
     } 
     else {
-        const userno = await getUserno();    
-        const data = await getNewProjectInfo(userno);
+        const userno = await getUserno();
+        const userInfo = await readUserInfo(userno);
         const currentDate = new Date().toISOString().slice(0, 10); // YYYY-MM-DD 형식
         
-        data.projectRes.pname = "";
-        data.projectRes.type = "";
-        data.projectRes.tname = "";
-        data.projectRes.process = "";
-        data.projectRes.content = "";
+        const data = {
+            projectRes: {
+                pid: -1,
+                pname: "",
+                type: "팀",
+                tname: "",
+                process: "개발 중",
+                content: "",
+                startDate: currentDate,
+                endDate: currentDate,
+                leader: userInfo.nickname,
+            },
+            userList: {
+
+            }
+        };
 
         isNew = true;
 
@@ -44,17 +55,42 @@ export default () => {
     const navigate = useNavigate();
     const [project, setProject] = useState(useLoaderData());
     const [newUserName, setNewUserName] = useState("");
+    // const [users, setUsers] = useState(project.userList); 
+
 
     const handleAddButtonClick = async () => {
         const response = await addProjectUser(newUserName);
-        console.log("확확", response);
-        
         if (response.userNo  !== -1) {
-            alert("Name added successfully!");
+            const newUser = { [newUserName]: response.dept }; 
+            setProject({
+                ...project,
+                userList: { ...project.userList, ...newUser }
+            });
+            if (!isNew){
+                await insertProjectUser(newUserName, project.projectRes.pid);
+            }
           } else {
             alert("존재하지 않는 닉네임입니다.");
         }
        
+    };
+
+    const handleDeleteButtonClick = async (nickname) => {
+        
+        if (!isNew){
+            await removeProjectUser(nickname, project.projectRes.pid);
+        }
+        const updatedUserList = { ...project.userList };
+        delete updatedUserList[nickname];
+        setProject({ ...project, userList: updatedUserList });
+    };
+
+    const handleChangeButtonClick = async (nickname) => {
+        
+        if (!isNew){
+            await updateProjectLeader(nickname, project.projectRes.pid);
+        }
+        setProject({...project, projectRes: {...project.projectRes, leader: nickname}});
     };
 
     return (
@@ -70,13 +106,31 @@ export default () => {
                         onChange={(e) => setProject({...project, projectRes: {...project.projectRes, pname: e.target.value}})}/>
                 </p>
                 <p>
+                    <label>팀 명</label>
+                    <input 
+                        type="text"
+                        name="tname" 
+                        defaultValue={project.projectRes.tname}
+                        onChange={(e) => setProject({...project, projectRes: {...project.projectRes, tname: e.target.value}})}/>
+                </p>
+                <p>
                     <label>진행 상황</label>
                     <select 
                         name="process"
                         defaultValue={project.projectRes.process}
                         onChange={(e) => setProject({...project, projectRes: {...project.projectRes, process: e.target.value}})}>
-                        <option value={1}>팀</option>
-                        <option value={2}>개인</option>
+                        <option value={"개발 중"}>개발 중</option>
+                        <option value={"개발 완료"}>개발 완료</option>
+                    </select>
+                </p>
+                <p>
+                    <label>팀 / 개인</label>
+                    <select 
+                        name="type"
+                        defaultValue={project.projectRes.type}
+                        onChange={(e) => setProject({...project, projectRes: {...project.projectRes, type: e.target.value}})}>
+                        <option value={"팀"}>팀</option>
+                        <option value={"개인"}>개인</option>
                     </select>
                 </p>
                 <p>
@@ -99,7 +153,8 @@ export default () => {
                         value={newUserName}
                         onChange={(e) => setNewUserName(e.target.value)}
                     />
-                    <button type="button" onClick={handleAddButtonClick}>추가</button><br></br>
+                    <button type="button" onClick={handleAddButtonClick}>추가</button><br></br><br></br>
+                    <input type="hidden" name="userList" onChange={(e) => setProject({ ...project, UserList: { ...project.UserList, endDate: e.target.value }})}/>
                     <span>
                         {Object.entries(project.userList).map(([name, department], index) => (
                             <span
@@ -114,14 +169,25 @@ export default () => {
                                         : ""
                                 }
                             >
-                                {name} - {department}
-                                <button>삭제</button><br></br>
+                                {project.projectRes.leader === name ? `[팀장] ${name}` : `${name}`}
+                                {department === 'DEVELOPER' ? ` - 개발팀 ` : ``}
+                                {department === 'DESIGN' ? ` - 디자인팀 ` : ``}
+                                {department === 'PLAN' ? ` - 기획팀 ` : ``}
+                                {project.projectRes.leader !== name && (
+                                    <span>
+                                        <button type="button" onClick={() => handleChangeButtonClick(name)}>팀장 위임</button> &nbsp; &nbsp;
+                                        <button type="button" onClick={() => handleDeleteButtonClick(name)}>삭제</button>
+                                    </span>
+                                )}
+                                <br></br>
                             </span>
                         ))}
                     </span>
+                    <br></br>
                 </p>
                 </div>
                 <div>
+                    <label>프로젝트 설명</label>
                     <CodeMirror
                         height= "400px"
                         value={project.projectRes.content}
@@ -147,13 +213,29 @@ export default () => {
                     {!isNew
                         ? <input type="button" value="수정"
                             onClick={async () => {
-                                if (await updateProject(project)) navigate(`/project/${project.projectRes.pid}`);
-                                else alert("프로젝트 수정에 실패했습니다.\n해당 현상이 반복되면 관리자에게 문의하세요.");
+                                if (project.projectRes.pname === ""){
+                                    alert("프로젝트 이름을 입력하세요.");
+                                } else if (project.projectRes.tname === ""){
+                                    alert("팀 명을 입력하세요.");
+                                } else if (project.projectRes.content === ""){
+                                    alert("프로젝트 설명을 입력하세요.");
+                                } else{
+                                    if (await updateProject(project)) navigate(`/project/${project.projectRes.pid}`);
+                                    else alert("프로젝트 수정에 실패했습니다.\n해당 현상이 반복되면 관리자에게 문의하세요.");
+                                }
                             }}/>
                         : <input type="button" value="생성"
                             onClick={async () => {
-                                if (await createProject(project)) navigate(`/project`);
-                                else alert("프로젝트 생성에 실패했습니다.\n해당 현상이 반복되면 관리자에게 문의하세요.");
+                                if (project.projectRes.pname === ""){
+                                    alert("프로젝트 이름을 입력하세요.");
+                                } else if (project.projectRes.tname === ""){
+                                    alert("팀 명을 입력하세요.");
+                                } else if (project.projectRes.content === ""){
+                                    alert("프로젝트 설명을 입력하세요.");
+                                } else{
+                                    if (await createProject(project)) navigate(`/project`);
+                                    else alert("프로젝트 생성에 실패했습니다.\n해당 현상이 반복되면 관리자에게 문의하세요.");
+                                }
                             }}/> }
                 </div>
             </form>

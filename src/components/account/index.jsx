@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 
 import Login from "./login";
 import Signup from "./signup";
+import ForgetPassword from "./forgetPassword";
 
 import styles from "./style.module.scss";
 
@@ -28,5 +29,9 @@ export default {
       path: "signup",
       element: <Signup />,
     },
+    {
+      path: "forgetPassword",
+      element: <ForgetPassword />,
+    }
   ],
 };

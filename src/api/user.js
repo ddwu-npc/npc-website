@@ -84,28 +84,13 @@ export const signup = (loginId, raw_password, nickname, email) => {
 };
 
 export const vaildateNickname = (nickname) => {
-  return new Promise((resolve) =>
-    setTimeout(() => {
-      if (nickname === "1234") resolve(false);
-      else resolve(true);
-    }, 100)
-  );
+  return axios.post("/users/checkNickname", {nickname: nickname});
 };
 
 export const vaildateLoginId = (loginId) => {
-  return new Promise((resolve) =>
-    setTimeout(() => {
-      if (loginId === "1234") resolve(false);
-      else resolve(true);
-    }, 100)
-  );
+  return axios.post("/users/checkUserId", {userId: loginId});
 };
 
 export const vaildateEmail = (email) => {
-  return new Promise((resolve) =>
-    setTimeout(() => {
-      if (email === "1234@gmail.com") resolve(false);
-      else resolve(true);
-    }, 100)
-  );
+  return axios.post("/users/checkEmail", {email: email});
 };

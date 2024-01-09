@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { redirect, useLoaderData } from "react-router";
-import { readUserFile, updateUserInfo } from "api/user"; 
-import { getUserno } from "api/user";
+import { Link } from "react-router-dom";
+
+import { getUserno, readUserFile, updateUserInfo } from "api/user"; 
 
 import styles from "./style.module.scss";
 import { Icon } from '@iconify/react';
@@ -138,9 +139,9 @@ export default () => {
               <div className={styles.infoData}>
                 <label>소속</label>
                 <select defaultValue={user.dname} onChange={(e) => setNewDname(e.target.value)}>
-                  <option value="DEVELOPER">DEVELOPER</option>
-                  <option value="PLAN">PLAN</option>
-                  <option value="DESIGN">DESIGN</option>
+                  <option value="DEVELOPER">개발팀</option>
+                  <option value="PLAN">기획팀</option>
+                  <option value="DESIGN">디자인팀</option>
                 </select>
                 
               </div>
@@ -175,17 +176,20 @@ export default () => {
                 <div>{user.birthday}</div>
               </div>
               <div className={styles.infoData}>
-                <label>NPC Point                   
-                  <span className={styles.historyText}>내역 보기
-                  <span className={styles.historyIcon}>
-                    <Icon icon="ic:baseline-arrow-forward-ios" width="14"/>
-                  </span></span></label>
+                <label>NPC Point
+                  <Link to={"point"}>
+                  내역 보기 <Icon icon="ps:right" /></Link>
+                </label>
                 <div>{user.npcPoint}
                 </div>
               </div>
               <div className={styles.infoData}>
                 <label>소속</label>
-                <div>{user.dname}</div>
+                <div>
+                  {user.dname === 'DEVELOPER' ? `개발팀 ` : ``}
+                  {user.dname === 'DESIGN' ? `디자인팀 ` : ``}
+                  {user.dname === 'PLAN' ? `기획팀 ` : ``}
+                  </div>
               </div>
               <div className={styles.infoData}>
                 <label>참여 중인 프로젝트</label>

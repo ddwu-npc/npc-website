@@ -15,13 +15,13 @@ import Edit, { loader as editLoader } from "./edit";
 export async function loader({ params, request }) {
   const searchParmas = new URL(request.url).searchParams;
   const search = {
-    range: searchParmas.get("range"),
-    searchRange: searchParmas.get("searchRange"),
+    type: searchParmas.get("type"),
+    process: searchParmas.get("process"),
     text: searchParmas.get("text"),
   };
   // 현재 1페이지
   const projectPaging = await getProjectList(search, 1);
-  return { projectPaging };
+  return { projectPaging, search };
 }
 
 export default () => {

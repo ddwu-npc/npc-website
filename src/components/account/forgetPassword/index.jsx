@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
 import { Link, useNavigate, useNavigationType } from "react-router-dom";
 
+import { validateUser, changePassword } from "api/user";
+
 import logo from "components/commons/img/logo.png";
 
 import styles from "./style.module.scss";
@@ -19,12 +21,12 @@ export default () => {
       email: form.email.value
     };
 
-    // api 연결
-    const result = false;
-
+    const result = await validateUser(data.loginId, data.email);
     if (result) {
-      if (navigationType === "PUSH") navigate(-1);
-      else navigate("/");
+        const newPassword = generateRandomString();
+        await changePassword(data.loginId, newPassword);
+        alert("임시 비밀번호가 발급되었습니다\n" + newPassword);
+        navigate(-1);
     } else {
       setFail(true);
     }
@@ -39,6 +41,19 @@ export default () => {
   const handleClick = () => {
     submit();
   };
+
+  function generateRandomString() {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789~!@#$%^&*()_+';
+    let randomString = '';
+    const stringLength = 10;
+  
+    for (let i = 0; i < stringLength; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      randomString += characters.charAt(randomIndex);
+    }
+  
+    return randomString;
+  }
 
   return (
     <form className={styles.findpassword} ref={formRef} onSubmit={(e) => e.preventDefault()}>

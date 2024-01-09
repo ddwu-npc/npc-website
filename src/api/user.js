@@ -94,3 +94,12 @@ export const vaildateLoginId = (loginId) => {
 export const vaildateEmail = (email) => {
   return axios.post("/users/checkEmail", {email: email});
 };
+
+export const validateUser = (loginId, email) => {
+  return axios.get("/users/checkUser/" + loginId + "/" + email);
+};
+
+export const changePassword = (loginId, raw_password) => {
+  let password = sha256(raw_password).toString();
+  return axios.put("/users/changePassword", {userId: loginId, password: password});
+};

@@ -3,10 +3,7 @@ import ex_axios from "axios";
 import { getToken } from "./jwtToken";
 
 export const readPost = (post_id) => {
-  const jwtToken = getToken();
-  const token = `Bearer ${jwtToken}` 
-
-  return axios.getWithHeader(`/post/${post_id}`, token);
+  return axios.getWithHeader(`/post/${post_id}`);
 };
 
 export const createPost = (boardId, fData, token) => {
@@ -68,33 +65,19 @@ export const deletePost = async(post_id) => {
 
 //post 삭제 시 해당 post의 게시판으로 돌아가야 함
 export const getBoardIdByPostId = async (post_id) => {
-  try {
-    const response = await axios.get(`/post/findBoard/${post_id}`);
-    return response;
-  } catch (error) {
-    console.error(`Error while fetching board_id for post_id ${post_id}:`,error);
-    throw error;
-  }
+  return axios.get(`/post/findBoard/${post_id}`);
 };
 
 export const findAuthor = (id, type)=>{
   if(type=="comment"){
-    const res = axios.get(`/comment/find/${id}`);
-    return res;
+    return axios.get(`/comment/find/${id}`);
   }else if(type=="post"){
-    const res = axios.get(`/post/find/${id}`);
-    return res;
+    return axios.get(`/post/find/${id}`);
   }
 }
 
 export const readFile = async (post_id) => {
-  try {
-    const res = await axios.get(`/files/${post_id}`);
-    return res; // 응답에 파일 데이터가 포함되어 있다고 가정합니다.
-  } catch (error) {
-    console.error("첨부 파일을 가져오는 중 오류 발생:", error);
-    throw error;
-  }
+  return axios.get(`/files/${post_id}`);
 };
 
 export const downloadFile =(file)=>{
@@ -128,10 +111,7 @@ export const createComment = (post_id, commentData, token) => {
 };
 
 export const readComment = (post_id) => {
-  const jwtToken = getToken();
-  const token = `Bearer ${jwtToken}` 
-  console.log("post token :" + token);
-  return axios.getWithHeader(`/comment/${post_id}`, token);
+  return axios.getWithHeader(`/comment/${post_id}`);
 };
 
 export const deleteComment = (comment_id) => {

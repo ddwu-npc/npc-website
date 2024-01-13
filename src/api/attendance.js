@@ -1,17 +1,18 @@
 import axios from "./axios";
 
-export const getAttendanceInfo = (attendanceId, token) => {
-    return axios.getWithHeader(`/attendance/${attendanceId}`, token);
+export const getAttendanceInfo = (attendanceId) => {
+    return axios.getWithHeader(`/attendance/${attendanceId}`);
 };
 
-export const attend = (attendanceId, authcode, token) => {
-    return axios.getWithHeader(`/attendance/${attendanceId}/${authcode}`, token);
+export const attend = (attendanceId, authcode) => {
+    return axios.getWithHeader(`/attendance/${attendanceId}/${authcode}`);
 }
 
 export const createAttendance = (pid) => {
     return axios.get(`/attendance/create/${pid}`);
 };
 
+/* 사용하지 않아 주석 처리
 export const getMyAttendance = () => {
     return new Promise((resolve) =>
         setTimeout(() => {
@@ -19,3 +20,4 @@ export const getMyAttendance = () => {
         }
     ));
 };
+*/

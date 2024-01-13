@@ -61,12 +61,12 @@ export default {
     );
   },
 
-  getWithHeader: (uri, token) => {
+  getWithHeader: (uri) => {
     return new Promise((resolve) =>
       axios
         .get(uri, { 
           headers: {
-            Authorization: token, 
+            Authorization: `Bearer ${localStorage.getItem('jwtToken')}`, 
           },
         })
         .then((response) => {
@@ -92,6 +92,23 @@ export default {
     );
   },
 
+  putWithHeader: (uri, data) => {
+    return new Promise((resolve) =>
+      axios
+        .put(uri, data, {
+          headers: {
+            Authorization: `Bearer${localStorage.getItem('jwtToken')}`, 
+          },
+        }).then((response) => {
+          resolve(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+          resolve(null);
+        })
+    );
+  },
+  
   delete: (uri, contentType, board_id) => {
     return new Promise(() =>
       axios

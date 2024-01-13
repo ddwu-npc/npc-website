@@ -2,16 +2,14 @@ import { useState, useEffect } from "react";
 import { redirect, useLoaderData, useNavigate, useNavigationType } from "react-router-dom";
 
 import { getAttendanceInfo, attend } from "api/attendance";
-import { getToken } from "api/jwtToken";
 import styles from "./style.module.scss";
 import Header from "components/commons/header";
 
 import { usePos } from "hooks";
 
 export const loader = async ({ params }) => {
-    const token = `Bearer ${getToken()}`
     const attendanceId = params.attendanceId;
-    return await getAttendanceInfo(attendanceId, token);
+    return await getAttendanceInfo(attendanceId);
 }
 
 export default () => {
@@ -23,7 +21,6 @@ export default () => {
     const attendanceRes = useLoaderData();
     const attendance = attendanceRes.attendance;
     const isLeader = attendanceRes.leader;
-    const token = `Bearer ${getToken()}`
 
     const [err, setErr] = useState(null);
     const [authCode, setAuthCode] = useState("");
@@ -84,8 +81,7 @@ export default () => {
                             type="button"
                             value="출석"
                             onClick={async () => {
-                                const result = await attend(attendance.attendanceId, authCode, token);
-                                console.log(result);
+                                const result = await attend(attendance.attendanceId, authCode);
                                 if (result == 1) {
                                     alert(
                                         `${attendance.meeting} 출석에 성공했습니다.\n10 포인트가 적립되었습니다.`

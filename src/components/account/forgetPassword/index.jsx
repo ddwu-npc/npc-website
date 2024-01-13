@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { Link, useNavigate, useNavigationType } from "react-router-dom";
 
-import { validateUser, changePassword } from "api/user";
+import { validateUser, forgetPassword } from "api/user";
 
 import logo from "components/commons/img/logo.png";
 
@@ -24,7 +24,7 @@ export default () => {
     const result = await validateUser(data.loginId, data.email);
     if (result) {
         const newPassword = generateRandomString();
-        await changePassword(data.loginId, newPassword);
+        await forgetPassword(data.loginId, newPassword);
         alert("임시 비밀번호가 발급되었습니다\n" + newPassword);
         navigate(-1);
     } else {

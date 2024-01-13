@@ -1,0 +1,63 @@
+.changepassword {
+    background: #ffffff;
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    > p {
+      height: 100px;
+    }
+    > div {
+      width: 495px;
+      height: 60px;
+  
+      border-bottom: 1px solid #7e7e7e;
+  
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+  
+      > label {
+        font-family: "Noto Sans KR";
+        font-weight: 400;
+        font-size: 20px;
+        color: #7e7e7e;
+  
+        margin-left: 20px;
+        width: 150px;
+      }
+      > input {
+        width: 350px;
+        border: none;
+        outline: none;
+        font-size: 20px;
+        margin-left: 30px;
+        ::placeholder {
+          color: #b1b1b1;
+        }
+      }
+    }
+    [type="button"] {
+      width: 300px;
+      height: 56px;
+      background: #000000;
+      border-radius: 10px;
+  
+      color: white;
+      font-size: 20px;
+      margin-top: 45px;
+  
+      cursor: pointer;
+    }
+  
+    .fail {
+      color: #bf4a4a;
+  
+      > label {
+        color: #bf4a4a;
+      }
+      border-color: #bf4a4a;
+    }
+  }
+  

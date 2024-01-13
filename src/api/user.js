@@ -99,7 +99,7 @@ export const validateUser = (loginId, email) => {
   return axios.get("/users/checkUser/" + loginId + "/" + email);
 };
 
-export const changePassword = (loginId, raw_password) => {
+export const forgetPassword = (loginId, raw_password) => {
   let password = sha256(raw_password).toString();
-  return axios.put("/users/changePassword", {userId: loginId, password: password});
+  return axios.put("/users/forgetPassword", {userId: loginId, password: password});
 };

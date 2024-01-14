@@ -79,3 +79,8 @@ export const forgetPassword = (loginId, raw_password) => {
   let password = sha256(raw_password).toString();
   return axios.put("/users/forgetPassword", {userId: loginId, password: password});
 };
+
+export const changePassword = (raw_password) => {
+  let password = sha256(raw_password).toString();
+  return axios.putWithHeader("/users/changePassword", {password: password});
+}

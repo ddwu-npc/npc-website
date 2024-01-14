@@ -97,7 +97,7 @@ export default {
       axios
         .put(uri, data, {
           headers: {
-            Authorization: `Bearer${localStorage.getItem('jwtToken')}`, 
+            Authorization: `Bearer ${localStorage.getItem('jwtToken')}`, 
           },
         }).then((response) => {
           resolve(response.data);

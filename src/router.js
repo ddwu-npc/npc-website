@@ -14,8 +14,9 @@ import Attendance, { loader as attendanceLoader } from "components/attendance";
 import Calendar, { loader as calendarLoader } from "components/calendar";
 import Mypage, { loader as MypageLoader } from "components/mypage";
 import Point, { loader as PointLoader } from "components/point";
-import ChangePassword, { loader as ChangePasswordLoader} from "components/mypage/setting/changePassword";
+import ChangePassword from "components/mypage/setting/changePassword";
 import ErrorPage from "./error-page";
+import DeleteAccount from "components/mypage/setting/deleteAccount";
 
 export default createBrowserRouter([
   {
@@ -77,8 +78,11 @@ export default createBrowserRouter([
       },
       {
         path: "/mypage/changePassword",
-        element: <ChangePassword/>,
-        loader: ChangePasswordLoader
+        element: <ChangePassword/>
+      },
+      {
+        path: "/mypage/deleteAccount",
+        element: <DeleteAccount/>
       },
       {
         path: "/attendance/:attendanceId",

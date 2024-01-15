@@ -29,6 +29,7 @@ export default () => {
 
     const projectData = useLoaderData();
     const [option, setOption] = useState(false);
+    const [showTeamMembers, setShowTeamMembers] = useState(false);
 
     const isLeader = projectData.projectRes.leader === projectData.user.nickname
     const isUserInList = Object.keys(projectData.userList).some(
@@ -99,30 +100,34 @@ export default () => {
                         <span>{projectData.projectRes.startDate}~{projectData.projectRes.endDate}</span>
                     </div>
                     <div>
-                        <label>팀원</label><br></br>
+                        <label>팀원                         
+                            {showTeamMembers ? (
+                                <Icon className={styles.toggle} icon="fluent:toggle-right-48-filled" onClick={() => setShowTeamMembers(false)} />
+                            ) : (
+                                <Icon className={styles.toggle} icon="fluent:toggle-right-48-regular" onClick={() => setShowTeamMembers(true)} />
+                            )}</label>
                         <span>
-                        {Object.entries(projectData.userList).map(([name, department], index) => (
-                            <span
-                                key={index}
-                                className={
-                                    department === "개발팀"
-                                        ? "dev-team"
-                                        : department === "디자인팀"
-                                        ? "design-team"
-                                        : department === "기획팀"
-                                        ? "planning-team"
-                                        : ""
-                                }
-                            >
-                            {department === 'DEVELOPER' ? `[개발팀] ` : ``}
-                            {department === 'DESIGN' ? `[디자인팀] ` : ``}
-                            {department === 'PLAN' ? `[기획팀] ` : ``}
-                            {name}
-                            <br></br>
-                            </span>
-                        ))}
-                    </span>
-                    <br></br>
+                            {showTeamMembers && Object.entries(projectData.userList).map(([name, department], index) => (
+                                <span
+                                    key={index}
+                                    className={
+                                        department === "개발팀"
+                                            ? "dev-team"
+                                            : department === "디자인팀"
+                                            ? "design-team"
+                                            : department === "기획팀"
+                                            ? "planning-team"
+                                            : ""
+                                    }
+                                >
+                                    {department === 'DEVELOPER' ? `[개발팀] ` : ``}
+                                    {department === 'DESIGN' ? `[디자인팀] ` : ``}
+                                    {department === 'PLAN' ? `[기획팀] ` : ``}
+                                    {name}
+                                    <br></br>
+                                </span>
+                            ))}
+                        </span>
                     </div>
                     <div>
                         <label>프로젝트 설명</label>

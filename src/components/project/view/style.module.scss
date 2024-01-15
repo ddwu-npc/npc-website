@@ -65,18 +65,23 @@
             justify-content: space-between;
 
             .describtion {
-                width: 55%;
-
+                width: 50%;
                 font-family: Noto Sans;
                 font-size: 16px;
-
+            
                 > div {
                     > label {
-                        display: inline-block;
+                        display: flex;
+                        align-items: center;
                         margin: 10px;
                         margin-left: 0;
-
                         font-weight: 600;
+            
+                        .toggle {
+                            margin-left: 10px;
+                            font-size: 30px;
+                            vertical-align: middle; 
+                        }
                     }
                 }
             }
